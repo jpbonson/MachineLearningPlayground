@@ -18,7 +18,27 @@ from sklearn import metrics
 from gensim.models.tfidfmodel import TfidfModel
 from scipy.sparse import csr_matrix
 from scipy.sparse import lil_matrix
-import scipy.sparse as sps
+
+import logging
+from scipy.odr import models
+from sklearn import metrics
+import unittest
+import os
+import os.path
+import tempfile
+ 
+import numpy
+from matplotlib.pyplot import plot, show
+from sklearn.cluster import KMeans
+from gensim.matutils import corpus2dense
+import gensim
+import logging
+ 
+from gensim.corpora import mmcorpus, Dictionary
+from gensim.models import lsimodel, ldamodel, tfidfmodel, rpmodel, logentropy_model, TfidfModel, LsiModel
+from gensim import matutils,corpora
+ 
+from scipy.cluster.vq import kmeans,vq
 
 documents = ["Sistemas sobre bananas são bananas",
 "Bananas são nutritivas",
@@ -46,19 +66,25 @@ class AlgorithmsWrapper:
     self.total_corpus = 0.0
     self.skips = 0
     self.final_results = []
+    self.upper_limit = 10
 
   def run(self):
     for category_id, objs in texts_per_cat.iteritems():
       print "\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
       print "Processing category: "+str(category_id)
-      if category_id.isdigit():
-        print "Processing "+str(len(objs))+" objects"
-        if algorithm=='firstname':
-          self.first_name(objs)
-        else
-          self.algorithm_lda(category_id, objs)
+      if len(objs) >= self.upper_limit:
+        if category_id.isdigit():
+          print "Processing "+str(len(objs))+" objects"
+          if self.algorithm=='firstname':
+            self.first_name(category_id, objs)
+          elif self.algorithm=='lda':
+            self.algorithm_lda(category_id, objs)
+          else:
+            self.algorithm_test(category_id, objs)
+        else:
+          print "category_id is not a digit, ignoring"
       else:
-        print "category_id is not a digit, ignoring"
+        print "to few objects, ignoring"
     self.print_results()
 
   def algorithm_lda(self, category_id, objs):
@@ -97,6 +123,29 @@ class AlgorithmsWrapper:
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
+  def algorithm_test(self, category_id, objs):
+    numTopics = self.calculate_k(objs)
+    print "Using k = "+str(numTopics)
+
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj))
+
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+
+    num_clusters = 4
+
+    print "Create models"
+    lsi_model = LsiModel(corpus, id2word=corpus.dictionary, num_topics=numTopics)
+    corpus_lsi = lsi_model[corpus]
+    print "Done creating models"
+
+    topic_id = 0
+    for topic in lsi_model.show_topics(num_words=5):
+        print "TOPIC (LSI2) " + str(topic_id) + " : " + topic
+        topic_id+=1
+     
     # print "A"
     # # print out the topics for LSA
     # lsi = models.LsiModel(corpus, id2word=dictionary, num_topics=2)
@@ -108,6 +157,37 @@ class AlgorithmsWrapper:
     # print
     # for top in lsi.print_topics(2):
     #   print top
+
+    corpus_lsi_dense = corpus2dense(corpus_lsi, numTopics)
+    print "Dense Matrix Shape " + str(corpus_lsi_dense.shape)
+    
+    #attempt scikit integration
+    km = KMeans(k=num_clusters, init='random', max_iter=100, n_init=1, verbose=1)
+    km.fit(corpus_lsi_dense)
+    labels = kmeans_model.labels_
+
+    #attempt scipy integration
+    # computing K-Means with K = 2 (2 clusters)
+    centroids,_ = kmeans(corpus_lsi_dense,2)
+    # assign each sample to a cluster
+    idx,_ = vq(corpus_lsi_dense,centroids)
+     
+    # some plotting using numpy's logical indexing
+    plot(
+        corpus_lsi_dense[idx==0,0],corpus_lsi_dense[idx==0,1],'ob',
+        corpus_lsi_dense[idx==1,0],corpus_lsi_dense[idx==1,1],'or',
+        corpus_lsi_dense[idx==2,0],corpus_lsi_dense[idx==2,1],'og',
+        corpus_lsi_dense[idx==3,0],corpus_lsi_dense[idx==3,1],'xr'
+    )
+     
+    plot(centroids[:,0],centroids[:,1],'sg',markersize=8)
+    show()
+
+    if numTopics > 1:
+      self.calculate_metrics(category_id, corpus, dictionary, labels)
+    else:
+      print "number of clusters equals or lower than 1, ignoring metric"
+    break
 
   def first_name(self, category_id, objs):
     first_names = set([item['name'].split()[0] for item in objs])
@@ -145,8 +225,11 @@ class AlgorithmsWrapper:
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
-  def get_categorizedproduct_content(self, event, use_description=self.use_description, use_preposition=True, use_stemming=self.use_stemming):
+  def get_categorizedproduct_content(self, event):
     # We check all fields for None if they are None we put an empty string instead
+    use_description=self.use_description
+    use_stemming=self.use_stemming
+    use_preposition=True
     name = (event.get("name") or "")
     description = ""
     if use_description:
@@ -161,7 +244,8 @@ class AlgorithmsWrapper:
   def calculate_k(self, objs):
     first_names = set([item['name'].split()[0] for item in objs])
     # result = int(round(math.sqrt(len(first_names))))
-    result = len(first_names)
+    # result = len(first_names)
+    result = int(round((len(first_names)/2)))
     if result > 100:
       result = 100
     if result >= len(objs):
@@ -193,7 +277,7 @@ class AlgorithmsWrapper:
       if self.use_skip:
         print "skipping"
         self.skips += 1
-        continue
+        return
       else:
         avg_silhouette = 0
     msg = str(category_id)+": "+str(avg_silhouette)
@@ -210,8 +294,6 @@ class AlgorithmsWrapper:
       print "micro avg: "+str(self.micro_avg_sum/self.total_corpus)
     if self.cont_samples > 0:
       print "macro avg: "+str(self.macro_avg_sum/self.cont_samples)
-    print "skipped: "+str(self.skips)
-    print
     print
     self.final_results.sort()
     for r in self.final_results:
@@ -227,5 +309,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='firstname')
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='lda')
   a.run()
