@@ -19,7 +19,6 @@ from gensim.models.tfidfmodel import TfidfModel
 from scipy.sparse import csr_matrix
 from scipy.sparse import lil_matrix
 
-import logging
 from scipy.odr import models
 from sklearn import metrics
 import unittest
@@ -80,7 +79,7 @@ class AlgorithmsWrapper:
           elif self.algorithm=='lda':
             self.algorithm_lda(category_id, objs)
           else:
-            self.algorithm_test(category_id, objs)
+            self.algorithm_lsi(category_id, objs)
         else:
           print "category_id is not a digit, ignoring"
       else:
@@ -123,8 +122,8 @@ class AlgorithmsWrapper:
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
-  def algorithm_test(self, category_id, objs):
-    numTopics = self.calculate_k(objs)
+  def algorithm_lsi(self, category_id, objs):
+    numTopics = 100
     print "Using k = "+str(numTopics)
 
     texts = []
@@ -134,60 +133,65 @@ class AlgorithmsWrapper:
     dictionary = corpora.Dictionary(texts)
     corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
 
-    num_clusters = 4
+    num_clusters = self.calculate_k(objs)
 
     print "Create models"
-    lsi_model = LsiModel(corpus, id2word=corpus.dictionary, num_topics=numTopics)
+    lsi_model = LsiModel(corpus, id2word=dictionary, num_topics=numTopics)
     corpus_lsi = lsi_model[corpus]
     print "Done creating models"
+
+    results = []
+    labels = []
+    for probabilities, obj in izip(corpus_lsi, objs):
+      max_prop = max(probabilities, key=lambda item:item[1])[0]
+      labels.append(max_prop)
+      results.append(str(max_prop)+" # "+obj['name'].encode('utf8'))
+    results.sort()
+    for r in results:
+      print r
 
     topic_id = 0
     for topic in lsi_model.show_topics(num_words=5):
         print "TOPIC (LSI2) " + str(topic_id) + " : " + topic
         topic_id+=1
      
-    # print "A"
-    # # print out the topics for LSA
-    # lsi = models.LsiModel(corpus, id2word=dictionary, num_topics=2)
-    # corpus_lsi = lsi[corpus]
-    # print str(corpus_lsi)+"\n"
-    # print str(corpus)+"\n"
     # for l,t in izip(corpus_lsi,corpus):
     #   print l,"#",t
     # print
-    # for top in lsi.print_topics(2):
+    # for top in lsi_model.print_topics(2):
     #   print top
 
-    corpus_lsi_dense = corpus2dense(corpus_lsi, numTopics)
-    print "Dense Matrix Shape " + str(corpus_lsi_dense.shape)
+    # corpus_lsi_dense = corpus2dense(corpus_lsi, numTopics)
+    # print "Dense Matrix Shape " + str(corpus_lsi_dense.shape)
     
-    #attempt scikit integration
-    km = KMeans(k=num_clusters, init='random', max_iter=100, n_init=1, verbose=1)
-    km.fit(corpus_lsi_dense)
-    labels = kmeans_model.labels_
+    # #attempt scikit integration
+    # kmeans_model = KMeans(n_clusters=num_clusters, init='random', max_iter=100, n_init=1, verbose=1)
+    # kmeans_model.fit(corpus_lsi_dense)
+    # labels = kmeans_model.labels_
+    # print "AQUI"
+    # print str(labels)
 
-    #attempt scipy integration
-    # computing K-Means with K = 2 (2 clusters)
-    centroids,_ = kmeans(corpus_lsi_dense,2)
-    # assign each sample to a cluster
-    idx,_ = vq(corpus_lsi_dense,centroids)
+    # #attempt scipy integration
+    # # computing K-Means with K = 2 (2 clusters)
+    # centroids,_ = kmeans(corpus_lsi_dense,2)
+    # # assign each sample to a cluster
+    # idx,_ = vq(corpus_lsi_dense,centroids)
      
-    # some plotting using numpy's logical indexing
-    plot(
-        corpus_lsi_dense[idx==0,0],corpus_lsi_dense[idx==0,1],'ob',
-        corpus_lsi_dense[idx==1,0],corpus_lsi_dense[idx==1,1],'or',
-        corpus_lsi_dense[idx==2,0],corpus_lsi_dense[idx==2,1],'og',
-        corpus_lsi_dense[idx==3,0],corpus_lsi_dense[idx==3,1],'xr'
-    )
+    # # some plotting using numpy's logical indexing
+    # plot(
+    #     corpus_lsi_dense[idx==0,0],corpus_lsi_dense[idx==0,1],'ob',
+    #     corpus_lsi_dense[idx==1,0],corpus_lsi_dense[idx==1,1],'or',
+    #     corpus_lsi_dense[idx==2,0],corpus_lsi_dense[idx==2,1],'og',
+    #     corpus_lsi_dense[idx==3,0],corpus_lsi_dense[idx==3,1],'xr'
+    # )
      
-    plot(centroids[:,0],centroids[:,1],'sg',markersize=8)
-    show()
+    # plot(centroids[:,0],centroids[:,1],'sg',markersize=8)
+    # show()
 
     if numTopics > 1:
       self.calculate_metrics(category_id, corpus, dictionary, labels)
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
-    break
 
   def first_name(self, category_id, objs):
     first_names = set([item['name'].split()[0] for item in objs])
@@ -254,6 +258,17 @@ class AlgorithmsWrapper:
       result = 1
     return result
 
+  def print_results(self):
+    print "\nFINAL RESULTS:"
+    if self.total_corpus > 0:
+      print "micro avg: "+str(self.micro_avg_sum/self.total_corpus)
+    if self.cont_samples > 0:
+      print "macro avg: "+str(self.macro_avg_sum/self.cont_samples)
+    print
+    self.final_results.sort()
+    for r in self.final_results:
+      print r
+
   # def print_topics(lda, vocab, n=10):
   #     """ Print the top words for each topic. """
   #     topics = lda.show_topics(topics=-1, topn=n, formatted=False)
@@ -288,17 +303,6 @@ class AlgorithmsWrapper:
     self.cont_samples += 1.0
     self.total_corpus += float(len(labels))
 
-  def print_results(self):
-    print "\nFINAL RESULTS:"
-    if self.total_corpus > 0:
-      print "micro avg: "+str(self.micro_avg_sum/self.total_corpus)
-    if self.cont_samples > 0:
-      print "macro avg: "+str(self.macro_avg_sum/self.cont_samples)
-    print
-    self.final_results.sort()
-    for r in self.final_results:
-      print r
-
 def file_generator(filename):
   for line in open("data-clusterization/"+filename):
     yield line
@@ -309,5 +313,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='lda')
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='test')
   a.run()
