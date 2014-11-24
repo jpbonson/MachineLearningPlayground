@@ -1,0 +1,1105 @@
+read inputs, normalize and tokenize
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 60
+Using k = 1
+Processing 2 objects
+print out the topics for LDA
+Topic #0: 0.143*sp + 0.143*edt+sp + 0.143*edt + 0.095*chance + 0.095*chanc+edt + 0.095*platinum+egoist + 0.095*platinum + 0.095*egoiste + 0.095*egoist+edt
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Chance EDT SP
+0 # Platinum Egoiste EDT SP
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 61
+Using k = 6
+Processing 7 objects
+print out the topics for LDA
+Topic #0: 0.048*construction + 0.048*mitchell + 0.048*paul + 0.048*masculino + 0.048*paul+mitchell + 0.048*paste + 0.048*construction+past + 0.048*oceane + 0.048*canet+ocean + 0.048*caneta
+
+Topic #1: 0.020*sp + 0.020*simply + 0.020*simply+sp + 0.020*men+edt + 0.020*edt + 0.020*men + 0.020*hardy+men + 0.020*removedor+esmalt + 0.020*unhas + 0.020*unha+canet
+
+Topic #2: 0.109*hardy + 0.109*ed + 0.109*ed+hardy + 0.074*hardy+women + 0.074*women + 0.074*women+edp + 0.074*edp + 0.040*hardy+men + 0.040*men + 0.040*edt
+
+Topic #3: 0.020*sp + 0.020*simply+sp + 0.020*simply + 0.020*men+edt + 0.020*men + 0.020*edt + 0.020*hardy+men + 0.020*unha+canet + 0.020*esmalt+unha + 0.020*removedor+esmalt
+
+Topic #4: 0.102*retratil+sombr + 0.102*retratil + 0.055*olho+qvs + 0.055*sombr+qvs + 0.055*olho+retratil + 0.055*qvs + 0.055*sombr+pincel + 0.055*olhos + 0.055*simply + 0.055*simply+sp
+
+Topic #5: 0.020*sp + 0.020*simply+sp + 0.020*simply + 0.020*men + 0.020*men+edt + 0.020*hardy+men + 0.020*edt + 0.020*unha+canet + 0.020*esmalt+unha + 0.020*removedor+esmalt
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Caneta Océane
+0 # Construction Paste Masculino 75ml Paul Mitchell
+2 # Ed Hardy For Men EDT
+2 # Ed Hardy For Women EDP
+2 # Ed Hardy For Women EDP
+4 # Retrátil para Sombra 2 em 1 QVS
+4 # Simply SP
+[[ 0.48507125  0.48507125  0.24253563  0.48507125  0.24253563  0.24253563
+   0.24253563  0.24253563  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.29180063  0.29180063  0.43143863  0.29180063  0.43143863
+   0.43143863  0.43143863  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.57735027  0.57735027  0.57735027  0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.31622777  0.31622777
+   0.15811388  0.15811388  0.15811388  0.15811388  0.31622777  0.31622777
+   0.15811388  0.15811388  0.15811388  0.15811388  0.15811388  0.15811388
+   0.31622777  0.31622777  0.31622777  0.15811388  0.15811388  0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.29180063  0.29180063  0.43143863  0.29180063  0.43143863
+   0.43143863  0.43143863  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.26726124  0.26726124  0.26726124  0.26726124
+   0.53452248  0.53452248  0.26726124  0.26726124  0.          0.          0.
+   0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.2037103   0.2037103   0.          0.2037103   0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.46784248  0.46784248  0.46784248
+   0.46784248]]
+[0 2 4 0 2 4 2]
+result by sample: [ -1.57009246e-16   5.46769479e-01  -1.57009246e-16  -1.57009246e-16
+   5.46769479e-01  -1.57009246e-16   9.35389589e-02]
+result avg: 0.169582559673
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 62
+Using k = 11
+Processing 12 objects
+print out the topics for LDA
+Topic #0: 0.113*ampola + 0.113*ampol+intensificador + 0.113*amend + 0.113*intensificadora + 0.059*tratament+ampol + 0.059*amend+tratament + 0.059*tratamento + 0.059*intensificador+amend + 0.005*preenchedor+sobrancelh + 0.005*perfect
+
+Topic #1: 0.081*edition+gr + 0.081*couleur+garden + 0.081*gr + 0.081*edition + 0.081*garden+edition + 0.081*garden + 0.081*couleurs + 0.007*perfumee + 0.007*preenchedor+sobrancelh + 0.007*bvlgari
+
+Topic #2: 0.327*perfect + 0.010*preenchedor+sobrancelh + 0.010*eau + 0.010*au + 0.010*edc + 0.010*eyebrow+extender + 0.010*extender + 0.010*eyebrow + 0.010*sourcils + 0.010*extender+sourcil
+
+Topic #3: 0.059*sourcils + 0.059*extender + 0.059*extender+sourcil + 0.059*eyebrow+extender + 0.059*eyebrow + 0.059*talika + 0.059*modelador+sobrancelh + 0.059*sourcil+modelador + 0.059*sobrancelh+talik + 0.059*modelador
+
+Topic #4: 0.014*preenchedor+sobrancelh + 0.014*perfect + 0.014*eau + 0.014*edc + 0.014*au + 0.014*eyebrow+extender + 0.014*extender + 0.014*eyebrow + 0.014*extender+sourcil + 0.014*sourcils
+
+Topic #5: 0.095*phyto + 0.095*phyt+ultr + 0.095*ultr+volum + 0.095*ultra + 0.095*volume + 0.008*preenchedor+sobrancelh + 0.008*perfect + 0.008*eau + 0.008*au + 0.008*edc
+
+Topic #6: 0.014*preenchedor+sobrancelh + 0.014*perfect + 0.014*edc + 0.014*au + 0.014*eau + 0.014*extender+sourcil + 0.014*eyebrow+extender + 0.014*eyebrow + 0.014*sourcils + 0.014*extender
+
+Topic #7: 0.014*preenchedor+sobrancelh + 0.014*perfect + 0.014*edc + 0.014*eau + 0.014*au + 0.014*blanc+edc + 0.014*perfume+au + 0.014*perfumee + 0.014*eyebrow+extender + 0.014*extender
+
+Topic #8: 0.059*blanc + 0.059*eau+perfume + 0.059*blanc+edc + 0.059*au+blanc + 0.059*perfume+au + 0.059*perfumee + 0.059*edc + 0.059*au + 0.059*eau + 0.040*agua+coloni
+
+Topic #9: 0.071*eau + 0.071*au + 0.071*edc + 0.071*parfumee + 0.071*parfume+au + 0.071*vert + 0.071*eau+parfume + 0.071*vert+edc + 0.071*au+vert + 0.006*preenchedor+sobrancelh
+
+Topic #10: 0.102*preenchedor + 0.102*sourcil+preenchedor + 0.102*extender+sourcil + 0.102*extender + 0.102*eyebrow + 0.102*sourcils + 0.102*eyebrow+extender + 0.004*preenchedor+sobrancelh + 0.004*au + 0.004*eau
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Ampola Intensificadora 15g Amend
+1 # 5 Couleurs Garden Edition 4,8gr
+10 # Eyebrow Extender Sourcils (Preenchedor para sobrancelhas)
+10 # Eyebrow Extender Sourcils (Preenchedor)
+2 # Perfect
+2 # Perfect
+2 # Perfect
+3 # Eyebrow Extender Sourcils (Modelador de sobrancelhas) Talika Light Brown
+5 # Phyto Ultra Volume
+8 # Eau Perfumeé Au Thé Blanc EDC
+8 # Àgua de Colônia Eau Perfumeé Au Thé Blanc EDC Unissex 75ml Bvlgari
+9 # Eau Parfumée Au Thé Vert EDC
+[[ 1.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.        ]
+ [ 0.          0.30078419  0.30078419  0.16780326  0.21688256  0.21688256
+   0.21688256  0.30078419  0.30078419  0.16780326  0.21688256  0.16780326
+   0.1503921   0.1503921   0.1503921   0.1503921   0.1503921   0.1503921
+   0.21688256  0.21688256  0.30078419  0.1503921   0.1503921   0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.3462506   0.3462506   0.3462506   0.3462506
+   0.44752241  0.44752241  0.3462506   0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.        ]
+ [ 0.          0.          0.          0.21186662  0.          0.          0.
+   0.          0.          0.21186662  0.          0.21186662  0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.37976695  0.37976695  0.37976695  0.37976695
+   0.37976695  0.37976695  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.        ]
+ [ 0.          0.          0.          0.27710458  0.35815247  0.35815247
+   0.35815247  0.          0.          0.27710458  0.35815247  0.27710458
+   0.          0.          0.          0.          0.          0.
+   0.35815247  0.35815247  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.4472136   0.4472136   0.4472136   0.4472136   0.4472136
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.4472136   0.2236068   0.4472136   0.4472136   0.2236068   0.4472136
+   0.2236068   0.2236068   0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.29419395  0.29419395  0.29419395  0.29419395
+   0.38024016  0.38024016  0.29419395  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.52733713  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.        ]
+ [ 1.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.37796447  0.37796447  0.37796447  0.37796447  0.37796447
+   0.37796447  0.37796447  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.        ]
+ [ 1.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.18799726  0.18799726  0.18799726  0.18799726
+   0.          0.          0.18799726  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.16849078  0.16849078  0.16849078  0.16849078
+   0.16849078  0.33698156  0.33698156  0.16849078  0.16849078  0.33698156
+   0.33698156  0.16849078  0.16849078  0.33698156]]
+[ 2  8 10  9  8  5  0 10  2  1  2  3]
+result by sample: [ 1.          0.33552075  0.52789078  0.          0.30807203  0.          0.
+  0.54413623  1.          0.          1.          0.        ]
+result avg: 0.392968315974
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 65
+Using k = 2
+Processing 3 objects
+print out the topics for LDA
+Topic #0: 0.068*mava + 0.068*mava+flex + 0.068*mavala + 0.068*unissex + 0.068*flex + 0.068*unissex+maval + 0.068*ml + 0.068*flex+ml + 0.040*tratament+unha + 0.040*ml+unissex
+
+Topic #1: 0.081*pump + 0.081*keune + 0.081*valvul+pump + 0.081*valvula + 0.048*acessorios + 0.048*pump+keun + 0.048*keun+valvul + 0.048*pump+acessori + 0.048*lumiere + 0.048*noire
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Mava-Flex 10ml Unissex Mavala
+1 # Clubbing Lumière Noire
+1 # Válvula Pump Keune
+[[ 0.4472136   0.4472136   0.4472136   0.4472136   0.4472136   0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.32025631
+   0.32025631  0.16012815  0.32025631  0.32025631  0.16012815  0.32025631
+   0.32025631  0.16012815  0.16012815  0.16012815  0.16012815  0.16012815
+   0.32025631  0.32025631  0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.2236068   0.2236068   0.4472136   0.4472136   0.2236068   0.2236068
+   0.4472136   0.4472136 ]]
+[1 0 1]
+result by sample: [ 0.  0.  0.]
+result avg: 0.0
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 67
+Using k = 1
+Processing 1 objects
+print out the topics for LDA
+Topic #0: 0.114*dion + 0.114*celine + 0.068*sensational+edt + 0.068*sensational + 0.068*feminino + 0.068*edt + 0.068*dion+sensational + 0.068*celin+dion + 0.045*popular+feminin + 0.045*popular
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Celine Dion Sensational EDT Feminino 50ml Celine Dion
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 69
+Using k = 5
+Processing 6 objects
+print out the topics for LDA
+Topic #0: 0.053*touch+roserai + 0.053*des+delic + 0.053*le+french + 0.053*roseraie + 0.053*french+touch + 0.053*roserai+des + 0.053*touch + 0.053*delices + 0.053*french + 0.053*le
+
+Topic #1: 0.058*passion + 0.058*edt + 0.058*ferrari + 0.058*ferrari+passion + 0.058*passion+edt + 0.057*cor+soft + 0.057*marshmallow + 0.057*soft+marshmallow + 0.057*soft + 0.010*batom
+
+Topic #2: 0.017*estojo + 0.017*lip+palett + 0.017*estoj+gauch + 0.017*gaucho + 0.017*palett+tom + 0.017*palette + 0.017*gauch+lip + 0.017*lip + 0.017*soft + 0.017*soft+marshmallow
+
+Topic #3: 0.017*palette + 0.017*gaucho + 0.017*estoj+gauch + 0.017*palett+tom + 0.017*lip+palett + 0.017*estojo + 0.017*lip + 0.017*gauch+lip + 0.017*soft+marshmallow + 0.017*soft
+
+Topic #4: 0.060*lancome + 0.060*hydrazen+yeux + 0.060*hydrazen + 0.060*yeux + 0.060*yeux+gel + 0.060*gel + 0.060*unissex + 0.033*gel+olho + 0.033*unissex+ml + 0.033*ml+lancom
+
+
+print out the documents and which is the most probable topics for each doc
+0 #  Le French Touch Roseraie Des Delices Lancôme Cor 314 Rose Candy
+0 #  Le French Touch Roseraie Des Delices Lancôme Cor 316 Soft Marshmallow
+0 # Estojo Gaucho Lip Palette com 4 Tons
+0 # Le French Touch Roseraie Des Delices
+1 # Ferrari Passion EDT
+4 # Hydrazen Yeux Gel Unissex 15ml Lancôme
+[[ 0.35355339  0.35355339  0.35355339  0.35355339  0.35355339  0.35355339
+   0.35355339  0.35355339  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.16276373  0.16276373  0.26545621  0.16276373  0.26545621
+   0.16276373  0.20538496  0.20538496  0.20538496  0.20538496  0.20538496
+   0.16276373  0.16276373  0.16276373  0.16276373  0.20538496  0.20538496
+   0.20538496  0.26545621  0.26545621  0.20538496  0.20538496  0.20538496
+   0.20538496  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.16276373  0.16276373  0.          0.16276373  0.
+   0.16276373  0.20538496  0.20538496  0.20538496  0.20538496  0.20538496
+   0.16276373  0.16276373  0.16276373  0.16276373  0.20538496  0.20538496
+   0.20538496  0.          0.          0.20538496  0.20538496  0.20538496
+   0.20538496  0.26545621  0.26545621  0.26545621  0.26545621  0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.4472136   0.4472136   0.4472136   0.4472136   0.4472136
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.12967587  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.33520726  0.16760363  0.16760363  0.16760363  0.16760363  0.33520726
+   0.33520726  0.16760363  0.16760363  0.16760363  0.16760363  0.16760363
+   0.33520726  0.16760363  0.16760363  0.33520726  0.33520726]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.30151134  0.30151134  0.30151134  0.30151134  0.30151134  0.          0.
+   0.          0.          0.          0.30151134  0.30151134  0.          0.
+   0.30151134  0.30151134  0.30151134  0.30151134  0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.        ]]
+[0 0 0 1 4 0]
+result by sample: [ 0.          0.29199147  0.29199147  0.          0.          0.29024187]
+result avg: 0.145704136497
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 34
+Using k = 1
+Processing 2 objects
+print out the topics for LDA
+Topic #0: 0.111*vernis + 0.111*vernil+golden + 0.111*ml + 0.111*le+vernil + 0.111*le + 0.111*hat+ml + 0.111*hat + 0.111*golden+hat + 0.111*golden
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Le Vernis - Golden Hat 6ml
+0 # Le Vernis - Golden Hat 6ml
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 48
+Using k = 70
+Processing 71 objects
+print out the topics for LDA
+Topic #0: 0.149*spice + 0.149*apple + 0.149*appl+spic + 0.117*antik + 0.056*spic+ml + 0.037*esfer+appl + 0.037*esferas + 0.037*antik+appl + 0.037*ml + 0.037*ml+antik
+
+Topic #1: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #2: 0.175*antik + 0.156*varanda + 0.092*ml + 0.092*ml+antik + 0.078*varand+ml + 0.078*antik+varand + 0.073*essencias + 0.039*intensidad+essenci + 0.039*varand+difusor + 0.039*difusor+arom
+
+Topic #3: 0.158*summer + 0.158*antik + 0.080*antik+vela + 0.080*aromatic+summer + 0.080*aromatica + 0.080*summer+antik + 0.080*vela + 0.080*vela+aromatic + 0.001*ml+antik + 0.001*summer+ml
+
+Topic #4: 0.297*lavanda + 0.131*gavet+lavand + 0.131*arom+roma + 0.131*antik+lavand + 0.074*lavand+ml + 0.066*lavand+antik + 0.001*antik + 0.001*ml+antik + 0.001*ml + 0.001*spray
+
+Topic #5: 0.224*nilla + 0.185*antik + 0.115*antik+nill + 0.113*nill+ml + 0.099*ml + 0.099*ml+antik + 0.034*spray + 0.029*spray+lencol + 0.029*nill+spray + 0.000*spice
+
+Topic #6: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #7: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #8: 0.215*spray+lencol + 0.215*vert+spray + 0.003*mangue + 0.003*vert + 0.003*antik + 0.003*mangu+vert + 0.003*spray + 0.003*ml+antik + 0.003*vert+ml + 0.003*antik+mangu
+
+Topic #9: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #10: 0.089*antik + 0.089*difusor + 0.089*vert + 0.089*mangue + 0.089*arom+mangu + 0.089*difusor+arom + 0.089*mangu+vert + 0.045*vert+ml + 0.045*ml + 0.045*ml+antik
+
+Topic #11: 0.102*carr+cha + 0.102*cha + 0.102*cha+verd + 0.102*verde + 0.102*antik + 0.051*ml + 0.051*ml+antik + 0.051*antik+carr + 0.051*verd+ml + 0.051*verd+difusor
+
+Topic #12: 0.162*perfumados + 0.162*perfumad+gavet + 0.144*antik + 0.081*saches + 0.081*sach+antik + 0.054*gavet+intensidad + 0.054*intensidade + 0.054*gavet+mangu + 0.054*antik+perfumad + 0.027*intensidad+antik
+
+Topic #13: 0.005*spice + 0.005*apple + 0.005*appl+spic + 0.005*antik + 0.005*ml+antik + 0.005*spic+difusor + 0.005*ml + 0.005*difusor + 0.005*antik+appl + 0.005*spic+ml
+
+Topic #14: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #15: 0.141*sementes + 0.141*sement+brasil + 0.136*antik + 0.106*arom+sement + 0.106*difusor + 0.106*difusor+arom + 0.068*ml+antik + 0.068*ml + 0.036*antik+difusor + 0.001*embalagem+vidr
+
+Topic #16: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #17: 0.165*bouquet + 0.165*bouquet+garni + 0.165*garni + 0.120*antik + 0.083*garni+ml + 0.060*ml + 0.060*ml+antik + 0.055*antik+bouquet + 0.028*garni+essenci + 0.028*essencias
+
+Topic #18: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #19: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #20: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #21: 0.180*mangu+vert + 0.180*vert + 0.180*mangue + 0.129*antik + 0.072*antik+mangu + 0.072*vert+ml + 0.060*ml + 0.060*ml+antik + 0.021*spray + 0.000*ambient+antik
+
+Topic #22: 0.005*vert + 0.005*perfumad+gavet + 0.005*perfumados + 0.005*antik + 0.005*mangue + 0.005*gavet+mangu + 0.005*mangu+vert + 0.005*vert+antik + 0.005*antik+perfumad + 0.005*sach+antik
+
+Topic #23: 0.155*antik + 0.134*botanik + 0.067*antik+botanik + 0.067*botanik+pout + 0.067*pout+pourri + 0.067*pout + 0.067*pourri + 0.067*botanik+antik + 0.067*essencias + 0.067*nill+essenci
+
+Topic #24: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #25: 0.218*refil + 0.094*antik + 0.088*flor+cerejeir + 0.088*flor + 0.088*cerejeir+refil + 0.088*refil+antik + 0.047*ml + 0.047*ml+antik + 0.044*refil+ml + 0.044*refil+flor
+
+Topic #26: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #27: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #28: 0.245*intensidade + 0.154*antik + 0.123*intensidad+ml + 0.082*antik+intensidad + 0.075*ml+antik + 0.075*ml + 0.050*difusor + 0.050*difusor+arom + 0.041*intensidad+difusor + 0.001*summer
+
+Topic #29: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #30: 0.196*difusor + 0.196*difusor+arom + 0.106*antik + 0.071*nilla + 0.066*arom+nill + 0.057*ml+antik + 0.057*ml + 0.035*nill+ml + 0.033*refil+difusor + 0.033*nill+antik
+
+Topic #31: 0.075*antik + 0.075*appl+spic + 0.075*apple + 0.075*embalagem + 0.075*embalagem+vidr + 0.075*esfer+appl + 0.075*esferas + 0.075*spice + 0.075*spic+embalagem + 0.038*pout+pourri
+
+Topic #32: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #33: 0.128*antik + 0.128*alecrim + 0.128*carr+alecrim + 0.065*difusor + 0.065*difusor+arom + 0.065*arom+carr + 0.065*antik+difusor + 0.065*ml+antik + 0.065*ml + 0.065*alecrim+ml
+
+Topic #34: 0.130*antik + 0.126*pourri+botanik + 0.126*pourri + 0.126*botanik + 0.063*antik+pot + 0.063*botanik+antik + 0.063*ceramica + 0.063*botanik+ceramic + 0.032*nill+difusor + 0.032*antik+verd
+
+Topic #35: 0.218*summer + 0.158*antik + 0.109*summer+ml + 0.109*antik+summer + 0.077*ml + 0.077*ml+antik + 0.055*summer+essenci + 0.055*essencias + 0.001*esfer+summer + 0.001*antik+verd
+
+Topic #36: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #37: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #38: 0.141*antik + 0.100*difusor+arom + 0.100*difusor + 0.073*ml + 0.073*ml+antik + 0.058*roma+turqui + 0.058*roma + 0.050*antik+difusor + 0.044*botanik + 0.044*refil
+
+Topic #39: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #40: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #41: 0.124*antik + 0.077*esferas + 0.058*pout+pourri + 0.058*pourri + 0.058*pout + 0.039*lavanda + 0.039*esfer+varand + 0.039*varanda + 0.039*antik+esfer + 0.039*esfer+lavand
+
+Topic #42: 0.121*antik + 0.121*esferas + 0.121*sementes + 0.121*sement+brasil + 0.121*esfer+sement + 0.061*pout+pourri + 0.061*antik+esfer + 0.061*pourri + 0.061*pout + 0.001*spice
+
+Topic #43: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #44: 0.167*antik + 0.161*lavanda + 0.042*ml + 0.042*ml+antik + 0.041*vela + 0.041*aromatic+lavand + 0.041*vela+aromatic + 0.041*lavand+antik + 0.041*aromatica + 0.041*garni+difusor
+
+Topic #45: 0.005*antik + 0.005*summer + 0.005*difusor+arom + 0.005*antik+difusor + 0.005*ml + 0.005*difusor + 0.005*arom+summer + 0.005*summer+ml + 0.005*ml+antik + 0.005*vert+difusor
+
+Topic #46: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #47: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #48: 0.129*flor+cerejeir + 0.129*flor + 0.127*antik + 0.068*ml+antik + 0.068*ml + 0.065*essencias + 0.065*arom+bouquet + 0.065*cerejeir+ml + 0.065*antik+flor + 0.036*difusor
+
+Topic #49: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #50: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #51: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #52: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #53: 0.128*antik + 0.128*piemonte + 0.128*carr+piemont + 0.065*ml + 0.065*difusor+arom + 0.065*piemont+ml + 0.065*arom+carr + 0.065*antik+difusor + 0.065*ml+antik + 0.065*difusor
+
+Topic #54: 0.121*antik + 0.121*summer + 0.121*esfer+summer + 0.121*esferas + 0.061*pout + 0.061*summer+antik + 0.061*pourri+esfer + 0.061*antik+pout + 0.061*pourri + 0.061*pout+pourri
+
+Topic #55: 0.089*antik + 0.089*vidro + 0.089*rosa+perfumad + 0.089*perfumadas + 0.089*perfumad+intensidad + 0.089*intensidade + 0.089*vidr+rosa + 0.045*pout+pourri + 0.045*pout + 0.045*intensidad+pout
+
+Topic #56: 0.108*antik + 0.108*difusor + 0.108*difusor+arom + 0.108*arom+varand + 0.108*varanda + 0.054*refil+antik + 0.054*varand+ml + 0.054*antik+difusor + 0.054*ml + 0.054*ml+antik
+
+Topic #57: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #58: 0.204*sement+brasil + 0.204*sementes + 0.154*antik + 0.102*antik+sement + 0.075*ml + 0.075*ml+antik + 0.052*essencias + 0.001*esfer+summer + 0.001*pout + 0.001*refil+flor
+
+Topic #59: 0.118*antik + 0.113*summer + 0.113*perfumado + 0.113*perfumad+gavet + 0.113*gavet+summer + 0.057*antik+perfumad + 0.057*saches + 0.057*summer+antik + 0.057*sach+antik + 0.057*spic+difusor
+
+Topic #60: 0.212*summer + 0.138*antik + 0.106*summer+ml + 0.074*antik+difusor + 0.071*carr+summer + 0.069*difusor + 0.069*difusor+arom + 0.066*ml+antik + 0.066*ml + 0.036*arom+carr
+
+Topic #61: 0.137*antik + 0.137*roup+varand + 0.137*varanda + 0.069*perfumad+antik + 0.069*varand+antik + 0.069*perfumada + 0.069*agua + 0.069*agua+perfumad + 0.069*antik+roup + 0.001*roma
+
+Topic #62: 0.143*antik + 0.127*lavanda + 0.112*difusor + 0.112*difusor+arom + 0.075*arom+lavand + 0.075*ml+antik + 0.075*ml + 0.071*lavand+ml + 0.038*refil + 0.038*antik+difusor
+
+Topic #63: 0.005*carr+summer + 0.005*pout+pourri + 0.005*vert+difusor + 0.005*refil+ml + 0.005*refil+flor + 0.005*cerejeir+refil + 0.005*antik+refil + 0.005*vidr+pout + 0.005*vidr+antik + 0.005*spice
+
+Topic #64: 0.193*antik + 0.189*spray+ambient + 0.178*spray + 0.158*ambient+antik + 0.100*ml+antik + 0.100*ml + 0.000*sement+brasil + 0.000*sementes + 0.000*antik+sement + 0.000*antik+pout
+
+Topic #65: 0.121*antik + 0.121*nilla + 0.121*gavet+nill + 0.121*perfumad+gavet + 0.121*nill+antik + 0.121*perfumados + 0.061*sach+perfumad + 0.061*saches + 0.001*pourri+esfer + 0.001*vert+difusor
+
+Topic #66: 0.158*antik + 0.158*summer + 0.080*antik+spray + 0.080*spray+lencol + 0.080*ml + 0.080*ml+antik + 0.080*summer+ml + 0.080*spray + 0.001*spic+embalagem + 0.001*refil+ml
+
+Topic #67: 0.190*antik + 0.087*essencias + 0.081*varet+difusor + 0.081*varetas + 0.081*lavanda + 0.047*ml+antik + 0.047*ml + 0.041*refil + 0.041*refil+varet + 0.041*lavand+essenci
+
+Topic #68: 0.089*summer + 0.089*embalagem+vidr + 0.089*esfer+summer + 0.089*antik + 0.089*vidr+antik + 0.089*embalagem + 0.089*summer+embalagem + 0.089*esferas + 0.045*pout + 0.045*antik+pout
+
+Topic #69: 0.005*esferas + 0.005*summer+embalagem + 0.005*embalagem + 0.005*vidr+antik + 0.005*antik + 0.005*esfer+summer + 0.005*embalagem+vidr + 0.005*summer + 0.005*pourri + 0.005*pout+pourri
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Apple Spice 15ml Antik
+0 # Apple Spice 300ml Antik
+0 # Esferas Apple Spice Antik
+10 # Difusor de Aromas Mangue Vert 230ml Antik
+11 # Para Carro Chá Verde 10ml Antik
+12 # Perfumados Para Gaveta Intensidade Antik
+12 # Perfumados Para Gaveta Mangue Vert Antik
+12 # Perfumados para Gavetas Lavanda Antik
+15 # Difusor de Aromas Sementes Do Brasil  230ml Antik
+15 # Sementes Do Brasil 300ml Antik
+17 # Bouquet Garni 15ml Antik
+17 # Bouquet Garni 300ml Antik
+2 # Varanda 15ml Antik
+2 # Varanda 300ml Antik
+21 # Mangue Vert 120ml Antik
+21 # Mangue Vert 15ml Antik
+21 # Mangue Vert 300ml Antik
+21 # Mangue Vert 500ml Antik
+23 # Botanik Antik
+25 # Refil Flor de Cerejeira Refil230ml Antik
+28 # Intensidade 15ml Antik
+28 # Intensidade 300ml Antik
+3 # Summer 180g Antik
+30 # Difusor de Aromas Nilla  230ml Antik
+31 # Esferas Apple Spice Embalagem de Vidro Antik
+33 # Para Carro Alecrim 10ml Antik
+34 # Para Pot-Pourri Botanik  Antik BRANCO
+34 # Para Pot-Pourri Botanik  Antik VERDE
+35 # Summer 15ml Antik
+35 # Summer 500ml Antik
+38 # Botanik 15ml Antik
+38 # Botanik 300ml Antik
+38 # Difusor de Aroma Summer  230ml Antik
+38 # Difusor de Aromas Apple Spice 230ml Antik
+38 # Difusor de Aromas Botanik 230ml Antik
+38 # Difusor de Aromas Bouquet Garni 230ml Antik
+38 # Difusor de Aromas Intensidade 230ml Antik
+38 # Difusor de Aromas Romã Da Turquia  230ml Antik
+38 # Romã Da Turquia 15ml Antik
+38 # Romã Da Turquia 300ml Antik
+38 # Romã Da Turquia 500ml Antik
+41 # Esferas Lavanda Antik
+41 # Esferas Varanda  Antik
+41 # Rosas Perfumadas Botanik Antik
+42 # Esferas Sementes do Brasil Antik
+44 # Lavanda 120ml Antik
+44 # Lavanda 180g Antik
+48 # Difusor-aromas Flor de Cerejeira 300ml Antik
+48 # Essências Flor de Cerejeira15ml Antik
+5 # Nilla  300ml Antik
+5 # Nilla 120ml Antik
+5 # Nilla 15ml Antik
+5 # Nilla 500ml Antik
+53 # Para Carro Piemonte 10ml Antik
+54 # Esferas Summer Antik
+55 # Vidro Com Rosas Perfumadas Intensidade Antik
+56 # Difusor de Aroma Varanda 230ml Antik
+58 # Sementes Do Brasil 15ml Antik
+58 # Sementes Do Brasil 500ml Antik
+59 # Perfumado Para Gavetas Summer Antik
+60 # Para Carro Summer 10ml Antik
+60 # Summer 300ml Antik
+61 # Para Roupas Varanda 1,1L Antik
+62 # Difusor de Aroma Lavanda 230ml Antik
+62 # Lavanda 300ml Antik
+64 # Lavanda 500ml Antik
+65 # Perfumados Para Gavetas Nilla Antik
+66 # Summer 120ml Antik
+67 # Lavanda 15ml Antik
+67 # Varetas Para Difusor - 12 unidades Antik
+68 # Esferas Summer Embalagem de Vidro Antik
+[[ 0.          0.36716301  0.43846029 ...,  0.          0.          0.        ]
+ [ 0.          0.          0.         ...,  0.          0.          0.        ]
+ [ 0.          0.          0.         ...,  0.          0.          0.        ]
+ ..., 
+ [ 0.          0.          0.         ...,  0.33775159  0.          0.        ]
+ [ 0.          0.          0.         ...,  0.          0.3755905   0.        ]
+ [ 0.          0.          0.         ...,  0.          0.          0.81771201]]
+[ 3  5 59 28  2  5 38 48 21 31 25 21 38 15 44 38 54 12 38 34 61 62 23 11 35
+  2  5 60 38 41 21 38 38 48 21 17 55 58 10 42 68 64 38 38  0 62  5 12  0 53
+ 66 67 65 35 28 56 30 41 12 17 15 44 38 58 67 38 33 34 41  0 60]
+result by sample: [ 0.          0.30414177  0.          0.4132622   0.28125326  0.25283534
+ -0.40005508  0.30164131  0.3378207   0.          0.          0.28637034
+ -0.43374555  0.40052762 -0.21337997  0.08347199  0.          0.05136627
+  0.15736192  0.44431343  0.          0.02883697  0.          0.
+  0.16015448  0.30740249  0.27299565 -0.07194019 -0.21004284 -0.06579762
+  0.31078516 -0.22668894 -0.32095097  0.29283343  0.30830178  0.6259      0.
+  0.36360309  0.          0.          0.          0.          0.14214107
+ -0.05077057 -0.11249969 -0.25124536  0.27606812  0.03842954  0.30056387
+  0.          0.         -0.02826705  0.          0.2267966   0.41274316
+  0.          0.         -0.15137322 -0.0589793   0.62854746  0.53219556
+ -0.33620319 -0.22010883  0.41774427 -0.40359941  0.08635242  0.
+  0.44664363 -0.05683874  0.30047568  0.08199827]
+result avg: 0.0882167933322
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 46
+Using k = 1
+Processing 2 objects
+print out the topics for LDA
+Topic #0: 0.060*happy+leg + 0.060*corporal + 0.060*unissex + 0.060*legs + 0.060*biotherm + 0.060*hidratante + 0.060*hidratant+corporal + 0.060*happy + 0.040*brinde + 0.040*surpresa
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Brinde Surpresa
+0 # Hidratante Corporal Happy Legs Unissex 150ml Biotherm
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 44
+Using k = 2
+Processing 3 objects
+print out the topics for LDA
+Topic #0: 0.087*bye + 0.067*celulite + 0.048*bye+celulit + 0.048*bye+bye + 0.048*nivea + 0.048*unissex + 0.048*pinc+bourjol + 0.048*pinca + 0.048*bourjois + 0.029*unissex+anti
+
+Topic #1: 0.050*recharge + 0.050*night+light + 0.050*skincar+moistur + 0.050*moisture + 0.050*light + 0.050*skincare + 0.050*moistur+recharg + 0.050*recharg+night + 0.050*shiseido + 0.050*night
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Bye-Bye Celulite Unissex 201g Nivea
+0 # Pinça Bourjois
+1 # The Skincare Moisture Recharge Night Light 75ml Shiseido
+[[ 0.14142136  0.14142136  0.56568542  0.28284271  0.28284271  0.14142136
+   0.14142136  0.42426407  0.14142136  0.14142136  0.14142136  0.28284271
+   0.28284271  0.14142136  0.14142136  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.26726124  0.26726124  0.53452248  0.53452248  0.53452248
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.14142136  0.14142136  0.14142136  0.14142136  0.14142136  0.14142136
+   0.28284271  0.14142136  0.14142136  0.14142136  0.14142136  0.28284271
+   0.28284271  0.28284271  0.28284271  0.28284271  0.28284271  0.28284271
+   0.28284271  0.28284271]]
+[0 0 1]
+result by sample: [  1.57009246e-16   1.57009246e-16   0.00000000e+00]
+result avg: 1.04672830579e-16
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 0
+Using k = 2
+Processing 3 objects
+print out the topics for LDA
+Topic #0: 0.100*brun+etincelant + 0.100*etincelant + 0.100*brun + 0.100*max+brun + 0.100*effet+max + 0.100*effet + 0.097*max + 0.034*max+max + 0.034*max+beig + 0.034*beige
+
+Topic #1: 0.175*max + 0.096*effet + 0.096*effet+max + 0.096*max+max + 0.057*rose+eclat + 0.057*eclat + 0.057*max+rose + 0.057*rose + 0.057*sunny + 0.057*beig+sunny
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Effet 3D Max Brun Etincelant
+1 # Effet 3D Max Max Beige Sunny
+1 # Effet 3D Max Max Rose Eclat
+[[ 0.49169813  0.          0.          0.          0.18147115  0.49169813
+   0.49169813  0.49169813  0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.18147115  0.          0.
+   0.          0.49169813  0.49169813  0.49169813  0.49169813  0.          0.
+   0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.5         0.5
+   0.5         0.5       ]]
+[1 1 0]
+result by sample: [ 0.01660373  0.01660373  0.        ]
+result avg: 0.0110691542527
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 2
+Using k = 1
+Processing 2 objects
+print out the topics for LDA
+Topic #0: 0.060*prim+time + 0.060*time + 0.060*eyelid + 0.060*eyelid+pearl + 0.060*pearl + 0.060*prime + 0.060*bareminerals + 0.060*time+eyelid + 0.040*primer+prim + 0.040*primer
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Prime Time Eyelid Pearl 3ml bareMinerals
+0 # Sui Dreams EDT
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 5
+Using k = 2
+Processing 3 objects
+print out the topics for LDA
+Topic #0: 0.042*ml + 0.042*body+splash + 0.042*splash + 0.042*unissex + 0.042*unissex+bachellor + 0.042*bachellor + 0.042*body + 0.042*splash+ml + 0.025*chic + 0.025*ml+unissex
+
+Topic #1: 0.049*cabel+fino + 0.049*cabelos + 0.049*hell+kitty + 0.049*infantil + 0.049*finos + 0.049*claros + 0.049*hello + 0.049*fino+clar + 0.049*kitty + 0.049*finalizador
+
+
+print out the documents and which is the most probable topics for each doc
+0 #  Body Splash 250 ml Unissex  Bachellor Cor Coconut Chic
+0 # Lui Rochas Homme EDT
+1 # Finalizador Cabelos Finos e Claros Infantil 200ml Hello Kitty
+[[ 0.30662424  0.15331212  0.15331212  0.30662424  0.30662424  0.15331212
+   0.15331212  0.15331212  0.15331212  0.15331212  0.15331212  0.15331212
+   0.15331212  0.15331212  0.15331212  0.11316589  0.15331212  0.15331212
+   0.30662424  0.30662424  0.30662424  0.30662424  0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.37796447  0.37796447  0.37796447  0.37796447  0.37796447
+   0.37796447  0.37796447  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.05375659  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.29130816  0.29130816  0.14565408  0.29130816  0.29130816
+   0.14565408  0.14565408  0.29130816  0.29130816  0.29130816  0.29130816
+   0.29130816  0.14565408  0.14565408  0.29130816  0.14565408  0.14565408]]
+[0 0 1]
+result by sample: [ -3.04634602e-03   1.57009246e-16   0.00000000e+00]
+result avg: -0.00101544867263
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 7
+Using k = 1
+Processing 2 objects
+print out the topics for LDA
+Topic #0: 0.032*duet+jasmin + 0.032*duet + 0.032*acobreados + 0.032*cabel+acobread + 0.032*cabelos + 0.032*deposica+pigment + 0.032*deposicao + 0.032*keracolor + 0.032*keracolor+vibrant + 0.032*mask
+
+
+print out the documents and which is the most probable topics for each doc
+0 #  Keracolor Vibrant Mask (Deposição de Pigmentos Cabelos Acobreados)250g Vitabelle
+0 # Perfume Idylle Duet Jasmin-Lilás  Feminino 35ml Guerlain
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 9
+Using k = 3
+Processing 4 objects
+print out the topics for LDA
+Topic #0: 0.092*shadow + 0.092*bareminerals + 0.092*shadow+baremineral + 0.092*wet+dry + 0.092*wet + 0.092*dry + 0.092*dry+shadow + 0.053*pincel + 0.053*pincel+olho + 0.053*olhos
+
+Topic #1: 0.122*sex+and + 0.122*city+edp + 0.122*city + 0.122*edp + 0.122*and + 0.122*and+city + 0.122*sex + 0.012*olho+wet + 0.012*pincel+olho + 0.012*olho+pincel
+
+Topic #2: 0.053*and+city + 0.053*sex + 0.053*and + 0.053*edp + 0.053*city + 0.053*city+edp + 0.053*sex+and + 0.053*olho+wet + 0.053*olho+pincel + 0.053*olhos
+
+
+print out the documents and which is the most probable topics for each doc
+0 # Wet / Dry Shadow bareMinerals
+1 # Sex And The City EDP
+1 # Sex And The City EDP
+1 # Sex And The City EDP
+[[ 0.37796447  0.37796447  0.37796447  0.37796447  0.37796447  0.37796447
+   0.37796447  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.34815531  0.34815531  0.34815531  0.17407766  0.17407766  0.17407766
+   0.17407766  0.17407766  0.34815531  0.34815531  0.34815531  0.34815531]
+ [ 0.37796447  0.37796447  0.37796447  0.37796447  0.37796447  0.37796447
+   0.37796447  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.37796447  0.37796447  0.37796447  0.37796447  0.37796447  0.37796447
+   0.37796447  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]]
+[1 0 1 1]
+result by sample: [ 0.99999999  0.          0.99999999  0.99999999]
+result avg: 0.749999992097
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 8
+Using k = 8
+Processing 9 objects
+print out the topics for LDA
+Topic #0: 0.009*female + 0.009*originals + 0.009*original+femal + 0.009*edp + 0.009*mccartney+edp + 0.009*stella + 0.009*mccartney + 0.009*stell+mccartney + 0.009*men + 0.009*men+exfoliant
+
+Topic #1: 0.042*po + 0.042*face + 0.042*all + 0.029*bareminerals + 0.029*face+po + 0.029*tonalizante + 0.029*over+face + 0.029*over + 0.029*po+tonalizant + 0.029*all+over
+
+Topic #2: 0.009*originals + 0.009*female + 0.009*original+femal + 0.009*edp + 0.009*mccartney+edp + 0.009*mccartney + 0.009*stell+mccartney + 0.009*stella + 0.009*men + 0.009*vis
+
+Topic #3: 0.045*compact+top + 0.045*sti + 0.045*top+watt + 0.045*top + 0.045*sti+compact + 0.045*watts + 0.045*compacto + 0.045*mega + 0.045*pro + 0.045*pro+sti
+
+Topic #4: 0.060*men + 0.060*edt + 0.060*ice+men + 0.060*men+edt + 0.060*ice + 0.007*female + 0.007*originals + 0.007*original+femal + 0.007*edp + 0.007*stell+mccartney
+
+Topic #5: 0.059*feminino + 0.059*fa + 0.059*blue + 0.059*blue+romanc + 0.059*aerosol+blue + 0.059*romance + 0.059*aerosol + 0.031*ml+fa + 0.031*desodorant+aerosol + 0.031*fa+desodorant
+
+Topic #6: 0.009*female + 0.009*originals + 0.009*original+femal + 0.009*edp + 0.009*mccartney+edp + 0.009*stella + 0.009*stell+mccartney + 0.009*mccartney + 0.009*men + 0.009*exfoliant
+
+Topic #7: 0.043*ml + 0.043*splash + 0.043*splash+ml + 0.043*body+splash + 0.043*body + 0.043*bachellor + 0.043*unissex+bachellor + 0.043*unissex + 0.023*corporal + 0.023*pera
+
+
+print out the documents and which is the most probable topics for each doc
+1 # All Over The Face Pó Tonalizante 1,5g bareMinerals Faux Tan
+1 # Sisley All Day Year 50 ml + Global Anti idade 5 ml + Gel Express + Gel Nettoyante 15g
+1 # Stella McCartney EDP
+3 #  Pro Sti Compacto Top 2100 Watts Mega Cor 110 V Vermelho
+3 # Originals Female
+4 # Ice Men EDT
+5 #  Aerosol Blue Romance Feminino 150ml Fa
+7 #  Body Splash 250 ml Unissex  Bachellor Cor Green Pera
+7 # Men Exfoliant Vis
+[[ 0.4472136   0.4472136   0.4472136   0.4472136   0.4472136   0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.14217893
+   0.14217893  0.28435786  0.28435786  0.09732647  0.14217893  0.28435786
+   0.14217893  0.14217893  0.28435786  0.28435786  0.14217893  0.28435786
+   0.28435786  0.28435786  0.28435786  0.14217893  0.14217893  0.14217893
+   0.28435786  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.47305847  0.47305847
+   0.32382514  0.47305847  0.47305847  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.18315529  0.26756157  0.13378079  0.13378079
+   0.26756157  0.40134236  0.13378079  0.26756157  0.13378079  0.13378079
+   0.26756157  0.26756157  0.40134236  0.26756157  0.13378079  0.13378079
+   0.13378079  0.26756157  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.13564172  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.19815159  0.19815159  0.19815159  0.19815159  0.19815159  0.19815159
+   0.19815159  0.39630318  0.19815159  0.19815159  0.19815159  0.19815159
+   0.19815159  0.19815159  0.19815159  0.19815159  0.19815159  0.19815159
+   0.19815159  0.19815159  0.19815159  0.19815159  0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.57735027  0.57735027  0.57735027  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.32382514  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.47305847  0.47305847
+   0.47305847  0.47305847  0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.10504172  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.15344972  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.30689943  0.15344972  0.15344972  0.30689943  0.30689943
+   0.15344972  0.15344972  0.15344972  0.15344972  0.15344972  0.15344972
+   0.15344972  0.15344972  0.15344972  0.15344972  0.15344972  0.30689943
+   0.30689943  0.30689943  0.30689943  0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.08421519  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.33686077  0.33686077  0.33686077  0.33686077  0.16843038  0.16843038
+   0.33686077  0.16843038  0.16843038  0.16843038  0.33686077  0.16843038
+   0.16843038  0.33686077]]
+[1 3 7 1 1 3 4 7 5]
+result by sample: [  1.57009246e-16  -2.56240088e-03  -5.38830525e-02   6.24993666e-03
+  -2.14224140e-03   0.00000000e+00   0.00000000e+00  -6.48240945e-03
+   0.00000000e+00]
+result avg: -0.00653557417685
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: None
+
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+Processing category: 74
+Using k = 5
+Processing 6 objects
+print out the topics for LDA
+Topic #0: 0.032*aqua + 0.032*men + 0.032*aqua+men + 0.032*outon+invern + 0.032*french+touch + 0.032*french + 0.032*absolu + 0.032*coleca+outon + 0.032*inverno + 0.032*outono
+
+Topic #1: 0.127*everlast + 0.127*desodorante + 0.066*uppercut+desodorant + 0.066*desodorant+masculin + 0.066*uppercut + 0.066*masculino + 0.066*everlast+uppercut + 0.036*everlast+everlast + 0.036*masculin+ml + 0.036*desodorant+everlast
+
+Topic #2: 0.082*touch+absolu + 0.082*colecao + 0.082*touch + 0.082*absolu + 0.082*outon+invern + 0.082*french+touch + 0.082*outono + 0.082*inverno + 0.082*absolu+coleca + 0.082*french
+
+Topic #3: 0.032*aqua + 0.032*aqua+men + 0.032*men + 0.032*colecao + 0.032*absolu+coleca + 0.032*absolu + 0.032*touch + 0.032*outon+invern + 0.032*inverno + 0.032*french+touch
+
+Topic #4: 0.108*aqua + 0.107*aerosol + 0.107*spray + 0.107*aqua+spray + 0.107*aerosol+aqua + 0.018*aqua+men + 0.018*men + 0.018*coleca+outon + 0.018*french + 0.018*absolu+coleca
+
+
+print out the documents and which is the most probable topics for each doc
+1 # Aqua Men
+1 # Desodorante Everlast Uppercut Desodorante Masculino 250ml Everlast
+2 # French Touch Absolu Coleção Outono / Inverno 2012
+2 # French Touch Absolu Coleção Outono / Inverno 2012
+2 # French Touch Absolu Coleção Outono / Inverno 2012
+4 # Aerosol Aqua Spray
+[[ 0.13130643  0.13130643  0.26261287  0.52522573  0.52522573  0.13130643
+   0.26261287  0.13130643  0.26261287  0.13130643  0.13130643  0.26261287
+   0.26261287  0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.        ]
+ [ 0.          0.          0.          0.          0.          0.          0.
+   0.          0.          0.          0.          0.          0.
+   0.39778293  0.64875602  0.64875602  0.          0.          0.          0.
+   0.          0.          0.          0.          0
