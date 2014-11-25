@@ -46,7 +46,7 @@ import collections
 from nltk import word_tokenize
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
-from sklearn.cluster import KMeans
+from sklearn.cluster import KMeans, AffinityPropagation
 from sklearn.feature_extraction.text import TfidfVectorizer
 from pprint import pprint
 
@@ -57,6 +57,9 @@ documents = ["Sistemas sobre bananas são bananas",
 "Sistemas e grafos sobre tudo!"]
 
 filename = "inputs_sepha_ok"
+
+def tokenizer_wrapper(text):
+  return get_terms(text, use_preposition=True, use_stemming=True)
 
 class AlgorithmsWrapper:
 
@@ -90,15 +93,20 @@ class AlgorithmsWrapper:
             self.algorithm_lda(category_id, objs)
           elif self.algorithm=='lsi':
             self.algorithm_lsi(category_id, objs)
-          else:
+          elif self.algorithm=='kmeans':
             self.algorithm_kmeans_with_tfidf(category_id, objs)
+          else:
+            self.algorithm_AffinityPropagation_with_tfidf(category_id, objs)
         else:
           print "category_id is not a digit, ignoring"
       else:
         print "to few objects, ignoring"
+    print "using algorithm: "+self.algorithm
+    print "use description: "+str(self.use_description)
+    print "use stemming: "+str(self.use_stemming)
     self.print_results()
     elapsed_time = time.time() - start_time
-    print "elapsed time: "+str(elapsed_time)
+    print "\nelapsed time: "+str(elapsed_time)
 
   def algorithm_lda(self, category_id, objs):
     numTopics = self.calculate_k(objs)
@@ -156,10 +164,15 @@ class AlgorithmsWrapper:
 
     results = []
     labels = []
+    cont = 0
     for probabilities, obj in izip(corpus_lsi, objs):
-      max_prop = max(probabilities, key=lambda item:item[1])[0]
+      if probabilities:
+        max_prop = max(probabilities, key=lambda item:item[1])[0]
+      else:
+        max_prop = "WARNING "+str(texts[cont])
       labels.append(max_prop)
       results.append(str(max_prop)+" # "+obj['name'].encode('utf8'))
+      cont += 1
     results.sort()
     for r in results:
       print r
@@ -182,7 +195,7 @@ class AlgorithmsWrapper:
     for obj in objs:
       texts.append(self.get_categorizedproduct_content(obj, raw=True))
 
-    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST)
+    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
  
     tfidf_model = vectorizer.fit_transform(texts)
     km_model = KMeans(n_clusters=numTopics)
@@ -207,79 +220,32 @@ class AlgorithmsWrapper:
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
-  def algorithm_test2(self, category_id, objs):
-    numTopics = self.calculate_k(objs)
-    print "Using k = "+str(numTopics)
+  def algorithm_AffinityPropagation_with_tfidf(self, category_id, objs):
+    print "Using automatic k"
+
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj, raw=True))
+
+    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
+ 
+    tfidf_model = vectorizer.fit_transform(texts)
+    model = AffinityPropagation()
+    labels = model.fit_predict(tfidf_model)
+
+    results = []
+    for i, cluster in enumerate(labels):
+      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+    results.sort()
+    for r in results:
+      print r
 
     texts = []
     for obj in objs:
       texts.append(self.get_categorizedproduct_content(obj))
-
     dictionary = corpora.Dictionary(texts)
     corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-    tfidf = TfidfModel(corpus)
-
-    num_clusters = self.calculate_k(objs)
-
-    # print "Create models"
-    # lsi_model = LsiModel(corpus, id2word=dictionary, num_topics=numTopics)
-    # corpus_lsi = lsi_model[corpus]
-    # print "Done creating models"
-
-    # results = []
-    # labels = []
-    # for probabilities, obj in izip(corpus_lsi, objs):
-    #   max_prop = max(probabilities, key=lambda item:item[1])[0]
-    #   labels.append(max_prop)
-    #   results.append(str(max_prop)+" # "+obj['name'].encode('utf8'))
-    # results.sort()
-    # for r in results:
-    #   print r
-
-    # topic_id = 0
-    # for topic in lsi_model.show_topics(num_words=5):
-    #     print "TOPIC (LSI2) " + str(topic_id) + " : " + topic
-    #     topic_id+=1
-     
-    # for l,t in izip(corpus_lsi,corpus):
-    #   print l,"#",t
-    # print
-    # for top in lsi_model.print_topics(2):
-    #   print top
-
-    # corpus_dense = corpus2dense(corpus, num_clusters)
-    # print "Dense Matrix Shape " + str(corpus_lsi_dense.shape)
-    
-    # #attempt scikit integration
-    # kmeans_model = KMeans(n_clusters=num_clusters) #, init='random', max_iter=100, n_init=1, verbose=1)
-    # kmeans_model.fit(corpus_dense)
-    # labels = kmeans_model.labels_
-    # print "labels: "
-    # print str(labels)
-    # print str(type(labels))
-    # print
-
-    # #attempt scipy integration
-    # computing K-Means with K = 2 (2 clusters)
-    centroids,_ = kmeans(tfidf[corpus],num_clusters)
-    # assign each sample to a cluster
-    idx,_ = vq(tfidf[corpus],centroids)
-     
-    # # some plotting using numpy's logical indexing
-    # plot(
-    #     corpus_lsi_dense[idx==0,0],corpus_lsi_dense[idx==0,1],'ob',
-    #     corpus_lsi_dense[idx==1,0],corpus_lsi_dense[idx==1,1],'or',
-    #     corpus_lsi_dense[idx==2,0],corpus_lsi_dense[idx==2,1],'og',
-    #     corpus_lsi_dense[idx==3,0],corpus_lsi_dense[idx==3,1],'xr'
-    # )
-     
-    # plot(centroids[:,0],centroids[:,1],'sg',markersize=8)
-    # show()
-
-    if numTopics > 1:
-      self.calculate_metrics(category_id, corpus, dictionary, labels)
-    else:
-      print "number of clusters equals or lower than 1, ignoring metric"
+    self.calculate_metrics(category_id, corpus, dictionary, labels)
 
   def first_name(self, category_id, objs):
     first_names = set([item['name'].split()[0] for item in objs])
@@ -338,9 +304,9 @@ class AlgorithmsWrapper:
 
   def calculate_k(self, objs):
     first_names = set([item['name'].split()[0] for item in objs])
-    # result = int(round(math.sqrt(len(first_names))))
+    result = int(round(math.sqrt(len(first_names))))
     # result = len(first_names)
-    result = int(round((len(first_names)/2)))
+    # result = int(round((len(first_names)/2)))
     if result > 100:
       result = 100
     if result >= len(objs):
@@ -405,5 +371,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='test', use_description=True)
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='test', use_description=False)
   a.run()
