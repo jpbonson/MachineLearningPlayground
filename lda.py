@@ -4,6 +4,7 @@
 import json
 import math
 import numpy
+import time
 import inspect
 import warnings
 from collections import defaultdict
@@ -39,6 +40,16 @@ from gensim import matutils,corpora
  
 from scipy.cluster.vq import kmeans,vq
 
+import string
+import collections
+ 
+from nltk import word_tokenize
+from nltk.stem import PorterStemmer
+from nltk.corpus import stopwords
+from sklearn.cluster import KMeans
+from sklearn.feature_extraction.text import TfidfVectorizer
+from pprint import pprint
+
 documents = ["Sistemas sobre bananas são bananas",
 "Bananas são nutritivas",
 "Sistemas construídos por pandas e bambus.",
@@ -49,27 +60,26 @@ filename = "inputs_sepha_ok"
 
 class AlgorithmsWrapper:
 
-  def __init__(self, texts_per_cat, use_skip = False, algorithm='firstname', use_stemming=True, use_description=False):
-    self.use_skip = use_skip
+  def __init__(self, texts_per_cat, algorithm='firstname', use_stemming=True, use_description=False):
     self.algorithm = algorithm
     self.texts_per_cat = texts_per_cat
     self.use_stemming = use_stemming
     self.use_description = use_description
     print "using algorithm: "+self.algorithm
-    print "use skipping: "+str(self.use_skip)
     print "use description: "+str(self.use_description)
     print "use stemming: "+str(self.use_stemming)
-    self.macro_avg_sum = 0.0
-    self.micro_avg_sum = 0.0
-    self.cont_samples = 0.0
+    self.macro_avgs = []
+    self.macro_stdevs = []
+    self.micro_avgs = []
     self.total_corpus = 0.0
     self.skips = 0
     self.final_results = []
     self.upper_limit = 10
 
   def run(self):
+    start_time = time.time()
     for category_id, objs in texts_per_cat.iteritems():
-      print "\n\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n"
+      print "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++"
       print "Processing category: "+str(category_id)
       if len(objs) >= self.upper_limit:
         if category_id.isdigit():
@@ -78,13 +88,17 @@ class AlgorithmsWrapper:
             self.first_name(category_id, objs)
           elif self.algorithm=='lda':
             self.algorithm_lda(category_id, objs)
-          else:
+          elif self.algorithm=='lsi':
             self.algorithm_lsi(category_id, objs)
+          else:
+            self.algorithm_kmeans_with_tfidf(category_id, objs)
         else:
           print "category_id is not a digit, ignoring"
       else:
         print "to few objects, ignoring"
     self.print_results()
+    elapsed_time = time.time() - start_time
+    print "elapsed time: "+str(elapsed_time)
 
   def algorithm_lda(self, category_id, objs):
     numTopics = self.calculate_k(objs)
@@ -98,7 +112,7 @@ class AlgorithmsWrapper:
     corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
 
     print "print out the topics for LDA"
-    lda = ldamodel.LdaModel(corpus, id2word=dictionary, num_topics=numTopics, passes=100)
+    lda = ldamodel.LdaModel(corpus, id2word=dictionary, num_topics=numTopics, passes=20)
     topics = []
     for i in range(0, lda.num_topics):
       print "Topic #" + str(i) + ": "+lda.print_topic(i)+"\n"
@@ -123,7 +137,7 @@ class AlgorithmsWrapper:
       print "number of clusters equals or lower than 1, ignoring metric"
 
   def algorithm_lsi(self, category_id, objs):
-    numTopics = 100
+    numTopics = self.calculate_k(objs)
     print "Using k = "+str(numTopics)
 
     texts = []
@@ -154,6 +168,78 @@ class AlgorithmsWrapper:
     for topic in lsi_model.show_topics(num_words=5):
         print "TOPIC (LSI2) " + str(topic_id) + " : " + topic
         topic_id+=1
+
+    if numTopics > 1:
+      self.calculate_metrics(category_id, corpus, dictionary, labels)
+    else:
+      print "number of clusters equals or lower than 1, ignoring metric"
+
+  def algorithm_kmeans_with_tfidf(self, category_id, objs):
+    numTopics = self.calculate_k(objs)
+    print "Using k = "+str(numTopics)
+
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj, raw=True))
+
+    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST)
+ 
+    tfidf_model = vectorizer.fit_transform(texts)
+    km_model = KMeans(n_clusters=numTopics)
+    km_model.fit(tfidf_model)
+ 
+    labels = []
+    results = []
+    for i, cluster in enumerate(km_model.labels_):
+      labels.append(cluster)
+      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+    results.sort()
+    for r in results:
+      print r
+
+    if numTopics > 1:
+      texts = []
+      for obj in objs:
+        texts.append(self.get_categorizedproduct_content(obj))
+      dictionary = corpora.Dictionary(texts)
+      corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+      self.calculate_metrics(category_id, corpus, dictionary, labels)
+    else:
+      print "number of clusters equals or lower than 1, ignoring metric"
+
+  def algorithm_test2(self, category_id, objs):
+    numTopics = self.calculate_k(objs)
+    print "Using k = "+str(numTopics)
+
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj))
+
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+    tfidf = TfidfModel(corpus)
+
+    num_clusters = self.calculate_k(objs)
+
+    # print "Create models"
+    # lsi_model = LsiModel(corpus, id2word=dictionary, num_topics=numTopics)
+    # corpus_lsi = lsi_model[corpus]
+    # print "Done creating models"
+
+    # results = []
+    # labels = []
+    # for probabilities, obj in izip(corpus_lsi, objs):
+    #   max_prop = max(probabilities, key=lambda item:item[1])[0]
+    #   labels.append(max_prop)
+    #   results.append(str(max_prop)+" # "+obj['name'].encode('utf8'))
+    # results.sort()
+    # for r in results:
+    #   print r
+
+    # topic_id = 0
+    # for topic in lsi_model.show_topics(num_words=5):
+    #     print "TOPIC (LSI2) " + str(topic_id) + " : " + topic
+    #     topic_id+=1
      
     # for l,t in izip(corpus_lsi,corpus):
     #   print l,"#",t
@@ -161,21 +247,23 @@ class AlgorithmsWrapper:
     # for top in lsi_model.print_topics(2):
     #   print top
 
-    # corpus_lsi_dense = corpus2dense(corpus_lsi, numTopics)
+    # corpus_dense = corpus2dense(corpus, num_clusters)
     # print "Dense Matrix Shape " + str(corpus_lsi_dense.shape)
     
     # #attempt scikit integration
-    # kmeans_model = KMeans(n_clusters=num_clusters, init='random', max_iter=100, n_init=1, verbose=1)
-    # kmeans_model.fit(corpus_lsi_dense)
+    # kmeans_model = KMeans(n_clusters=num_clusters) #, init='random', max_iter=100, n_init=1, verbose=1)
+    # kmeans_model.fit(corpus_dense)
     # labels = kmeans_model.labels_
-    # print "AQUI"
+    # print "labels: "
     # print str(labels)
+    # print str(type(labels))
+    # print
 
     # #attempt scipy integration
-    # # computing K-Means with K = 2 (2 clusters)
-    # centroids,_ = kmeans(corpus_lsi_dense,2)
-    # # assign each sample to a cluster
-    # idx,_ = vq(corpus_lsi_dense,centroids)
+    # computing K-Means with K = 2 (2 clusters)
+    centroids,_ = kmeans(tfidf[corpus],num_clusters)
+    # assign each sample to a cluster
+    idx,_ = vq(tfidf[corpus],centroids)
      
     # # some plotting using numpy's logical indexing
     # plot(
@@ -229,7 +317,7 @@ class AlgorithmsWrapper:
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
-  def get_categorizedproduct_content(self, event):
+  def get_categorizedproduct_content(self, event, raw=False):
     # We check all fields for None if they are None we put an empty string instead
     use_description=self.use_description
     use_stemming=self.use_stemming
@@ -239,11 +327,14 @@ class AlgorithmsWrapper:
     if use_description:
       if 'info' in event and 'description' in event['info']:
         description = event['info']['description']
-    tags = event.get("tags", []) or []
     event['tags'] = filter(None, event['tags'])
-    return get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
-        get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming) + \
-        get_terms(tags, use_preposition=use_preposition, use_stemming=use_stemming)
+    tags = event.get("tags", []) or []
+    if raw:
+      return name+" "+description+" "+" ".join(tags)
+    else:
+      return get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
+          get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming) + \
+          get_terms(tags, use_preposition=use_preposition, use_stemming=use_stemming)
 
   def calculate_k(self, objs):
     first_names = set([item['name'].split()[0] for item in objs])
@@ -258,23 +349,6 @@ class AlgorithmsWrapper:
       result = 1
     return result
 
-  def print_results(self):
-    print "\nFINAL RESULTS:"
-    if self.total_corpus > 0:
-      print "micro avg: "+str(self.micro_avg_sum/self.total_corpus)
-    if self.cont_samples > 0:
-      print "macro avg: "+str(self.macro_avg_sum/self.cont_samples)
-    print
-    self.final_results.sort()
-    for r in self.final_results:
-      print r
-
-  # def print_topics(lda, vocab, n=10):
-  #     """ Print the top words for each topic. """
-  #     topics = lda.show_topics(topics=-1, topn=n, formatted=False)
-  #     for ti, topic in enumerate(topics):
-  #         print 'topic %d: %s' % (ti, ' '.join('%s/%.2f' % (t[1], t[0]) for t in topic))
-
   def calculate_metrics(self, category_id, corpus, dictionary, labels):
     tfidf = TfidfModel(corpus)
     features = lil_matrix(((len(corpus), len(dictionary.keys()))))
@@ -287,21 +361,39 @@ class AlgorithmsWrapper:
     # labels = [1, 2, 3, 4]
     labels = numpy.array(labels)
     try:
-      avg_silhouette = numpy.mean(metrics.silhouette_score(X, labels, metric='euclidean',sample_size=500))
+      avgs = []
+      for i in range(3):
+        avgs.append(numpy.mean(metrics.silhouette_score(X, labels, metric='euclidean',sample_size=500)))
+      avg_silhouette = numpy.around(numpy.mean(avgs), decimals=3)
+      stddev_silhouette = numpy.around(numpy.std(avgs), decimals=3)
     except ValueError as e:
-      if self.use_skip:
         print "skipping"
         self.skips += 1
         return
-      else:
-        avg_silhouette = 0
-    msg = str(category_id)+": "+str(avg_silhouette)
+    msg = str(category_id)+": "+str(avg_silhouette)+" ( "+str(stddev_silhouette)+" )"
     print msg
     self.final_results.append(msg)
-    self.macro_avg_sum += avg_silhouette
-    self.micro_avg_sum += avg_silhouette*float(len(labels))
-    self.cont_samples += 1.0
+    self.macro_avgs.append(avg_silhouette)
+    self.macro_stdevs.append(stddev_silhouette)
+    self.micro_avgs.append(avg_silhouette*float(len(labels)))
     self.total_corpus += float(len(labels))
+
+  def print_results(self):
+    print "\nFINAL RESULTS:"
+    if self.total_corpus > 0:
+      print "micro avg: "+str(numpy.around(sum(self.micro_avgs)/self.total_corpus, decimals=3))
+    if self.macro_avgs:
+      print "macro avg: "+str(numpy.around(numpy.mean(self.macro_avgs), decimals=3))+" ( "+str(numpy.around(numpy.std(self.macro_stdevs), decimals=3))+" )"
+    print
+    self.final_results.sort()
+    for r in self.final_results:
+      print r
+
+  # def print_topics(lda, vocab, n=10):
+  #     """ Print the top words for each topic. """
+  #     topics = lda.show_topics(topics=-1, topn=n, formatted=False)
+  #     for ti, topic in enumerate(topics):
+  #         print 'topic %d: %s' % (ti, ' '.join('%s/%.2f' % (t[1], t[0]) for t in topic))
 
 def file_generator(filename):
   for line in open("data-clusterization/"+filename):
@@ -313,5 +405,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='test')
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='test', use_description=True)
   a.run()
