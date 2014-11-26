@@ -46,7 +46,8 @@ import collections
 from nltk import word_tokenize
 from nltk.stem import PorterStemmer
 from nltk.corpus import stopwords
-from sklearn.cluster import KMeans, AffinityPropagation
+from sklearn.cluster import KMeans
+from sklearn.cluster import *
 from sklearn.feature_extraction.text import TfidfVectorizer
 from pprint import pprint
 
@@ -56,7 +57,7 @@ documents = ["Sistemas sobre bananas são bananas",
 "Adote uma banana hoje!",
 "Sistemas e grafos sobre tudo!"]
 
-filename = "inputs_sepha_ok"
+filename = "inputs_fastshop-wcs_goldstandard" # "inputs_fastshop-wcs_ok"
 
 def tokenizer_wrapper(text):
   return get_terms(text, use_preposition=True, use_stemming=True)
@@ -85,18 +86,23 @@ class AlgorithmsWrapper:
       print "\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++"
       print "Processing category: "+str(category_id)
       if len(objs) >= self.upper_limit:
+        goldstandards = None
+        if 'goldstandard' in objs[0]:
+          goldstandards = []
+          for obj in objs:
+            goldstandards.append(obj['goldstandard'])
         if category_id.isdigit():
           print "Processing "+str(len(objs))+" objects"
           if self.algorithm=='firstname':
-            self.first_name(category_id, objs)
+            self.first_name(category_id, objs, goldstandards)
           elif self.algorithm=='lda':
-            self.algorithm_lda(category_id, objs)
+            self.algorithm_lda(category_id, objs, goldstandards)
           elif self.algorithm=='lsi':
-            self.algorithm_lsi(category_id, objs)
+            self.algorithm_lsi(category_id, objs, goldstandards)
           elif self.algorithm=='kmeans':
-            self.algorithm_kmeans_with_tfidf(category_id, objs)
+            self.algorithm_kmeans_with_tfidf(category_id, objs, goldstandards)
           else:
-            self.algorithm_AffinityPropagation_with_tfidf(category_id, objs)
+            self.algorithms_from_sklearn(category_id, objs, goldstandards)
         else:
           print "category_id is not a digit, ignoring"
       else:
@@ -108,7 +114,7 @@ class AlgorithmsWrapper:
     elapsed_time = time.time() - start_time
     print "\nelapsed time: "+str(elapsed_time)
 
-  def algorithm_lda(self, category_id, objs):
+  def algorithm_lda(self, category_id, objs, goldstandards):
     numTopics = self.calculate_k(objs)
     print "Using k = "+str(numTopics)
 
@@ -140,11 +146,11 @@ class AlgorithmsWrapper:
       print r
 
     if numTopics > 1:
-      self.calculate_metrics(category_id, corpus, dictionary, labels)
+      self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
-  def algorithm_lsi(self, category_id, objs):
+  def algorithm_lsi(self, category_id, objs, goldstandards):
     numTopics = self.calculate_k(objs)
     print "Using k = "+str(numTopics)
 
@@ -183,11 +189,11 @@ class AlgorithmsWrapper:
         topic_id+=1
 
     if numTopics > 1:
-      self.calculate_metrics(category_id, corpus, dictionary, labels)
+      self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
-  def algorithm_kmeans_with_tfidf(self, category_id, objs):
+  def algorithm_kmeans_with_tfidf(self, category_id, objs, goldstandards):
     numTopics = self.calculate_k(objs)
     print "Using k = "+str(numTopics)
 
@@ -216,22 +222,34 @@ class AlgorithmsWrapper:
         texts.append(self.get_categorizedproduct_content(obj))
       dictionary = corpora.Dictionary(texts)
       corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-      self.calculate_metrics(category_id, corpus, dictionary, labels)
+      self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
-  def algorithm_AffinityPropagation_with_tfidf(self, category_id, objs):
-    print "Using automatic k"
+  def algorithms_from_sklearn(self, category_id, objs, goldstandards):
+    numTopics = self.calculate_k(objs)
+    print "Using k = "+str(numTopics)
 
     texts = []
     for obj in objs:
       texts.append(self.get_categorizedproduct_content(obj, raw=True))
 
     vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
- 
     tfidf_model = vectorizer.fit_transform(texts)
-    model = AffinityPropagation()
-    labels = model.fit_predict(tfidf_model)
+
+    if self.algorithm == 'affinity':
+      model = AffinityPropagation(copy=False)
+    elif self.algorithm == 'spectral':
+      model = SpectralClustering(n_clusters=numTopics)
+    else:
+      model = AgglomerativeClustering(n_clusters=numTopics)
+
+    # model = DBSCAN() # allows cluster data as noisy, but can be used to predict k of clusters
+    # model = FeatureAgglomeration(n_clusters=numTopics)
+    # model = MiniBatchKMeans(n_clusters=numTopics)
+    # model = MeanShift() # bad results, slow
+    # model = Ward(n_clusters=numTopics)
+    labels = model.fit_predict(tfidf_model.toarray())
 
     results = []
     for i, cluster in enumerate(labels):
@@ -245,9 +263,9 @@ class AlgorithmsWrapper:
       texts.append(self.get_categorizedproduct_content(obj))
     dictionary = corpora.Dictionary(texts)
     corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-    self.calculate_metrics(category_id, corpus, dictionary, labels)
+    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
 
-  def first_name(self, category_id, objs):
+  def first_name(self, category_id, objs, goldstandards):
     first_names = set([item['name'].split()[0] for item in objs])
     numTopics = len(first_names)
     print "Using k = "+str(numTopics)
@@ -279,7 +297,7 @@ class AlgorithmsWrapper:
       print r
 
     if numTopics > 1:
-      self.calculate_metrics(category_id, corpus, dictionary, labels)
+      self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
@@ -304,18 +322,29 @@ class AlgorithmsWrapper:
 
   def calculate_k(self, objs):
     first_names = set([item['name'].split()[0] for item in objs])
-    result = int(round(math.sqrt(len(first_names))))
+    # result = int(round(math.sqrt(len(first_names))))
     # result = len(first_names)
-    # result = int(round((len(first_names)/2)))
-    if result > 100:
-      result = 100
+    result = int(round((len(first_names)/2)))
+    if result > 500:
+      result = 500
     if result >= len(objs):
       result = len(objs)-1
     if result == 0:
       result = 1
     return result
 
-  def calculate_metrics(self, category_id, corpus, dictionary, labels):
+  def calculate_metrics(self, category_id, corpus, dictionary, labels, goldstandards):
+    msg = ""
+    if goldstandards:
+      msg += "----\n"
+      msg += ("Homogeneity: %0.3f\n" % metrics.homogeneity_score(goldstandards, labels))
+      msg += ("Completeness: %0.3f\n" % metrics.completeness_score(goldstandards, labels))
+      msg += ("V-measure: %0.3f\n" % metrics.v_measure_score(goldstandards, labels))
+      msg += ("Adjusted Rand Index: %0.3f\n"
+            % metrics.adjusted_rand_score(goldstandards, labels))
+      msg += ("Adjusted Mutual Information: %0.3f\n"
+            % metrics.adjusted_mutual_info_score(goldstandards, labels))
+
     tfidf = TfidfModel(corpus)
     features = lil_matrix(((len(corpus), len(dictionary.keys()))))
     for corpus_id, item in enumerate(corpus):
@@ -335,8 +364,9 @@ class AlgorithmsWrapper:
     except ValueError as e:
         print "skipping"
         self.skips += 1
-        return
-    msg = str(category_id)+": "+str(avg_silhouette)+" ( "+str(stddev_silhouette)+" )"
+        avg_silhouette = -1.0
+        stddev_silhouette = -1.0
+    msg += str(category_id)+": "+str(avg_silhouette)+" ( "+str(stddev_silhouette)+" ), k = "+str(len(set(labels)))
     print msg
     self.final_results.append(msg)
     self.macro_avgs.append(avg_silhouette)
@@ -354,7 +384,7 @@ class AlgorithmsWrapper:
     self.final_results.sort()
     for r in self.final_results:
       print r
-
+    print "skips: "+str(self.skips)
   # def print_topics(lda, vocab, n=10):
   #     """ Print the top words for each topic. """
   #     topics = lda.show_topics(topics=-1, topn=n, formatted=False)
@@ -371,5 +401,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='test', use_description=False)
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='lda', use_description=True)
   a.run()
