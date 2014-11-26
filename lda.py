@@ -7,6 +7,7 @@ import numpy
 import time
 import inspect
 import warnings
+from operator import itemgetter
 from collections import defaultdict
 from gensim import corpora, models, similarities
 from gensim.models import hdpmodel, ldamodel
@@ -57,7 +58,7 @@ documents = ["Sistemas sobre bananas são bananas",
 "Adote uma banana hoje!",
 "Sistemas e grafos sobre tudo!"]
 
-filename = "inputs_fastshop-wcs_goldstandard" # "inputs_fastshop-wcs_ok"
+filename = "inputs_fastshop-wcs_goldstandard" # "inputs_fastshop-wcs_ok" # "inputs_staples_no_description"
 
 def tokenizer_wrapper(text):
   return get_terms(text, use_preposition=True, use_stemming=True)
@@ -79,6 +80,12 @@ class AlgorithmsWrapper:
     self.skips = 0
     self.final_results = []
     self.upper_limit = 10
+    self.retries_k = 3
+    self.homogeneity_scores = []
+    self.completeness_scores = []
+    self.v_measure_scores = []
+    self.adjusted_rand_scores = []
+    self.adjusted_mutual_info_scores = []
 
   def run(self):
     start_time = time.time()
@@ -107,6 +114,7 @@ class AlgorithmsWrapper:
           print "category_id is not a digit, ignoring"
       else:
         print "to few objects, ignoring"
+    print
     print "using algorithm: "+self.algorithm
     print "use description: "+str(self.use_description)
     print "use stemming: "+str(self.use_stemming)
@@ -194,75 +202,91 @@ class AlgorithmsWrapper:
       print "number of clusters equals or lower than 1, ignoring metric"
 
   def algorithm_kmeans_with_tfidf(self, category_id, objs, goldstandards):
-    numTopics = self.calculate_k(objs)
-    print "Using k = "+str(numTopics)
+    numTopics_original = self.calculate_k(objs)
+    steps = int(numpy.rint(numTopics_original*0.25))
+    partial_results = []
+    for i in range(-self.retries_k, self.retries_k+1):
+      numTopics = numTopics_original+steps*i
+      print "Using k = "+str(numTopics)
 
-    texts = []
-    for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj, raw=True))
+      texts = []
+      for obj in objs:
+        texts.append(self.get_categorizedproduct_content(obj, raw=True))
 
-    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
- 
-    tfidf_model = vectorizer.fit_transform(texts)
-    km_model = KMeans(n_clusters=numTopics)
-    km_model.fit(tfidf_model)
- 
-    labels = []
-    results = []
-    for i, cluster in enumerate(km_model.labels_):
-      labels.append(cluster)
-      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+      vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
+   
+      tfidf_model = vectorizer.fit_transform(texts)
+      km_model = KMeans(n_clusters=numTopics, n_init=20)
+      km_model.fit(tfidf_model)
+   
+      labels = []
+      results = []
+      for i, cluster in enumerate(km_model.labels_):
+        labels.append(cluster)
+        results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+
+      if numTopics > 1:
+        texts = []
+        for obj in objs:
+          texts.append(self.get_categorizedproduct_content(obj))
+        dictionary = corpora.Dictionary(texts)
+        corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+        avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
+        partial_results.append((avg_silhuette, category_id, corpus, dictionary, labels, results))
+      else:
+        print "number of clusters equals or lower than 1, ignoring metric"
+    best_run = max(partial_results,key=itemgetter(0))
+    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
     results.sort()
     for r in results:
       print r
+    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
 
-    if numTopics > 1:
+  def algorithms_from_sklearn(self, category_id, objs, goldstandards):
+    numTopics_original = self.calculate_k(objs)
+    steps = int(numpy.rint(numTopics_original*0.25))
+    partial_results = []
+    for i in range(-self.retries_k, self.retries_k+1):
+      numTopics = numTopics_original+steps*i
+      print "Using k = "+str(numTopics)
+
+      texts = []
+      for obj in objs:
+        texts.append(self.get_categorizedproduct_content(obj, raw=True))
+
+      vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
+      tfidf_model = vectorizer.fit_transform(texts)
+
+      if self.algorithm == 'affinity':
+        model = AffinityPropagation(copy=False)
+      elif self.algorithm == 'spectral':
+        model = SpectralClustering(n_clusters=numTopics)
+      else:
+        model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete")
+
+      # model = DBSCAN() # allows cluster data as noisy, but can be used to predict k of clusters
+      # model = FeatureAgglomeration(n_clusters=numTopics)
+      # model = MiniBatchKMeans(n_clusters=numTopics)
+      # model = MeanShift() # bad results, slow
+      # model = Ward(n_clusters=numTopics)
+      labels = model.fit_predict(tfidf_model.toarray())
+
+      results = []
+      for i, cluster in enumerate(labels):
+        results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+
       texts = []
       for obj in objs:
         texts.append(self.get_categorizedproduct_content(obj))
       dictionary = corpora.Dictionary(texts)
       corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-      self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
-    else:
-      print "number of clusters equals or lower than 1, ignoring metric"
-
-  def algorithms_from_sklearn(self, category_id, objs, goldstandards):
-    numTopics = self.calculate_k(objs)
-    print "Using k = "+str(numTopics)
-
-    texts = []
-    for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj, raw=True))
-
-    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
-    tfidf_model = vectorizer.fit_transform(texts)
-
-    if self.algorithm == 'affinity':
-      model = AffinityPropagation(copy=False)
-    elif self.algorithm == 'spectral':
-      model = SpectralClustering(n_clusters=numTopics)
-    else:
-      model = AgglomerativeClustering(n_clusters=numTopics)
-
-    # model = DBSCAN() # allows cluster data as noisy, but can be used to predict k of clusters
-    # model = FeatureAgglomeration(n_clusters=numTopics)
-    # model = MiniBatchKMeans(n_clusters=numTopics)
-    # model = MeanShift() # bad results, slow
-    # model = Ward(n_clusters=numTopics)
-    labels = model.fit_predict(tfidf_model.toarray())
-
-    results = []
-    for i, cluster in enumerate(labels):
-      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+      avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
+      partial_results.append((avg_silhuette, category_id, corpus, dictionary, labels, results))
+    best_run = max(partial_results,key=itemgetter(0))
+    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
     results.sort()
     for r in results:
       print r
-
-    texts = []
-    for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj))
-    dictionary = corpora.Dictionary(texts)
-    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
     self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
 
   def first_name(self, category_id, objs, goldstandards):
@@ -308,13 +332,22 @@ class AlgorithmsWrapper:
     use_preposition=True
     name = (event.get("name") or "")
     description = ""
+    tags = []
     if use_description:
       if 'info' in event and 'description' in event['info']:
         description = event['info']['description']
-    event['tags'] = filter(None, event['tags'])
-    tags = event.get("tags", []) or []
+    if 'tags' in event and event['tags']:
+      event['tags'] = filter(None, event['tags'])
+      tags = event.get("tags", []) or []
+    if not name:
+      name = ""
+    if not description:
+      description = ""
     if raw:
-      return name+" "+description+" "+" ".join(tags)
+      if 'tags' in event and event['tags']:
+        return name+" "+description+" "+" ".join(tags)
+      else:
+        return str(name.encode('utf8'))+" "+str(description.encode('utf8'))
     else:
       return get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
           get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming) + \
@@ -323,8 +356,8 @@ class AlgorithmsWrapper:
   def calculate_k(self, objs):
     first_names = set([item['name'].split()[0] for item in objs])
     # result = int(round(math.sqrt(len(first_names))))
-    # result = len(first_names)
-    result = int(round((len(first_names)/2)))
+    result = len(first_names)
+    # result = int(round((len(first_names)/2)))
     if result > 500:
       result = 500
     if result >= len(objs):
@@ -333,17 +366,19 @@ class AlgorithmsWrapper:
       result = 1
     return result
 
-  def calculate_metrics(self, category_id, corpus, dictionary, labels, goldstandards):
+  def calculate_metrics(self, category_id, corpus, dictionary, labels, goldstandards, temp=False):
     msg = ""
     if goldstandards:
-      msg += "----\n"
-      msg += ("Homogeneity: %0.3f\n" % metrics.homogeneity_score(goldstandards, labels))
-      msg += ("Completeness: %0.3f\n" % metrics.completeness_score(goldstandards, labels))
-      msg += ("V-measure: %0.3f\n" % metrics.v_measure_score(goldstandards, labels))
-      msg += ("Adjusted Rand Index: %0.3f\n"
-            % metrics.adjusted_rand_score(goldstandards, labels))
-      msg += ("Adjusted Mutual Information: %0.3f\n"
-            % metrics.adjusted_mutual_info_score(goldstandards, labels))
+      homogeneity_score = metrics.homogeneity_score(goldstandards, labels)
+      completeness_score = metrics.completeness_score(goldstandards, labels)
+      v_measure_score = metrics.v_measure_score(goldstandards, labels)
+      adjusted_rand_score = metrics.adjusted_rand_score(goldstandards, labels)
+      adjusted_mutual_info_score = metrics.adjusted_mutual_info_score(goldstandards, labels)
+      self.homogeneity_scores.append(homogeneity_score)
+      self.completeness_scores.append(completeness_score)
+      self.v_measure_scores.append(v_measure_score)
+      self.adjusted_rand_scores.append(adjusted_rand_score)
+      self.adjusted_mutual_info_scores.append(adjusted_mutual_info_score)
 
     tfidf = TfidfModel(corpus)
     features = lil_matrix(((len(corpus), len(dictionary.keys()))))
@@ -355,24 +390,34 @@ class AlgorithmsWrapper:
     X = features
     # labels = [1, 2, 3, 4]
     labels = numpy.array(labels)
-    try:
-      avgs = []
-      for i in range(3):
-        avgs.append(numpy.mean(metrics.silhouette_score(X, labels, metric='euclidean',sample_size=500)))
-      avg_silhouette = numpy.around(numpy.mean(avgs), decimals=3)
-      stddev_silhouette = numpy.around(numpy.std(avgs), decimals=3)
-    except ValueError as e:
-        print "skipping"
-        self.skips += 1
-        avg_silhouette = -1.0
-        stddev_silhouette = -1.0
-    msg += str(category_id)+": "+str(avg_silhouette)+" ( "+str(stddev_silhouette)+" ), k = "+str(len(set(labels)))
-    print msg
-    self.final_results.append(msg)
-    self.macro_avgs.append(avg_silhouette)
-    self.macro_stdevs.append(stddev_silhouette)
-    self.micro_avgs.append(avg_silhouette*float(len(labels)))
-    self.total_corpus += float(len(labels))
+    # try:
+    avgs = []
+    for i in range(3):
+      avgs.append(numpy.mean(metrics.silhouette_score(X, labels, metric='euclidean',sample_size=500)))
+    avg_silhouette = numpy.around(numpy.mean(avgs), decimals=3)
+    stddev_silhouette = numpy.around(numpy.std(avgs), decimals=3)
+    # except ValueError as e:
+    #   if not temp:
+    #     print "skipping"
+    #     self.skips += 1
+    #     avg_silhouette = -1.0
+    #     stddev_silhouette = -1.0
+    if not temp:
+      if goldstandards:
+        msg += "----\n"
+        msg += ("Homogeneity: %0.3f\n" % homogeneity_score)
+        msg += ("Completeness: %0.3f\n" %  completeness_score)
+        msg += ("V-measure: %0.3f\n" % v_measure_score)
+        msg += ("Adjusted Rand Index: %0.3f\n" % adjusted_rand_score)
+        msg += ("Adjusted Mutual Information: %0.3f\n" % adjusted_mutual_info_score)
+      msg += str(category_id)+": "+str(avg_silhouette)+" ( "+str(stddev_silhouette)+" ), k = "+str(len(set(labels)))
+      print msg
+      self.final_results.append(msg)
+      self.macro_avgs.append(avg_silhouette)
+      self.macro_stdevs.append(stddev_silhouette)
+      self.micro_avgs.append(avg_silhouette*float(len(labels)))
+      self.total_corpus += float(len(labels))
+    return avg_silhouette
 
   def print_results(self):
     print "\nFINAL RESULTS:"
@@ -380,6 +425,12 @@ class AlgorithmsWrapper:
       print "micro avg: "+str(numpy.around(sum(self.micro_avgs)/self.total_corpus, decimals=3))
     if self.macro_avgs:
       print "macro avg: "+str(numpy.around(numpy.mean(self.macro_avgs), decimals=3))+" ( "+str(numpy.around(numpy.std(self.macro_stdevs), decimals=3))+" )"
+    if self.homogeneity_scores:
+      print "homogeneity_scores: "+str(numpy.around(numpy.mean(self.homogeneity_scores), decimals=3))
+      print "completeness_scores: "+str(numpy.around(numpy.mean(self.completeness_scores), decimals=3))
+      print "v_measure_scores: "+str(numpy.around(numpy.mean(self.v_measure_scores), decimals=3))
+      print "adjusted_rand_scores: "+str(numpy.around(numpy.mean(self.adjusted_rand_scores), decimals=3))
+      print "adjusted_mutual_info_scores: "+str(numpy.around(numpy.mean(self.adjusted_mutual_info_scores), decimals=3))
     print
     self.final_results.sort()
     for r in self.final_results:
@@ -401,5 +452,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='lda', use_description=True)
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='aggre', use_description=True)
   a.run()
