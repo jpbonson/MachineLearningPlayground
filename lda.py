@@ -61,7 +61,11 @@ documents = ["Sistemas sobre bananas são bananas",
 filename = "inputs_goldstandard" # "inputs_fastshop-wcs_ok" # "inputs_staples_no_description"
 
 def tokenizer_wrapper(text):
-  return get_terms(text, use_preposition=True, use_stemming=True)
+  texts = text.split('<split_here>')
+  results = []
+  for item in texts:
+    results += get_terms(item, use_preposition=True, use_stemming=True)
+  return results
 
 class AlgorithmsWrapper:
 
@@ -79,12 +83,14 @@ class AlgorithmsWrapper:
     self.total_corpus = 0.0
     self.skips = 0
     self.final_results = []
-    self.upper_limit = 10
+    self.upper_limit = 2
     self.homogeneity_scores = []
     self.completeness_scores = []
     self.v_measure_scores = []
     self.adjusted_rand_scores = []
     self.adjusted_mutual_info_scores = []
+    self.cont_k_matches = 0
+    self.cont_k_matches_max_wins = 0
 
   def run(self):
     start_time = time.time()
@@ -118,6 +124,8 @@ class AlgorithmsWrapper:
     self.print_results()
     elapsed_time = time.time() - start_time
     print "\nelapsed time: "+str(elapsed_time)
+    print "cont_k_matches: "+str(self.cont_k_matches)
+    print "cont_k_matches_max_wins: "+str(self.cont_k_matches_max_wins)
 
   # OLD TESTS
 
@@ -246,13 +254,73 @@ class AlgorithmsWrapper:
 
   # NEW TESTS
 
+  def binary_search(min_k_value, max_k_value, previous_metric_value, cont = 3):
+    if cont == 0:
+      return previous_metric_value
+    else:
+      midpoint_k_value = (max_k_value-min_k_value) // 2
+      current_metric_value = 0 # calculate with k = midpoint_k_value
+      if previous_metric_value < current_metric_value:
+        return binarySearch(alist[:midpoint_k_value], previous_metric_value)
+      else:
+        return binarySearch(alist[midpoint_k_value+1:], previous_metric_value)
+
   def run_sklearn_algorithm(self, category_id, objs, goldstandards):
-    numTopics_original = self.calculate_k_using_firstnames(objs)
-    steps = int(numpy.rint(numTopics_original*0.25))
+    partial_results = []
+
+    min_k_value = int(numpy.rint(math.sqrt(len(objs))))
+    if min_k_value < 2:
+      min_k_value = 2
+    result_min = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, min_k_value)
+    max_k_value = len(objs) // 3
+    if max_k_value > 500:
+      max_k_value = 500
+    result_max = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, max_k_value)
+    (best_k_value, result_best) = max([(min_k_value, result_min), (max_k_value, result_max)],key=lambda item:item[1][0])
+
+    if max_k_value > 100:
+      range_value = 3
+    elif max_k_value > 10:
+      range_value = 2
+    else:
+      range_value = 1
+
+    min_limit = min_k_value
+    max_limit = max_k_value
+    for i in range(range_value):
+      mid_k_value = (min_limit+max_limit) // 2
+      result_mid = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, mid_k_value)
+      (best_k_value, result_best) = max([(best_k_value, result_best), (mid_k_value, result_mid)],key=lambda item:item[1][0])
+      min_limit = best_k_value
+      max_limit = mid_k_value
+
+    print "Best k value = "+str(best_k_value)
+    self.cont_k_matches += 1
+    if best_k_value == max_k_value:
+      print "max wins"
+      self.cont_k_matches_max_wins += 1
+
+    (avg_silhuette, category_id, corpus, dictionary, labels, results) = result_best
+    results.sort()
+    for r in results:
+      print r
+    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+
+  def run_sklearn_algorithm_with_linear_k(self, category_id, objs, goldstandards):
     partial_results = []
 
     numTopics = 10
+    result = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, numTopics)
+    partial_results.append(result)
 
+    best_run = max(partial_results,key=itemgetter(0))
+    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
+    results.sort()
+    for r in results:
+      print r
+    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+
+  def run_sklearn_algorithm_step(self, category_id, objs, goldstandards, numTopics):
     print "Using k = "+str(numTopics)
     texts = []
     for obj in objs:
@@ -263,12 +331,12 @@ class AlgorithmsWrapper:
 
     if self.algorithm == 'kmeans':
       model = KMeans(n_clusters=numTopics, n_init=20)
-    elif self.algorithm == 'kmeans':
-      model = AffinityPropagation(copy=False) # very good
-    else:
+    elif self.algorithm == 'agglo':
       model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete")
+    else:
+      raise SystemExit
+    # model = AffinityPropagation(copy=False) # good
     # model = SpectralClustering(n_clusters=numTopics) # good
-    # model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete") # very good
     # model = DBSCAN()  # good # allows cluster data as noisy, but can be used to predict k of clusters
     # model = FeatureAgglomeration(n_clusters=numTopics) # too slow
     # model = MiniBatchKMeans(n_clusters=numTopics) # basically the same as kmeans
@@ -286,31 +354,11 @@ class AlgorithmsWrapper:
     corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
     avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
     result = (avg_silhuette, category_id, corpus, dictionary, labels, results)
-    partial_results.append(result)
-
-    best_run = max(partial_results,key=itemgetter(0))
-    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
-    results.sort()
-    for r in results:
-      print r
-    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
-
-  def binarySearch(alist, item):
-    if len(alist) == 0:
-      return False
-    else:
-      midpoint = len(alist)//2
-      if alist[midpoint]==item:
-        return True
-      else:
-        if item<alist[midpoint]:
-          return binarySearch(alist[:midpoint],item)
-        else:
-          return binarySearch(alist[midpoint+1:],item)
+    return result
 
   #
 
-  def get_categorizedproduct_content(self, event, raw=False, extra_weight_for_name=False):
+  def get_categorizedproduct_content(self, event, raw=False, extra_weight_for_name=True):
     # We check all fields for None if they are None we put an empty string instead
     use_stemming=self.use_stemming
     use_preposition=True
@@ -324,9 +372,9 @@ class AlgorithmsWrapper:
     if not description:
       description = ""
     if raw:
-      result = str(name.encode('utf8'))+" "+str(description.encode('utf8'))
+      result = str(name.encode('utf8'))+" <split_here> "+str(description.encode('utf8'))
       if extra_weight_for_name:
-        result = str(name.encode('utf8'))+result
+        result += " <split_here> "+str(name.encode('utf8'))
       return result
     else:
       result = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
