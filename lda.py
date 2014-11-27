@@ -58,7 +58,7 @@ documents = ["Sistemas sobre bananas são bananas",
 "Adote uma banana hoje!",
 "Sistemas e grafos sobre tudo!"]
 
-filename = "inputs_fastshop-wcs_goldstandard" # "inputs_fastshop-wcs_ok" # "inputs_staples_no_description"
+filename = "inputs_goldstandard" # "inputs_fastshop-wcs_ok" # "inputs_staples_no_description"
 
 def tokenizer_wrapper(text):
   return get_terms(text, use_preposition=True, use_stemming=True)
@@ -80,7 +80,6 @@ class AlgorithmsWrapper:
     self.skips = 0
     self.final_results = []
     self.upper_limit = 10
-    self.retries_k = 3
     self.homogeneity_scores = []
     self.completeness_scores = []
     self.v_measure_scores = []
@@ -100,16 +99,18 @@ class AlgorithmsWrapper:
             goldstandards.append(obj['goldstandard'])
         if category_id.isdigit():
           print "Processing "+str(len(objs))+" objects"
-          if self.algorithm=='firstname':
+          if self.algorithm=='firstname': # good
             self.first_name(category_id, objs, goldstandards)
-          elif self.algorithm=='lda':
+          elif self.algorithm=='lda': #  below average
             self.algorithm_lda(category_id, objs, goldstandards)
-          elif self.algorithm=='lsi':
+          elif self.algorithm=='lsi': # terrible
             self.algorithm_lsi(category_id, objs, goldstandards)
-          elif self.algorithm=='kmeans':
-            self.algorithm_kmeans_with_tfidf(category_id, objs, goldstandards)
+          elif self.algorithm=='kmeans': # very good
+            self.run_algorithm(category_id, objs, goldstandards, 'algorithm_kmeans')
+          elif self.algorithm=='hier': # very good
+            self.run_algorithm(category_id, objs, goldstandards, 'algorithm_agglomerative')
           else:
-            self.algorithms_from_sklearn(category_id, objs, goldstandards)
+            self.run_algorithm(category_id, objs, goldstandards, 'algorithms_from_sklearn')
         else:
           print "category_id is not a digit, ignoring"
       else:
@@ -122,8 +123,45 @@ class AlgorithmsWrapper:
     elapsed_time = time.time() - start_time
     print "\nelapsed time: "+str(elapsed_time)
 
+  # OLD TESTS
+
+  def first_name(self, category_id, objs, goldstandards):
+    numTopics = self.calculate_k_using_firstnames(objs)
+    print "Using k = "+str(numTopics)
+
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj))
+
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+
+    labels = []
+    for item in texts:
+      labels.append(item[0])
+
+    topics = set(labels)
+
+    print "print out the clusters"
+    for i, t in enumerate(topics):
+      print "Topic #" + str(i) + ": "+str(t)+"\n"
+    print
+
+    print "print out the documents and which is the most probable cluster for each doc"
+    results = []
+    for label, obj in izip(labels, objs):
+      results.append(str(label)+" # "+obj['name'].encode('utf8'))
+    results.sort()
+    for r in results:
+      print r
+
+    if numTopics > 1:
+      self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+    else:
+      print "number of clusters equals or lower than 1, ignoring metric"
+
   def algorithm_lda(self, category_id, objs, goldstandards):
-    numTopics = self.calculate_k(objs)
+    numTopics = self.calculate_k_using_firstnames(objs)
     print "Using k = "+str(numTopics)
 
     texts = []
@@ -159,7 +197,7 @@ class AlgorithmsWrapper:
       print "number of clusters equals or lower than 1, ignoring metric"
 
   def algorithm_lsi(self, category_id, objs, goldstandards):
-    numTopics = self.calculate_k(objs)
+    numTopics = self.calculate_k_using_firstnames(objs)
     print "Using k = "+str(numTopics)
 
     texts = []
@@ -168,8 +206,6 @@ class AlgorithmsWrapper:
 
     dictionary = corpora.Dictionary(texts)
     corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-
-    num_clusters = self.calculate_k(objs)
 
     print "Create models"
     lsi_model = LsiModel(corpus, id2word=dictionary, num_topics=numTopics)
@@ -201,163 +237,9 @@ class AlgorithmsWrapper:
     else:
       print "number of clusters equals or lower than 1, ignoring metric"
 
-  def algorithm_kmeans_with_tfidf(self, category_id, objs, goldstandards):
-    numTopics_original = self.calculate_k(objs)
-    steps = int(numpy.rint(numTopics_original*0.25))
-    partial_results = []
-    for i in range(-self.retries_k, self.retries_k+1):
-      numTopics = numTopics_original+steps*i
-      print "Using k = "+str(numTopics)
-
-      texts = []
-      for obj in objs:
-        texts.append(self.get_categorizedproduct_content(obj, raw=True))
-
-      vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
-   
-      tfidf_model = vectorizer.fit_transform(texts)
-      km_model = KMeans(n_clusters=numTopics, n_init=20)
-      km_model.fit(tfidf_model)
-   
-      labels = []
-      results = []
-      for i, cluster in enumerate(km_model.labels_):
-        labels.append(cluster)
-        results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
-
-      if numTopics > 1:
-        texts = []
-        for obj in objs:
-          texts.append(self.get_categorizedproduct_content(obj))
-        dictionary = corpora.Dictionary(texts)
-        corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-        avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
-        partial_results.append((avg_silhuette, category_id, corpus, dictionary, labels, results))
-      else:
-        print "number of clusters equals or lower than 1, ignoring metric"
-    best_run = max(partial_results,key=itemgetter(0))
-    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
-    results.sort()
-    for r in results:
-      print r
-    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
-
-  def algorithms_from_sklearn(self, category_id, objs, goldstandards):
-    numTopics_original = self.calculate_k(objs)
-    steps = int(numpy.rint(numTopics_original*0.25))
-    partial_results = []
-    for i in range(-self.retries_k, self.retries_k+1):
-      numTopics = numTopics_original+steps*i
-      print "Using k = "+str(numTopics)
-
-      texts = []
-      for obj in objs:
-        texts.append(self.get_categorizedproduct_content(obj, raw=True))
-
-      vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
-      tfidf_model = vectorizer.fit_transform(texts)
-
-      if self.algorithm == 'affinity':
-        model = AffinityPropagation(copy=False)
-      elif self.algorithm == 'spectral':
-        model = SpectralClustering(n_clusters=numTopics)
-      else:
-        model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete")
-
-      # model = DBSCAN() # allows cluster data as noisy, but can be used to predict k of clusters
-      # model = FeatureAgglomeration(n_clusters=numTopics)
-      # model = MiniBatchKMeans(n_clusters=numTopics)
-      # model = MeanShift() # bad results, slow
-      # model = Ward(n_clusters=numTopics)
-      labels = model.fit_predict(tfidf_model.toarray())
-
-      results = []
-      for i, cluster in enumerate(labels):
-        results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
-
-      texts = []
-      for obj in objs:
-        texts.append(self.get_categorizedproduct_content(obj))
-      dictionary = corpora.Dictionary(texts)
-      corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-      avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
-      partial_results.append((avg_silhuette, category_id, corpus, dictionary, labels, results))
-    best_run = max(partial_results,key=itemgetter(0))
-    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
-    results.sort()
-    for r in results:
-      print r
-    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
-
-  def first_name(self, category_id, objs, goldstandards):
+  def calculate_k_using_firstnames(self, objs):
     first_names = set([item['name'].split()[0] for item in objs])
-    numTopics = len(first_names)
-    print "Using k = "+str(numTopics)
-
-    texts = []
-    for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj))
-
-    dictionary = corpora.Dictionary(texts)
-    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-
-    labels = []
-    for item in texts:
-      labels.append(item[0])
-
-    topics = set(labels)
-
-    print "print out the clusters"
-    for i, t in enumerate(topics):
-      print "Topic #" + str(i) + ": "+str(t)+"\n"
-    print
-
-    print "print out the documents and which is the most probable cluster for each doc"
-    results = []
-    for label, obj in izip(labels, objs):
-      results.append(str(label)+" # "+obj['name'].encode('utf8'))
-    results.sort()
-    for r in results:
-      print r
-
-    if numTopics > 1:
-      self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
-    else:
-      print "number of clusters equals or lower than 1, ignoring metric"
-
-  def get_categorizedproduct_content(self, event, raw=False):
-    # We check all fields for None if they are None we put an empty string instead
-    use_description=self.use_description
-    use_stemming=self.use_stemming
-    use_preposition=True
-    name = (event.get("name") or "")
-    description = ""
-    tags = []
-    if use_description:
-      if 'info' in event and 'description' in event['info']:
-        description = event['info']['description']
-    if 'tags' in event and event['tags']:
-      event['tags'] = filter(None, event['tags'])
-      tags = event.get("tags", []) or []
-    if not name:
-      name = ""
-    if not description:
-      description = ""
-    if raw:
-      if 'tags' in event and event['tags']:
-        return name+" "+description+" "+" ".join(tags)
-      else:
-        return str(name.encode('utf8'))+" "+str(description.encode('utf8'))
-    else:
-      return get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
-          get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming) + \
-          get_terms(tags, use_preposition=use_preposition, use_stemming=use_stemming)
-
-  def calculate_k(self, objs):
-    first_names = set([item['name'].split()[0] for item in objs])
-    # result = int(round(math.sqrt(len(first_names))))
     result = len(first_names)
-    # result = int(round((len(first_names)/2)))
     if result > 500:
       result = 500
     if result >= len(objs):
@@ -365,6 +247,142 @@ class AlgorithmsWrapper:
     if result == 0:
       result = 1
     return result
+
+  # NEW TESTS
+
+  def run_algorithm(self, category_id, objs, goldstandards, algorithm_name):
+    numTopics_original = self.calculate_k_using_firstnames(objs)
+    steps = int(numpy.rint(numTopics_original*0.25))
+    partial_results = []
+
+    numTopics = 10
+
+    print "Using k = "+str(numTopics)
+    result = getattr(self, algorithm_name)(category_id, objs, goldstandards, numTopics)
+    partial_results.append(result)
+    
+    best_run = max(partial_results,key=itemgetter(0))
+    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
+    results.sort()
+    for r in results:
+      print r
+    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+
+  def algorithm_kmeans(self, category_id, objs, goldstandards, numTopics):
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj, raw=True))
+
+    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
+    tfidf_model = vectorizer.fit_transform(texts)
+
+    km_model = KMeans(n_clusters=numTopics, n_init=20)
+    km_model.fit(tfidf_model)
+ 
+    labels = []
+    results = []
+    for i, cluster in enumerate(km_model.labels_):
+      labels.append(cluster)
+      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj))
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+    avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
+    return (avg_silhuette, category_id, corpus, dictionary, labels, results)
+
+  def algorithm_agglomerative(self, category_id, objs, goldstandards, numTopics):
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj, raw=True))
+
+    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
+    tfidf_model = vectorizer.fit_transform(texts)
+
+    model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete")
+    labels = model.fit_predict(tfidf_model.toarray())
+
+    results = []
+    for i, cluster in enumerate(labels):
+      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj))
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+    avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
+    return (avg_silhuette, category_id, corpus, dictionary, labels, results)
+
+  def algorithms_from_sklearn(self, category_id, objs, goldstandards, numTopics):
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj, raw=True))
+
+    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
+    tfidf_model = vectorizer.fit_transform(texts)
+
+    model = AffinityPropagation(copy=False) # very good
+    # model = SpectralClustering(n_clusters=numTopics) # good
+    # model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete") # very good
+    # model = DBSCAN()  # good # allows cluster data as noisy, but can be used to predict k of clusters
+    # model = FeatureAgglomeration(n_clusters=numTopics) # too slow
+    # model = MiniBatchKMeans(n_clusters=numTopics) # basically the same as kmeans
+    # model = MeanShift() # bad results, too slow
+    # model = Ward(n_clusters=numTopics) # basically the same as AgglomerativeClustering
+    labels = model.fit_predict(tfidf_model.toarray())
+
+    results = []
+    for i, cluster in enumerate(labels):
+      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+
+    texts = []
+    for obj in objs:
+      texts.append(self.get_categorizedproduct_content(obj))
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+    avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
+    return (avg_silhuette, category_id, corpus, dictionary, labels, results)
+
+  def get_categorizedproduct_content(self, event, raw=False, extra_weight_for_name=False):
+    # We check all fields for None if they are None we put an empty string instead
+    use_stemming=self.use_stemming
+    use_preposition=True
+    name = (event.get("name") or "")
+    description = ""
+    if self.use_description:
+      if 'info' in event and 'description' in event['info']:
+        description = event['info']['description']
+    if not name:
+      name = ""
+    if not description:
+      description = ""
+    if raw:
+      result = str(name.encode('utf8'))+" "+str(description.encode('utf8'))
+      if extra_weight_for_name:
+        result = str(name.encode('utf8'))+result
+      return result
+    else:
+      result = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
+        get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming)
+      if extra_weight_for_name:
+        result += get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming)
+      return result
+
+  def binarySearch(alist, item):
+    if len(alist) == 0:
+      return False
+    else:
+      midpoint = len(alist)//2
+      if alist[midpoint]==item:
+        return True
+      else:
+        if item<alist[midpoint]:
+          return binarySearch(alist[:midpoint],item)
+        else:
+          return binarySearch(alist[midpoint+1:],item)
 
   def calculate_metrics(self, category_id, corpus, dictionary, labels, goldstandards, temp=False):
     msg = ""
@@ -436,11 +454,6 @@ class AlgorithmsWrapper:
     for r in self.final_results:
       print r
     print "skips: "+str(self.skips)
-  # def print_topics(lda, vocab, n=10):
-  #     """ Print the top words for each topic. """
-  #     topics = lda.show_topics(topics=-1, topn=n, formatted=False)
-  #     for ti, topic in enumerate(topics):
-  #         print 'topic %d: %s' % (ti, ' '.join('%s/%.2f' % (t[1], t[0]) for t in topic))
 
 def file_generator(filename):
   for line in open("data-clusterization/"+filename):
@@ -448,9 +461,8 @@ def file_generator(filename):
 
 if (__name__ == '__main__'):
   print "read inputs, normalize and tokenize"
-  # warnings.simplefilter("error")
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='aggre', use_description=True)
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='kmeans', use_description=True)
   a.run()
