@@ -105,12 +105,8 @@ class AlgorithmsWrapper:
             self.algorithm_lda(category_id, objs, goldstandards)
           elif self.algorithm=='lsi': # terrible
             self.algorithm_lsi(category_id, objs, goldstandards)
-          elif self.algorithm=='kmeans': # very good
-            self.run_algorithm(category_id, objs, goldstandards, 'algorithm_kmeans')
-          elif self.algorithm=='hier': # very good
-            self.run_algorithm(category_id, objs, goldstandards, 'algorithm_agglomerative')
           else:
-            self.run_algorithm(category_id, objs, goldstandards, 'algorithms_from_sklearn')
+            self.run_sklearn_algorithm(category_id, objs, goldstandards)
         else:
           print "category_id is not a digit, ignoring"
       else:
@@ -250,7 +246,7 @@ class AlgorithmsWrapper:
 
   # NEW TESTS
 
-  def run_algorithm(self, category_id, objs, goldstandards, algorithm_name):
+  def run_sklearn_algorithm(self, category_id, objs, goldstandards):
     numTopics_original = self.calculate_k_using_firstnames(objs)
     steps = int(numpy.rint(numTopics_original*0.25))
     partial_results = []
@@ -258,17 +254,6 @@ class AlgorithmsWrapper:
     numTopics = 10
 
     print "Using k = "+str(numTopics)
-    result = getattr(self, algorithm_name)(category_id, objs, goldstandards, numTopics)
-    partial_results.append(result)
-    
-    best_run = max(partial_results,key=itemgetter(0))
-    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
-    results.sort()
-    for r in results:
-      print r
-    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
-
-  def algorithm_kmeans(self, category_id, objs, goldstandards, numTopics):
     texts = []
     for obj in objs:
       texts.append(self.get_categorizedproduct_content(obj, raw=True))
@@ -276,55 +261,12 @@ class AlgorithmsWrapper:
     vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
     tfidf_model = vectorizer.fit_transform(texts)
 
-    km_model = KMeans(n_clusters=numTopics, n_init=20)
-    km_model.fit(tfidf_model)
- 
-    labels = []
-    results = []
-    for i, cluster in enumerate(km_model.labels_):
-      labels.append(cluster)
-      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
-
-    texts = []
-    for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj))
-    dictionary = corpora.Dictionary(texts)
-    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-    avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
-    return (avg_silhuette, category_id, corpus, dictionary, labels, results)
-
-  def algorithm_agglomerative(self, category_id, objs, goldstandards, numTopics):
-    texts = []
-    for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj, raw=True))
-
-    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
-    tfidf_model = vectorizer.fit_transform(texts)
-
-    model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete")
-    labels = model.fit_predict(tfidf_model.toarray())
-
-    results = []
-    for i, cluster in enumerate(labels):
-      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
-
-    texts = []
-    for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj))
-    dictionary = corpora.Dictionary(texts)
-    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-    avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
-    return (avg_silhuette, category_id, corpus, dictionary, labels, results)
-
-  def algorithms_from_sklearn(self, category_id, objs, goldstandards, numTopics):
-    texts = []
-    for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj, raw=True))
-
-    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
-    tfidf_model = vectorizer.fit_transform(texts)
-
-    model = AffinityPropagation(copy=False) # very good
+    if self.algorithm == 'kmeans':
+      model = KMeans(n_clusters=numTopics, n_init=20)
+    elif self.algorithm == 'kmeans':
+      model = AffinityPropagation(copy=False) # very good
+    else:
+      model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete")
     # model = SpectralClustering(n_clusters=numTopics) # good
     # model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete") # very good
     # model = DBSCAN()  # good # allows cluster data as noisy, but can be used to predict k of clusters
@@ -337,14 +279,36 @@ class AlgorithmsWrapper:
     results = []
     for i, cluster in enumerate(labels):
       results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
-
     texts = []
     for obj in objs:
       texts.append(self.get_categorizedproduct_content(obj))
     dictionary = corpora.Dictionary(texts)
     corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
     avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
-    return (avg_silhuette, category_id, corpus, dictionary, labels, results)
+    result = (avg_silhuette, category_id, corpus, dictionary, labels, results)
+    partial_results.append(result)
+
+    best_run = max(partial_results,key=itemgetter(0))
+    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
+    results.sort()
+    for r in results:
+      print r
+    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+
+  def binarySearch(alist, item):
+    if len(alist) == 0:
+      return False
+    else:
+      midpoint = len(alist)//2
+      if alist[midpoint]==item:
+        return True
+      else:
+        if item<alist[midpoint]:
+          return binarySearch(alist[:midpoint],item)
+        else:
+          return binarySearch(alist[midpoint+1:],item)
+
+  #
 
   def get_categorizedproduct_content(self, event, raw=False, extra_weight_for_name=False):
     # We check all fields for None if they are None we put an empty string instead
@@ -370,19 +334,6 @@ class AlgorithmsWrapper:
       if extra_weight_for_name:
         result += get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming)
       return result
-
-  def binarySearch(alist, item):
-    if len(alist) == 0:
-      return False
-    else:
-      midpoint = len(alist)//2
-      if alist[midpoint]==item:
-        return True
-      else:
-        if item<alist[midpoint]:
-          return binarySearch(alist[:midpoint],item)
-        else:
-          return binarySearch(alist[midpoint+1:],item)
 
   def calculate_metrics(self, category_id, corpus, dictionary, labels, goldstandards, temp=False):
     msg = ""
