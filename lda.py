@@ -7,6 +7,7 @@ import numpy
 import time
 import inspect
 import warnings
+import re
 import collections
 from operator import itemgetter
 from collections import defaultdict
@@ -59,7 +60,9 @@ documents = ["Sistemas sobre bananas são bananas",
 "Adote uma banana hoje!",
 "Sistemas e grafos sobre tudo!"]
 
-filename = "inputs_goldstandard" # "inputs_fastshop-wcs_ok" # "inputs_staples_no_description"
+filename = "inputs_goldstandard"
+# filename = "short_sepha"
+# filename = "inputs_fastshop-wcs_ok" # "inputs_goldstandard" # "inputs_staples_no_description"
 
 def tokenizer_wrapper(text):
   texts = text.split('<split_here>')
@@ -84,7 +87,7 @@ class AlgorithmsWrapper:
     self.total_corpus = 0.0
     self.skips = 0
     self.final_results = []
-    self.upper_limit = 2
+    self.upper_limit = 4
     self.homogeneity_scores = []
     self.completeness_scores = []
     self.v_measure_scores = []
@@ -258,16 +261,35 @@ class AlgorithmsWrapper:
   def run_sklearn_algorithm(self, category_id, objs, goldstandards):
     # produce the fourth level of clusterization
     partial_results = []
+    first_names_len = float(len(set([item['name'].split()[0] for item in objs])))
+    first_names_min = int(numpy.rint(first_names_len*0.5))
+    first_names_max = int(numpy.rint(first_names_len*1.5))
 
     min_k_value = int(numpy.rint(math.sqrt(len(objs))))
     if min_k_value < 2:
       min_k_value = 2
     result_min = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, min_k_value)
-    max_k_value = len(objs) // 3
-    if max_k_value > 500:
-      max_k_value = 500
-    result_max = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, max_k_value)
-    (best_k_value, result_best) = max([(min_k_value, result_min), (max_k_value, result_max)],key=lambda item:item[1][0])
+    if len(objs) > 1000:
+      max_k_value = len(objs) // 5
+    elif len(objs) > 500:
+      max_k_value = len(objs) // 4
+    elif len(objs) > 10:
+      max_k_value = len(objs) // 3
+    else:
+      max_k_value = len(objs) // 2
+    if max_k_value >= len(objs):
+      max_k_value = len(objs) - 1
+    if max_k_value > 200:
+      max_k_value = 200
+    if max_k_value < 2:
+      max_k_value = 2
+    if max_k_value < min_k_value:
+      max_k_value = min_k_value
+    if min_k_value == max_k_value:
+        (best_k_value, result_best) = (min_k_value, result_min)
+    else:
+      result_max = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, max_k_value)
+      (best_k_value, result_best) = max([(min_k_value, result_min), (max_k_value, result_max)],key=lambda item:item[1][0])
 
     if max_k_value > 100:
       range_value = 3
@@ -279,6 +301,8 @@ class AlgorithmsWrapper:
     min_limit = min_k_value
     max_limit = max_k_value
     for i in range(range_value):
+      if min_limit == max_limit:
+        break
       mid_k_value = (min_limit+max_limit) // 2
       result_mid = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, mid_k_value)
       (best_k_value, result_best) = max([(best_k_value, result_best), (mid_k_value, result_mid)],key=lambda item:item[1][0])
@@ -292,19 +316,19 @@ class AlgorithmsWrapper:
       self.cont_k_matches_max_wins += 1
 
     (avg_silhuette, category_id, corpus, dictionary, labels, results) = result_best
-    # results.sort()
-    # for r in results:
-    #   print r
-    # self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
 
     # given objs and labels from the fourth level, produce the third level of clusterization
     labels_groups = defaultdict(list)
     for label, obj in izip(labels, objs):
-      labels_groups[label].append(obj['name'].encode('utf8').split()[0])
+      normalized_firstname = get_terms(obj['name'], use_preposition=True, use_stemming=True)[0]
+      labels_groups[label].append(normalized_firstname)
 
     final_labels = {}
     to_posprocess = []
     for label, values in labels_groups.iteritems():
+      no_digits_values = [item for item in values if not item.isdigit()]
+      if no_digits_values:
+        values = no_digits_values
       counter=collections.Counter(values)
       if len(set(counter.values())) == 1 and len(counter.values()) > 1: # there is no major name for the label
         to_posprocess.append((label, values))
@@ -317,8 +341,8 @@ class AlgorithmsWrapper:
       if labels_that_already_exists: # posprocess
         final_labels[label] = labels_that_already_exists.pop()
       else:
-        shorter_label = min(set(values), key=len)
-        final_labels[label] = shorter_label
+        longer_label = max(set(values), key=len)
+        final_labels[label] = longer_label
 
     results = []
     final_labels_per_obj = []
@@ -329,7 +353,10 @@ class AlgorithmsWrapper:
     print "\nFinal clusterized results:"
     for r in results:
       print r
-    self.calculate_metrics(category_id, corpus, dictionary, final_labels_per_obj, goldstandards)
+    if len(final_labels_per_obj) > 1:
+      self.calculate_metrics(category_id, corpus, dictionary, final_labels_per_obj, goldstandards)
+    else:
+      print "skipping"
 
   def run_sklearn_algorithm_with_linear_k(self, category_id, objs, goldstandards):
     partial_results = []
@@ -343,7 +370,10 @@ class AlgorithmsWrapper:
     results.sort()
     for r in results:
       print r
-    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+    if numTopics > 1:
+      self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+    else:
+      print "skipping"
 
   def run_sklearn_algorithm_step(self, category_id, objs, goldstandards, numTopics):
     print "Using k = "+str(numTopics)
@@ -354,11 +384,12 @@ class AlgorithmsWrapper:
       else:
         texts.append(self.get_categorizedproduct_content(obj, raw=True, extra_weight_for_name=True))
 
+    # mover para fora e setar copy_x para True
     vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
     tfidf_model = vectorizer.fit_transform(texts)
 
     if self.algorithm == 'kmeans':
-      model = KMeans(n_clusters=numTopics, n_init=20)
+      model = KMeans(n_clusters=numTopics, n_init=10, max_iter=300,  copy_x=True, n_jobs=2)
     elif self.algorithm == 'agglo':
       model = AgglomerativeClustering(n_clusters=numTopics, linkage="ward")
     else:
@@ -380,10 +411,13 @@ class AlgorithmsWrapper:
       texts.append(self.get_categorizedproduct_content(obj))
     dictionary = corpora.Dictionary(texts)
     corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-    avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
+    if len(labels) > 1:
+      avg_silhuette = self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards, temp=True)
+    else:
+      avg_silhuette = 0
+      print "skipping"
     result = (avg_silhuette, category_id, corpus, dictionary, labels, results)
     return result
-
   #
 
   def get_categorizedproduct_content(self, event, raw=False, extra_weight_for_name=False):
@@ -391,6 +425,10 @@ class AlgorithmsWrapper:
     use_stemming=self.use_stemming
     use_preposition=True
     name = (event.get("name") or "")
+    p = re.compile(r'\([^)]*\)')
+    name_without_parenteses = p.sub('', name)
+    if name_without_parenteses:
+      name = name_without_parenteses
     description = ""
     if self.use_description:
       if 'info' in event and 'description' in event['info']:
@@ -404,7 +442,7 @@ class AlgorithmsWrapper:
       terms = ' '.join(str(name.encode('utf8')).split()[0:3]) # get three first terms
       result += " <split_here> "+terms
       if extra_weight_for_name:
-        result += " <split_here> "+name
+        result += " <split_here> "+name.encode('utf8')
       return result
     else:
       result = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
@@ -493,5 +531,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='kmeans')
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='agglo')
   a.run()
