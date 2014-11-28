@@ -69,7 +69,7 @@ def tokenizer_wrapper(text):
 
 class AlgorithmsWrapper:
 
-  def __init__(self, texts_per_cat, algorithm='firstname', use_stemming=True, use_description=False):
+  def __init__(self, texts_per_cat, algorithm='firstname', use_stemming=True, use_description=True):
     self.algorithm = algorithm
     self.texts_per_cat = texts_per_cat
     self.use_stemming = use_stemming
@@ -332,7 +332,7 @@ class AlgorithmsWrapper:
     if self.algorithm == 'kmeans':
       model = KMeans(n_clusters=numTopics, n_init=20)
     elif self.algorithm == 'agglo':
-      model = AgglomerativeClustering(n_clusters=numTopics, linkage="complete")
+      model = AgglomerativeClustering(n_clusters=numTopics, linkage="ward")
     else:
       raise SystemExit
     # model = AffinityPropagation(copy=False) # good
@@ -374,7 +374,8 @@ class AlgorithmsWrapper:
     if raw:
       result = str(name.encode('utf8'))+" <split_here> "+str(description.encode('utf8'))
       if extra_weight_for_name:
-        result += " <split_here> "+str(name.encode('utf8'))
+        terms = ' '.join(str(name.encode('utf8')).split()[0:3]) # get three first terms
+        result += " <split_here> "+terms
       return result
     else:
       result = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
@@ -463,5 +464,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='kmeans', use_description=True)
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='agglo')
   a.run()
