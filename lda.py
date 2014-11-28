@@ -7,6 +7,7 @@ import numpy
 import time
 import inspect
 import warnings
+import collections
 from operator import itemgetter
 from collections import defaultdict
 from gensim import corpora, models, similarities
@@ -254,18 +255,8 @@ class AlgorithmsWrapper:
 
   # NEW TESTS
 
-  def binary_search(min_k_value, max_k_value, previous_metric_value, cont = 3):
-    if cont == 0:
-      return previous_metric_value
-    else:
-      midpoint_k_value = (max_k_value-min_k_value) // 2
-      current_metric_value = 0 # calculate with k = midpoint_k_value
-      if previous_metric_value < current_metric_value:
-        return binarySearch(alist[:midpoint_k_value], previous_metric_value)
-      else:
-        return binarySearch(alist[midpoint_k_value+1:], previous_metric_value)
-
   def run_sklearn_algorithm(self, category_id, objs, goldstandards):
+    # produce the fourth level of clusterization
     partial_results = []
 
     min_k_value = int(numpy.rint(math.sqrt(len(objs))))
@@ -301,10 +292,44 @@ class AlgorithmsWrapper:
       self.cont_k_matches_max_wins += 1
 
     (avg_silhuette, category_id, corpus, dictionary, labels, results) = result_best
+    # results.sort()
+    # for r in results:
+    #   print r
+    # self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+
+    # given objs and labels from the fourth level, produce the third level of clusterization
+    labels_groups = defaultdict(list)
+    for label, obj in izip(labels, objs):
+      labels_groups[label].append(obj['name'].encode('utf8').split()[0])
+
+    final_labels = {}
+    to_posprocess = []
+    for label, values in labels_groups.iteritems():
+      counter=collections.Counter(values)
+      if len(set(counter.values())) == 1 and len(counter.values()) > 1: # there is no major name for the label
+        to_posprocess.append((label, values))
+      else:
+        most_common_label = max(set(values), key=values.count)
+        final_labels[label] = most_common_label
+
+    for label, values in to_posprocess:
+      labels_that_already_exists = set(values).intersection(final_labels.values())
+      if labels_that_already_exists: # posprocess
+        final_labels[label] = labels_that_already_exists.pop()
+      else:
+        shorter_label = min(set(values), key=len)
+        final_labels[label] = shorter_label
+
+    results = []
+    final_labels_per_obj = []
+    for i, label in enumerate(labels):
+      final_labels_per_obj.append(final_labels[label])
+      results.append(str(final_labels[label])+" # "+objs[i]['name'].encode('utf8'))
     results.sort()
+    print "\nFinal clusterized results:"
     for r in results:
       print r
-    self.calculate_metrics(category_id, corpus, dictionary, labels, goldstandards)
+    self.calculate_metrics(category_id, corpus, dictionary, final_labels_per_obj, goldstandards)
 
   def run_sklearn_algorithm_with_linear_k(self, category_id, objs, goldstandards):
     partial_results = []
@@ -324,7 +349,10 @@ class AlgorithmsWrapper:
     print "Using k = "+str(numTopics)
     texts = []
     for obj in objs:
-      texts.append(self.get_categorizedproduct_content(obj, raw=True))
+      if self.algorithm == 'kmeans':
+        texts.append(self.get_categorizedproduct_content(obj, raw=True, extra_weight_for_name=False))
+      else:
+        texts.append(self.get_categorizedproduct_content(obj, raw=True, extra_weight_for_name=True))
 
     vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper)
     tfidf_model = vectorizer.fit_transform(texts)
@@ -358,7 +386,7 @@ class AlgorithmsWrapper:
 
   #
 
-  def get_categorizedproduct_content(self, event, raw=False, extra_weight_for_name=True):
+  def get_categorizedproduct_content(self, event, raw=False, extra_weight_for_name=False):
     # We check all fields for None if they are None we put an empty string instead
     use_stemming=self.use_stemming
     use_preposition=True
@@ -373,9 +401,10 @@ class AlgorithmsWrapper:
       description = ""
     if raw:
       result = str(name.encode('utf8'))+" <split_here> "+str(description.encode('utf8'))
+      terms = ' '.join(str(name.encode('utf8')).split()[0:3]) # get three first terms
+      result += " <split_here> "+terms
       if extra_weight_for_name:
-        terms = ' '.join(str(name.encode('utf8')).split()[0:3]) # get three first terms
-        result += " <split_here> "+terms
+        result += " <split_here> "+name
       return result
     else:
       result = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming) + \
@@ -464,5 +493,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='agglo')
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='kmeans')
   a.run()
