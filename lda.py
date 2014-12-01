@@ -64,31 +64,16 @@ filename = "inputs_goldstandard"
 # filename = "short_sepha"
 # filename = "inputs_fastshop-wcs_ok" # "inputs_staples_no_description"
 
-def get_categorizedproduct_content(event, use_stemming=True, use_preposition=True, remove_parentheses=True, remove_hifen=False):
+def get_categorizedproduct_content(event, use_stemming=True, use_preposition=True, remove_parentheses=True, remove_hifen=False, remove_alone_numbers=True, remove_numbers=False):
   # We check all fields for None if they are None we put an empty string instead
   name = (event.get("name") or "")
-  p = re.compile(r'\([^)]*\)')
-  name_without_parenteses = p.sub('', name)
-  if name_without_parenteses:
-    name = name_without_parenteses
   description = ""
   if 'info' in event and 'description' in event['info']:
     description = event['info']['description']
-  if not name:
-    name = ""
-  if not description:
-    description = ""
-  name_terms = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=True, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=True)
+  name_terms = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=remove_numbers, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=True, remove_alone_numbers=remove_alone_numbers)
   result = name_terms + name_terms + name_terms[0:3] + [name_terms[0]]
-  result += get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=True, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=False)
+  result += get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=remove_numbers, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=False, remove_alone_numbers=remove_alone_numbers)
   return result
-
-def tokenizer_wrapper(text):
-  # texts = text.split('<split_here>')
-  # results = []
-  # for item in texts:
-  #   results += get_terms(item, use_preposition=True, use_stemming=True)
-  return get_categorizedproduct_content(text)
 
 class AlgorithmsWrapper:
 
@@ -274,64 +259,23 @@ class AlgorithmsWrapper:
 
   # NEW TESTS
 
-  def run_sklearn_algorithm(self, category_id, objs, goldstandards):
+  def run_sklearn_algorithm(self, category_id, objs, goldstandards, use_binary_search=False):
     # produce the fourth level of clusterization
-    partial_results = []
 
-    min_k_value = int(numpy.rint(math.sqrt(len(objs))))
-    if min_k_value < 2:
-      min_k_value = 2
-    result_min = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, min_k_value)
-    if len(objs) > 500:
-      max_k_value = len(objs) // 4
-    elif len(objs) > 10:
-      max_k_value = len(objs) // 3
+    max_k_value = self.calculate_max_k_value(objs)
+    result_max = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, max_k_value)
+
+    if use_binary_search:
+      (avg_silhouette, category_id, labels, results) = self.run_binary_search(category_id, objs, goldstandards, max_k_value, result_max)
     else:
-      max_k_value = len(objs) // 2
-    if max_k_value >= len(objs):
-      max_k_value = len(objs) - 1
-    if max_k_value > 120:
-      max_k_value = 120
-    if max_k_value < 2:
-      max_k_value = 2
-    if max_k_value < min_k_value:
-      max_k_value = min_k_value
-    if min_k_value == max_k_value:
-        (best_k_value, result_best) = (min_k_value, result_min)
-    else:
-      result_max = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, max_k_value)
-      (best_k_value, result_best) = max([(min_k_value, result_min), (max_k_value, result_max)],key=lambda item:item[1][0])
-
-    if max_k_value > 100:
-      range_value = 3
-    elif max_k_value > 10:
-      range_value = 2
-    else:
-      range_value = 1
-
-    min_limit = min_k_value
-    max_limit = max_k_value
-    for i in range(range_value):
-      if min_limit == max_limit:
-        break
-      mid_k_value = (min_limit+max_limit) // 2
-      result_mid = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, mid_k_value)
-      (best_k_value, result_best) = max([(best_k_value, result_best), (mid_k_value, result_mid)],key=lambda item:item[1][0])
-      min_limit = best_k_value
-      max_limit = mid_k_value
-
-    print "Best k value = "+str(best_k_value)
-    self.cont_k_matches += 1
-    if best_k_value == max_k_value:
-      print "max wins"
-      self.cont_k_matches_max_wins += 1
-
-    (avg_silhouette, category_id, labels, results) = result_best
+      (avg_silhouette, category_id, labels, results) = result_max
 
     # given objs and labels from the fourth level, produce the third level of clusterization
+
+    # first group the data for each cluster and define a label for each cluster's item (a normalized firstname)
     labels_groups = defaultdict(list)
     for label, obj in izip(labels, objs):
-      normalized_name = get_terms(obj['name'], use_preposition=True, use_stemming=True, remove_numbers=True, remove_hifen=False, use_name_blacklist=True, remove_parentheses=True, use_only_one_gram=True)
+      normalized_name = get_terms(obj['name'], use_preposition=True, use_stemming=True, remove_numbers=False, remove_hifen=False, use_name_blacklist=True, remove_parentheses=True, use_only_one_gram=True, remove_alone_numbers=True)
       normalized_firstname = normalized_name[0]
       if len(normalized_name) > 1 and (normalized_firstname in GENERIC_WORDS or normalized_name[1] in PREPOSITIONS_LIST):
         if len(normalized_name) > 2 and normalized_name[1] in PREPOSITIONS_LIST:
@@ -340,6 +284,8 @@ class AlgorithmsWrapper:
           normalized_firstname+= "-"+normalized_name[1]
       labels_groups[label].append(normalized_firstname)
 
+    # then for each cluster define its label as its major label.
+    # if there is no major label, it will be processed after the others. 
     final_labels = {}
     to_posprocess = []
     for label, values in labels_groups.iteritems():
@@ -350,6 +296,7 @@ class AlgorithmsWrapper:
         most_common_label = max(set(values), key=values.count)
         final_labels[label] = most_common_label
 
+    # for each one left to process, choose their label to group them in labels that already exists
     for label, values in to_posprocess:
       labels_that_already_exists = set(values).intersection(final_labels.values())
       if labels_that_already_exists: # posprocess
@@ -372,22 +319,55 @@ class AlgorithmsWrapper:
     # else:
     #   print "skipping"
 
-  def run_sklearn_algorithm_with_linear_k(self, category_id, objs, goldstandards):
-    partial_results = []
+  def calculate_max_k_value(self, objs):
+    if len(objs) > 500:
+      max_k_value = len(objs) // 4
+    elif len(objs) > 10:
+      max_k_value = len(objs) // 3
+    else:
+      max_k_value = len(objs) // 2
+    if max_k_value >= len(objs):
+      max_k_value = len(objs) - 1
+    if max_k_value > 200:
+      max_k_value = 200
+    if max_k_value < 2:
+      max_k_value = 2
+    return max_k_value
 
-    numTopics = 10
-    result = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, numTopics)
-    partial_results.append(result)
+  def run_binary_search(self, category_id, objs, goldstandards, max_k_value, result_max):
+    min_k_value = int(numpy.rint(math.sqrt(len(objs))))
+    if min_k_value < 2:
+      min_k_value = 2
+    result_min = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, min_k_value)
+    if max_k_value < min_k_value:
+      max_k_value = min_k_value
+    if min_k_value == max_k_value:
+        (best_k_value, result_best) = (min_k_value, result_min)
+    else:
+      (best_k_value, result_best) = max([(min_k_value, result_min), (max_k_value, result_max)],key=lambda item:item[1][0])
 
-    best_run = max(partial_results,key=itemgetter(0))
-    (avg_silhuette, category_id, corpus, dictionary, labels, results) = best_run
-    results.sort()
-    for r in results:
-      print r
-    # if numTopics > 1:
-    #   self.calculate_metrics(category_id, objs, labels, goldstandards)
-    # else:
-    #   print "skipping"
+    if max_k_value > 10:
+      range_value = 2
+    else:
+      range_value = 1
+
+    min_limit = min_k_value
+    max_limit = max_k_value
+    for i in range(range_value):
+      if min_limit == max_limit:
+        break
+      mid_k_value = (min_limit+max_limit) // 2
+      result_mid = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, mid_k_value)
+      (best_k_value, result_best) = max([(best_k_value, result_best), (mid_k_value, result_mid)],key=lambda item:item[1][0])
+      min_limit = best_k_value
+      max_limit = mid_k_value
+
+    print "Best k value = "+str(best_k_value)
+    self.cont_k_matches += 1
+    if best_k_value == max_k_value:
+      print "max wins"
+      self.cont_k_matches_max_wins += 1
+    return result_best
 
   def run_sklearn_algorithm_step(self, category_id, objs, goldstandards, numTopics):
     print "Using k = "+str(numTopics)
@@ -396,7 +376,7 @@ class AlgorithmsWrapper:
       texts.append(obj)
 
     # mover para fora e setar copy_x para True
-    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=tokenizer_wrapper, strip_accents=None, preprocessor=None, lowercase=False)
+    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=get_categorizedproduct_content, strip_accents=None, preprocessor=None, lowercase=False)
     tfidf_model = vectorizer.fit_transform(texts)
 
     if self.algorithm == 'kmeans':
@@ -417,8 +397,8 @@ class AlgorithmsWrapper:
     # labels = model.fit_predict(tfidf_model.toarray())
 
     results = []
-    for i, cluster in enumerate(labels):
-      results.append(str(cluster)+" # "+objs[i]['name'].encode('utf8'))
+    for label, obj in izip(labels, objs):
+      results.append(str(label)+" # "+obj['name'].encode('utf8'))
     
     (avg_silhouette, _) = self.calculate_avg_silhouette(objs, labels)
     result = (avg_silhouette, category_id, labels, results)
