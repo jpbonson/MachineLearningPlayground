@@ -14,7 +14,7 @@ from collections import defaultdict
 from gensim import corpora, models, similarities
 from gensim.models import hdpmodel, ldamodel
 from itertools import izip
-from engine.tools.contentbased.stopwords import WORDS_STOPLIST, IGNORE_WORDS, PREPOSITIONS_LIST, GENERIC_WORDS
+from engine.tools.contentbased.stopwords import WORDS_STOPLIST, IGNORE_WORDS, PREPOSITIONS_LIST_SHORT, GENERIC_WORDS
 from engine.common.normalize import normalize_string
 from engine.tools.contentbased.create_model import get_terms
 from engine.common.filters import filter_and_classify_input
@@ -64,15 +64,17 @@ filename = "inputs_goldstandard"
 # filename = "short_sepha"
 # filename = "inputs_fastshop-wcs_ok" # "inputs_staples_no_description"
 
-def get_categorizedproduct_content(event, use_stemming=True, use_preposition=True, remove_parentheses=True, remove_hifen=False, remove_alone_numbers=True, remove_numbers=False):
+def get_categorizedproduct_content(event, use_stemming=True, use_preposition=True, remove_parentheses=True, remove_hifen=False, remove_alone_numbers=True):
   # We check all fields for None if they are None we put an empty string instead
   name = (event.get("name") or "")
   description = ""
-  if 'info' in event and 'description' in event['info']:
+  if 'info' in event and 'description' in event['info'] and event['info']['description']:
     description = event['info']['description']
-  name_terms = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=remove_numbers, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=True, remove_alone_numbers=remove_alone_numbers)
-  result = name_terms + name_terms + name_terms[0:3] + [name_terms[0]]
-  result += get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=remove_numbers, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=False, remove_alone_numbers=remove_alone_numbers)
+  name_terms = get_terms(name, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=False, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=True, remove_alone_numbers=remove_alone_numbers)
+  result = name_terms + name_terms
+  if name_terms:
+    result += name_terms[0:3] + [name_terms[0]]
+  result += get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=True, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=False, remove_alone_numbers=remove_alone_numbers)
   return result
 
 class AlgorithmsWrapper:
@@ -259,17 +261,32 @@ class AlgorithmsWrapper:
 
   # NEW TESTS
 
-  def run_sklearn_algorithm(self, category_id, objs, goldstandards, use_binary_search=False):
-    # produce the fourth level of clusterization
+  def run_sklearn_algorithm(self, category_id, objs, goldstandards):
+    labels = self.clusterize_for_fourth_category_level(category_id, objs, goldstandards)    
+    final_labels = self.clusterize_for_third_category_level(objs, labels)
+    results = []
+    for label, obj in izip(final_labels, objs):
+      results.append(str(label)+" # "+obj['name'].encode('utf8'))
+    results.sort()
+    print "\nFinal clusterized results:"
+    for r in results:
+      print r
+    # if len(final_labels_per_obj) > 1:
+    #   self.calculate_metrics(category_id, objs, final_labels_per_obj, goldstandards)
+    # else:
+    #   print "skipping"
 
+  def clusterize_for_fourth_category_level(self, category_id, objs, goldstandards, use_binary_search=False):
+    # produce the fourth level of clusterization
     max_k_value = self.calculate_max_k_value(objs)
     result_max = self.run_sklearn_algorithm_step(category_id, objs, goldstandards, max_k_value)
-
     if use_binary_search:
       (avg_silhouette, category_id, labels, results) = self.run_binary_search(category_id, objs, goldstandards, max_k_value, result_max)
     else:
       (avg_silhouette, category_id, labels, results) = result_max
+    return labels
 
+  def clusterize_for_third_category_level(self, objs, labels):
     # given objs and labels from the fourth level, produce the third level of clusterization
 
     # first group the data for each cluster and define a label for each cluster's item (a normalized firstname)
@@ -277,11 +294,11 @@ class AlgorithmsWrapper:
     for label, obj in izip(labels, objs):
       normalized_name = get_terms(obj['name'], use_preposition=True, use_stemming=True, remove_numbers=False, remove_hifen=False, use_name_blacklist=True, remove_parentheses=True, use_only_one_gram=True, remove_alone_numbers=True)
       normalized_firstname = normalized_name[0]
-      if len(normalized_name) > 1 and (normalized_firstname in GENERIC_WORDS or normalized_name[1] in PREPOSITIONS_LIST):
-        if len(normalized_name) > 2 and normalized_name[1] in PREPOSITIONS_LIST:
-          normalized_firstname+= "-"+normalized_name[2]
+      if len(normalized_name) > 1 and (normalized_firstname in GENERIC_WORDS or normalized_name[1] in PREPOSITIONS_LIST_SHORT):
+        if len(normalized_name) > 2 and normalized_name[1] in PREPOSITIONS_LIST_SHORT:
+          normalized_firstname+= "+"+normalized_name[2]
         else:
-          normalized_firstname+= "-"+normalized_name[1]
+          normalized_firstname+= "+"+normalized_name[1]
       labels_groups[label].append(normalized_firstname)
 
     # then for each cluster define its label as its major label.
@@ -305,19 +322,10 @@ class AlgorithmsWrapper:
         longer_label = max(set(values), key=len)
         final_labels[label] = longer_label
 
-    results = []
     final_labels_per_obj = []
-    for i, label in enumerate(labels):
+    for label, obj in izip(labels, objs):
       final_labels_per_obj.append(final_labels[label])
-      results.append(str(final_labels[label])+" # "+objs[i]['name'].encode('utf8'))
-    results.sort()
-    print "\nFinal clusterized results:"
-    for r in results:
-      print r
-    # if len(final_labels_per_obj) > 1:
-    #   self.calculate_metrics(category_id, objs, final_labels_per_obj, goldstandards)
-    # else:
-    #   print "skipping"
+    return final_labels_per_obj
 
   def calculate_max_k_value(self, objs):
     if len(objs) > 500:
@@ -371,13 +379,9 @@ class AlgorithmsWrapper:
 
   def run_sklearn_algorithm_step(self, category_id, objs, goldstandards, numTopics):
     print "Using k = "+str(numTopics)
-    texts = []
-    for obj in objs:
-      texts.append(obj)
 
-    # mover para fora e setar copy_x para True
     vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=get_categorizedproduct_content, strip_accents=None, preprocessor=None, lowercase=False)
-    tfidf_model = vectorizer.fit_transform(texts)
+    tfidf_model = vectorizer.fit_transform(objs)
 
     if self.algorithm == 'kmeans':
       model = KMeans(n_clusters=numTopics, n_init=12, max_iter=400,  copy_x=False, n_jobs=2)
