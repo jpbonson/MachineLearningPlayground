@@ -14,6 +14,7 @@ os.environ['MPLCONFIGDIR'] = '/tmp/sklearn'
 from operator import itemgetter
 from collections import defaultdict
 from gensim import corpora, models, similarities
+from gensim.models.tfidfmodel import TfidfModel
 from gensim.models import hdpmodel, ldamodel
 from itertools import izip
 from engine.tools.contentbased.stopwords import WORDS_STOPLIST, IGNORE_WORDS, PREPOSITIONS_LIST_SHORT, GENERIC_WORDS
@@ -266,7 +267,7 @@ class AlgorithmsWrapper:
 
   # NEW TESTS
 
-  def run_sklearn_algorithm(self, category_id, objs, goldstandards, use_cluster_firstname=True):
+  def run_sklearn_algorithm(self, category_id, objs, goldstandards, use_cluster_firstname=False):
     labels = self.clusterize_for_fourth_category_level(category_id, objs, goldstandards)   
     if use_cluster_firstname: 
       final_labels = self.clusterize_for_third_category_level_with_firstname(objs, labels)
@@ -302,6 +303,29 @@ class AlgorithmsWrapper:
       (avg_silhouette, category_id, labels, results) = result_max
     return labels
 
+  def create_tfidf(self, texts):
+    # vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=None, strip_accents=None, preprocessor=None, lowercase=False)
+    # tfidf_model = vectorizer.fit_transform(values_group)
+
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+    # tfidf_model = TfidfModel(corpus)
+
+    # dictionary = corpora.Dictionary((doc.content for doc in (docs for docs in documents)))
+    bad_keys = (bad_key for bad_key, doc_freq in dictionary.dfs.iteritems() if doc_freq == 1)
+    dictionary.filter_tokens(bad_keys)
+    DICTIONARY_SIZE = 1000000
+    dictionary.filter_extremes(keep_n=DICTIONARY_SIZE)
+    dictionary.compactify()
+
+    tfidf_model = TfidfModel(dictionary=dictionary)
+    features = lil_matrix(((len(corpus), len(dictionary.keys()))))
+    for corpus_id, item in enumerate(corpus):
+      for (word_id, tfidf_value) in tfidf_model[item]:
+        features[corpus_id, word_id] = tfidf_value
+
+    return features
+
   def clusterize_for_third_category_level_with_algorithm(self, objs, labels):
     labels_groups = defaultdict(list)
     for label, obj in izip(labels, objs):
@@ -311,13 +335,16 @@ class AlgorithmsWrapper:
     label_order = []
     for label, values in labels_groups.iteritems():
       label_order.append(label)
-      values_group.append(' '.join(values))
-    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=None, strip_accents=None, preprocessor=None, lowercase=False)
-    tfidf_model = vectorizer.fit_transform(values_group)
-    k_value = len(label_order) // 3
+      values_group.append(values)
+
+    features = self.create_tfidf(values_group)
+    
+    labels_cluster_firstname = self.clusterize_for_third_category_level_with_firstname(objs, labels, use_prepositions=True)
+    k_value = len(set(labels_cluster_firstname))
     print "Using k = "+str(k_value)+" for third level"
+
     model = AgglomerativeClustering(n_clusters=k_value, linkage="complete")
-    third_level_labels = model.fit_predict(tfidf_model.toarray())
+    third_level_labels = model.fit_predict(features.toarray())
 
     final_labels = {}
     for label, third_level_label in izip(label_order, third_level_labels):
@@ -426,13 +453,8 @@ class AlgorithmsWrapper:
     texts = []
     for obj in objs:
       texts.append(get_categorizedproduct_content(obj))
-    dictionary = corpora.Dictionary(texts)
-    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
-    tfidf_model = TfidfModel(corpus)
-    features = lil_matrix(((len(corpus), len(dictionary.keys()))))
-    for corpus_id, item in enumerate(corpus):
-      for (word_id, tfidf_value) in tfidf_model[item]:
-        features[corpus_id, word_id] = tfidf_value
+
+    features = self.create_tfidf(texts)
 
     if self.algorithm == 'kmeans':
       model = KMeans(n_clusters=numTopics, n_init=12, max_iter=400,  copy_x=False, n_jobs=2)
