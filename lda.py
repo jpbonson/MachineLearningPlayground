@@ -280,13 +280,16 @@ class AlgorithmsWrapper:
         print r
     else:
       final_labels = self.clusterize_for_third_category_level_with_algorithm(objs, labels)
-      results = []
-      for label, obj in izip(labels, objs):
-        results.append(str(final_labels[label])+" # "+obj['name'].encode('utf8'))
-      results.sort()
-      print "\nFinal clusterized results:"
-      for r in results:
-        print r
+      if final_labels:
+        results = []
+        for label, obj in izip(labels, objs):
+          results.append(str(final_labels[label])+" # "+obj['name'].encode('utf8'))
+        results.sort()
+        print "\nFinal clusterized results:"
+        for r in results:
+          print r
+      else:
+        print "ignored"
     
     # if len(final_labels_per_obj) > 1:
     #   self.calculate_metrics(category_id, objs, final_labels_per_obj, goldstandards)
@@ -337,20 +340,23 @@ class AlgorithmsWrapper:
       label_order.append(label)
       values_group.append(values)
 
-    features = self.create_tfidf(values_group)
-    
-    labels_cluster_firstname = self.clusterize_for_third_category_level_with_firstname(objs, labels, use_prepositions=True)
-    k_value = len(set(labels_cluster_firstname))
-    print "Using k = "+str(k_value)+" for third level"
+    if len(values_group) >= self.upper_limit:
 
-    model = AgglomerativeClustering(n_clusters=k_value, linkage="complete")
-    third_level_labels = model.fit_predict(features.toarray())
+      features = self.create_tfidf(values_group)
+      
+      labels_cluster_firstname = self.clusterize_for_third_category_level_with_firstname(objs, labels, use_prepositions=True)
+      k_value = len(set(labels_cluster_firstname))
+      print "Using k = "+str(k_value)+" for third level"
 
-    final_labels = {}
-    for label, third_level_label in izip(label_order, third_level_labels):
-      final_labels[label] = third_level_label
+      model = AgglomerativeClustering(n_clusters=k_value, linkage="complete")
+      third_level_labels = model.fit_predict(features.toarray())
 
-    return final_labels
+      final_labels = {}
+      for label, third_level_label in izip(label_order, third_level_labels):
+        final_labels[label] = third_level_label
+      return final_labels
+    else:
+      return None
 
   def clusterize_for_third_category_level_with_firstname(self, objs, labels, use_prepositions=True):
     # given objs and labels from the fourth level, produce the third level of clusterization
