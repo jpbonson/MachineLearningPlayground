@@ -9,6 +9,8 @@ import inspect
 import warnings
 import re
 import collections
+import os
+os.environ['MPLCONFIGDIR'] = '/tmp/sklearn'
 from operator import itemgetter
 from collections import defaultdict
 from gensim import corpora, models, similarities
@@ -64,7 +66,7 @@ filename = "inputs_goldstandard"
 # filename = "short_sepha"
 # filename = "inputs_fastshop-wcs_ok" # "inputs_staples_no_description"
 
-def get_categorizedproduct_content(event, use_stemming=True, use_preposition=True, remove_parentheses=True, remove_hifen=False, remove_alone_numbers=True):
+def get_categorizedproduct_content(event, use_stemming=True, use_preposition=True, remove_parentheses=True, remove_hifen=False, remove_alone_numbers=True, extra_name_weight=False):
   # We check all fields for None if they are None we put an empty string instead
   name = (event.get("name") or "")
   description = ""
@@ -74,7 +76,10 @@ def get_categorizedproduct_content(event, use_stemming=True, use_preposition=Tru
   result = name_terms + name_terms
   if name_terms:
     result += name_terms[0:3] + [name_terms[0]]
-  result += get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=True, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=False, remove_alone_numbers=remove_alone_numbers)
+  if extra_name_weight:
+    result += name_terms[0:3] + [name_terms[0]]
+  else:
+    result += get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=True, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=False, remove_alone_numbers=remove_alone_numbers)
   return result
 
 class AlgorithmsWrapper:
@@ -261,16 +266,27 @@ class AlgorithmsWrapper:
 
   # NEW TESTS
 
-  def run_sklearn_algorithm(self, category_id, objs, goldstandards):
-    labels = self.clusterize_for_fourth_category_level(category_id, objs, goldstandards)    
-    final_labels = self.clusterize_for_third_category_level(objs, labels)
-    results = []
-    for label, obj in izip(final_labels, objs):
-      results.append(str(label)+" # "+obj['name'].encode('utf8'))
-    results.sort()
-    print "\nFinal clusterized results:"
-    for r in results:
-      print r
+  def run_sklearn_algorithm(self, category_id, objs, goldstandards, use_cluster_firstname=True):
+    labels = self.clusterize_for_fourth_category_level(category_id, objs, goldstandards)   
+    if use_cluster_firstname: 
+      final_labels = self.clusterize_for_third_category_level_with_firstname(objs, labels)
+      results = []
+      for label, obj in izip(final_labels, objs):
+        results.append(str(label)+" # "+obj['name'].encode('utf8'))
+      results.sort()
+      print "\nFinal clusterized results:"
+      for r in results:
+        print r
+    else:
+      final_labels = self.clusterize_for_third_category_level_with_algorithm(objs, labels)
+      results = []
+      for label, obj in izip(labels, objs):
+        results.append(str(final_labels[label])+" # "+obj['name'].encode('utf8'))
+      results.sort()
+      print "\nFinal clusterized results:"
+      for r in results:
+        print r
+    
     # if len(final_labels_per_obj) > 1:
     #   self.calculate_metrics(category_id, objs, final_labels_per_obj, goldstandards)
     # else:
@@ -286,7 +302,30 @@ class AlgorithmsWrapper:
       (avg_silhouette, category_id, labels, results) = result_max
     return labels
 
-  def clusterize_for_third_category_level(self, objs, labels):
+  def clusterize_for_third_category_level_with_algorithm(self, objs, labels):
+    labels_groups = defaultdict(list)
+    for label, obj in izip(labels, objs):
+      labels_groups[label] += get_categorizedproduct_content(obj, extra_name_weight=True)
+
+    values_group = []
+    label_order = []
+    for label, values in labels_groups.iteritems():
+      label_order.append(label)
+      values_group.append(' '.join(values))
+    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=None, strip_accents=None, preprocessor=None, lowercase=False)
+    tfidf_model = vectorizer.fit_transform(values_group)
+    k_value = len(label_order) // 3
+    print "Using k = "+str(k_value)+" for third level"
+    model = AgglomerativeClustering(n_clusters=k_value, linkage="complete")
+    third_level_labels = model.fit_predict(tfidf_model.toarray())
+
+    final_labels = {}
+    for label, third_level_label in izip(label_order, third_level_labels):
+      final_labels[label] = third_level_label
+
+    return final_labels
+
+  def clusterize_for_third_category_level_with_firstname(self, objs, labels, use_prepositions=True):
     # given objs and labels from the fourth level, produce the third level of clusterization
 
     # first group the data for each cluster and define a label for each cluster's item (a normalized firstname)
@@ -294,11 +333,12 @@ class AlgorithmsWrapper:
     for label, obj in izip(labels, objs):
       normalized_name = get_terms(obj['name'], use_preposition=True, use_stemming=True, remove_numbers=False, remove_hifen=False, use_name_blacklist=True, remove_parentheses=True, use_only_one_gram=True, remove_alone_numbers=True)
       normalized_firstname = normalized_name[0]
-      if len(normalized_name) > 1 and (normalized_firstname in GENERIC_WORDS or normalized_name[1] in PREPOSITIONS_LIST_SHORT):
-        if len(normalized_name) > 2 and normalized_name[1] in PREPOSITIONS_LIST_SHORT:
-          normalized_firstname+= "+"+normalized_name[2]
-        else:
-          normalized_firstname+= "+"+normalized_name[1]
+      if use_prepositions:
+        if len(normalized_name) > 1 and (normalized_firstname in GENERIC_WORDS or normalized_name[1] in PREPOSITIONS_LIST_SHORT):
+          if len(normalized_name) > 2 and normalized_name[1] in PREPOSITIONS_LIST_SHORT:
+            normalized_firstname+= "+"+normalized_name[2]
+          else:
+            normalized_firstname+= "+"+normalized_name[1]
       labels_groups[label].append(normalized_firstname)
 
     # then for each cluster define its label as its major label.
@@ -380,15 +420,28 @@ class AlgorithmsWrapper:
   def run_sklearn_algorithm_step(self, category_id, objs, goldstandards, numTopics):
     print "Using k = "+str(numTopics)
 
-    vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, tokenizer=get_categorizedproduct_content, strip_accents=None, preprocessor=None, lowercase=False)
-    tfidf_model = vectorizer.fit_transform(objs)
+    # vectorizer = TfidfVectorizer(stop_words=WORDS_STOPLIST, analyzer=get_categorizedproduct_content, tokenizer=None, strip_accents=None, preprocessor=None, lowercase=False)
+    # tfidf_model = vectorizer.fit_transform(objs)
+
+    texts = []
+    for obj in objs:
+      texts.append(get_categorizedproduct_content(obj))
+    dictionary = corpora.Dictionary(texts)
+    corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+    tfidf_model = TfidfModel(corpus)
+    features = lil_matrix(((len(corpus), len(dictionary.keys()))))
+    for corpus_id, item in enumerate(corpus):
+      for (word_id, tfidf_value) in tfidf_model[item]:
+        features[corpus_id, word_id] = tfidf_value
 
     if self.algorithm == 'kmeans':
       model = KMeans(n_clusters=numTopics, n_init=12, max_iter=400,  copy_x=False, n_jobs=2)
-      labels = model.fit_predict(tfidf_model)
+      # labels = model.fit_predict(tfidf_model)
+      labels = model.fit_predict(features)
     elif self.algorithm == 'agglo':
       model = AgglomerativeClustering(n_clusters=numTopics, linkage="ward")
-      labels = model.fit_predict(tfidf_model.toarray())
+      # labels = model.fit_predict(tfidf_model.toarray())
+      labels = model.fit_predict(features.toarray())
     else:
       raise SystemExit
     # model = AffinityPropagation(copy=False) # good
@@ -495,5 +548,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='kmeans')
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='agglo')
   a.run()
