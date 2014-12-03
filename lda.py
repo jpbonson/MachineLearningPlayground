@@ -346,6 +346,10 @@ class AlgorithmsWrapper:
       
       labels_cluster_firstname = self.clusterize_for_third_category_level_with_firstname(objs, labels, use_prepositions=True)
       k_value = len(set(labels_cluster_firstname))
+      if k_value >= len(values_group):
+        k_value = len(values_group) - 1
+      if k_value < 2:
+        k_value = 2
       print "Using k = "+str(k_value)+" for third level"
 
       model = AgglomerativeClustering(n_clusters=k_value, linkage="complete")
