@@ -5,6 +5,7 @@ import json
 import math
 import numpy
 import time
+import heapq
 import inspect
 import warnings
 import re
@@ -25,6 +26,7 @@ from sklearn import metrics
 from gensim.models.tfidfmodel import TfidfModel
 from scipy.sparse import csr_matrix
 from scipy.sparse import lil_matrix
+from gensim.similarities.docsim import MatrixSimilarity
 
 from scipy.odr import models
 from sklearn import metrics
@@ -79,8 +81,7 @@ def get_categorizedproduct_content(event, use_stemming=True, use_preposition=Tru
     result += name_terms[0:3] + [name_terms[0]]
   if extra_name_weight:
     result += name_terms[0:3] + [name_terms[0]]
-  else:
-    result += get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=True, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=False, remove_alone_numbers=remove_alone_numbers)
+  result += get_terms(description, use_preposition=use_preposition, use_stemming=use_stemming, remove_numbers=True, remove_parentheses=remove_parentheses, remove_hifen=remove_hifen, use_name_blacklist=False, remove_alone_numbers=remove_alone_numbers)
   return result
 
 class AlgorithmsWrapper:
@@ -268,7 +269,14 @@ class AlgorithmsWrapper:
   # NEW TESTS
 
   def run_sklearn_algorithm(self, category_id, objs, goldstandards, use_cluster_firstname=False):
-    labels = self.clusterize_for_fourth_category_level(category_id, objs, goldstandards)   
+    labels = self.clusterize_for_fourth_category_level(category_id, objs, goldstandards)
+    results = []
+    for label, obj in izip(labels, objs):
+      results.append(str(label)+" # "+obj['name'].encode('utf8'))
+    results.sort()
+    print "\Partial clusterized results:"
+    for r in results:
+      print r 
     if use_cluster_firstname: 
       final_labels = self.clusterize_for_third_category_level_with_firstname(objs, labels)
       results = []
@@ -283,7 +291,7 @@ class AlgorithmsWrapper:
       if final_labels:
         results = []
         for label, obj in izip(labels, objs):
-          results.append(str(final_labels[label])+" # "+obj['name'].encode('utf8'))
+          results.append(str(final_labels.get(label, label))+" # "+obj['name'].encode('utf8'))
         results.sort()
         print "\nFinal clusterized results:"
         for r in results:
@@ -329,6 +337,20 @@ class AlgorithmsWrapper:
 
     return features
 
+  def get_similars_with_similarity_level(self, document, model, dictionary, similarities, max_similars):
+    """
+    Get the most similar groups (categories or products) given a document that contains all relevant
+    terms in the federated product.
+    """
+    bag_of_words = dictionary.doc2bow(document)
+    tfidf_per_word = model[bag_of_words]
+    similarity_per_group = similarities[tfidf_per_word]
+    most_similar_groups_by_id = [i for i in zip(*heapq.nlargest(max_similars, enumerate(similarity_per_group), key=lambda x: x[1]))]
+    groups = most_similar_groups_by_id[0]
+    similarities = most_similar_groups_by_id[1]
+    most_similar_groups = [(item, str(similarities[i])) for i, item in enumerate(groups)]
+    return most_similar_groups
+
   def clusterize_for_third_category_level_with_algorithm(self, objs, labels):
     labels_groups = defaultdict(list)
     for label, obj in izip(labels, objs):
@@ -342,23 +364,60 @@ class AlgorithmsWrapper:
 
     if len(values_group) >= self.upper_limit:
 
-      features = self.create_tfidf(values_group)
-      
-      labels_cluster_firstname = self.clusterize_for_third_category_level_with_firstname(objs, labels, use_prepositions=True)
-      k_value = len(set(labels_cluster_firstname))
-      if k_value >= len(values_group):
-        k_value = len(values_group) - 1
-      if k_value < 2:
-        k_value = 2
-      print "Using k = "+str(k_value)+" for third level"
+      texts = values_group
+      dictionary = corpora.Dictionary(texts)
+      corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+      # bad_keys = (bad_key for bad_key, doc_freq in dictionary.dfs.iteritems() if doc_freq == 1)
+      # dictionary.filter_tokens(bad_keys)
+      # DICTIONARY_SIZE = 1000000
+      # dictionary.filter_extremes(keep_n=DICTIONARY_SIZE)
+      # dictionary.compactify()
 
-      model = AgglomerativeClustering(n_clusters=k_value, linkage="complete")
-      third_level_labels = model.fit_predict(features.toarray())
+      tfidf_model = TfidfModel(dictionary=dictionary)
+      # features = lil_matrix(((len(corpus), len(dictionary.keys()))))
+      # for corpus_id, item in enumerate(corpus):
+      #   for (word_id, tfidf_value) in tfidf_model[item]:
+      #     features[corpus_id, word_id] = tfidf_value
 
-      final_labels = {}
-      for label, third_level_label in izip(label_order, third_level_labels):
-        final_labels[label] = third_level_label
-      return final_labels
+      similarities = MatrixSimilarity(corpus, num_features=len(dictionary))
+
+      cluster_map = {}
+      already_merged = []
+      for current_id, cluster in enumerate(values_group):
+        if cluster:
+          most_similars = self.get_similars_with_similarity_level(cluster, tfidf_model, dictionary, similarities, max_similars=5)
+          for similar in most_similars:
+            cluster_id, similarity = similar
+            if current_id != cluster_id and cluster_id not in already_merged and float(similarity) >= 0.6:
+              cluster += values_group[cluster_id]
+              values_group[cluster_id] = []
+              cluster_map[cluster_id] = current_id
+              already_merged.append(cluster_id)
+
+      print "cluster_map: "+str(cluster_map)
+      print "already_merged: "+str(already_merged)
+
+      return cluster_map
+
+      # features = self.create_tfidf(values_group)
+
+      # labels_cluster_firstname = self.clusterize_for_third_category_level_with_firstname(objs, labels, use_prepositions=True)    
+
+      # k_value = len(set(labels_cluster_firstname))
+      # if k_value >= len(values_group):
+      #   k_value = len(values_group) - 1
+      # if k_value < 2:
+      #   k_value = 2
+      # print "Using k = "+str(k_value)+" for third level"
+
+      # model = AgglomerativeClustering(n_clusters=k_value, linkage="complete")
+      # third_level_labels = model.fit_predict(features.toarray())
+
+      # final_labels = {}
+      # for label, third_level_label in izip(label_order, third_level_labels):
+      #   final_labels[label] = third_level_label
+      # return final_labels
+
     else:
       return None
 
@@ -474,6 +533,12 @@ class AlgorithmsWrapper:
       model = AgglomerativeClustering(n_clusters=numTopics, linkage="ward")
       # labels = model.fit_predict(tfidf_model.toarray())
       labels = model.fit_predict(features.toarray())
+    elif self.algorithm == 'kmeans2':
+      dictionary = corpora.Dictionary(texts)
+      corpus = [dictionary.doc2bow(text) for text in texts] # bag of words
+      similarities = MatrixSimilarity(corpus, num_features=len(dictionary))
+      model = KMeans(n_clusters=numTopics, n_init=12, max_iter=400,  copy_x=False, n_jobs=2)
+      labels = model.fit_predict(similarities)
     else:
       raise SystemExit
     # model = AffinityPropagation(copy=False) # good
@@ -580,5 +645,5 @@ if (__name__ == '__main__'):
   texts_per_cat = defaultdict(list)
   for (domain, input_type, obj) in filter_and_classify_input(file_generator(filename), convert_to_version=None):
     texts_per_cat[obj.get('chaordicCategoryBidId', 'None')].append(obj)
-  a = AlgorithmsWrapper(texts_per_cat, algorithm='agglo')
+  a = AlgorithmsWrapper(texts_per_cat, algorithm='kmeans2')
   a.run()
