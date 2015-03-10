@@ -1,3 +1,3 @@
-MLExperiences
+MachineLearningPlayground
 =============
-Playing around with sklearn clustering algorithms.
+Playing around with sklearn clustering and classification algorithms.
