@@ -1,0 +1,20 @@
+<>This paper presents a system for the automatic organization of digital documents in PDF format.
+<>Independently of the application domain and particular version of the algorithm, ant-clustering algorithms based on ACA follow a set of basic, general principles.
+<>Given an input data set composed of N l-dimensional vectors to be clustered, these data are spread all over a bidimensional (toroidal) grid of size m x m.
+<>A colony of ants (agents) is allowed to move on the grid picking up, carrying and dropping off objects based on some probabilistic rules.
+<>If an ant is not carrying an object and finds an object i in its neighborhood, it picks up this object with a probability that is inversely proportional to the number of similar objects in the neighborhood, as described in Eq.(1).
+<>If, however, the ant is carrying an object i and perceives a neighbor cell in which there are other objects, then the ant drops off the object it is carrying, with a probability that is directly proportional to the object’s similarity with the perceived ones, as described in Eq.(2).
+<>To cluster PDF files, it is first necessary to convert them into text documents.
+<>Then, they have to be transformed into collections of words that will represent an object on the grid.
+<>This transformation is automatically obtained through the calculation of the relative frequency of a word in the documents (Eq.(4)).
+<>Instead of using the Euclidean distance as a measure of dissimilarity, the cosine measure, which determines the similarity between two vectors independently of their magnitude, is going to be used.
+<>One vector represents the set of words extracted from the document being carried by the ant, and the other vector represents the collection of words extracted from the documents in the neighborhood of the ant.
+<>After the generation of the objects, the ant-clustering algorithm described previously is applied.
+<>The only difference is the calculation of f(i), where the cosine measure (sim(.,.)/alfa), is used instead of (1 - d(.,.)/alfa).
+<>Sets of PDF files were copied from the WCCI – IEEE 1998 World Congress on Computational Intelligence: Proceedings of IJCNN 1998, FUZZ-IEEE 1998 and ICEC 1998.
+<>This paper presented an algorithm for the automatic clustering of text documents using a classification technique inspired by the behavior of some ant species while organizing and cleaning their nests.
+<>As the ant-clustering algorithm used was originally developed to tackle numeric data, some modifications had to be introduced in order to adapt it to deal with text data.
+<>To evaluate the performance of the algorithm, real-world documents were extracted from the IEEE WCCI 1998 CD and presented to the algorithm.
+<>The system demonstrated to be capable of grouping together documents belonging to the same original group (fuzzy, neural or evolutionary).
+<>The cases the algorithm mixed a document corresponded to those cases in which the paper (PDF file) referred to hybrid approaches or in which the paper could be correctly classified into more than one group, thus leaving margin for a dual right classification.
+<>Furthermore, in many cases a document was inappropriately classified because it contained several words that were more common in a group than in its original group; for instance, the word network may appear several times in an EC paper.

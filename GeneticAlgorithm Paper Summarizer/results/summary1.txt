@@ -1,0 +1,105 @@
+Text Summarization Based on Genetic Programming
+
+<introduction>
+<>Automatic text summarization has been an active research area for many years.
+<>Evaluation of summarization is a quite hard problem.
+<>Often, a lot of manual labour is required, for instance by having humans read generated summaries and grading the quality of the summaries with regards to different aspects such as information content and text clarity.
+<>Manual labour is time consuming and expensive.
+<>Summarization is also subjective.
+<>The conception of what constitutes a good summary varies a lot between individuals, and of course also depending on the purpose of the summary.
+<>Recently many experiments have been conducted for the text summarization task.
+<>Some were about evaluation of summarization using relevance prediction, and voted regression model.
+<>Others were about single- and multiple-sentence compression using "parse and trim" approach and a statistical noisy-channel approach and conditional random fields.
+<>Other research includes multi-document summarization and summarization for specific domains.
+<>We employ an evolutionary algorithm, Genetic programming (GP), as the learning mechanism in our Adaptive Text Summarization (ATS) system to learn sentence ranking functions.
+<>Even though our system generates extractive summaries, the sentence ranking function in use differentiates ours from that of who specified it to be a linear function of sentence features.
+<>We used GP to generate a sentence ranking function from the training data and applied it to the test data, which also differs from who used decision tree, who used Bayes's rule, and who implemented both Naïve Bayes and decision tree.
+<>In this work, sentences of each document are modeled as vectors of features extracted from the text.
+<>The summarization task can be seen as a two-class classification problem, where a sentence is labeled as "correct" if it belongs to the extractive reference summary, or as "incorrect" otherwise.
+<>We may give the "correct" class a value '1' and the "incorrect" class a value '0'.
+<>In testing mode, each sentence is given a value between '0' and '1' (values between 0 and 1 are continuous).
+<>Therefore, we can extract the appropriate number of sentences according to the compression rate.
+<>The trainable summarizer is expected to "learn" the patterns which lead to the summaries, by identifying relevant feature values which are most correlated with the classes "correct" or "incorrect".
+<>When a new document is given to the system, the "learned" patterns are used to classify each sentence of that document into either a "correct" or "incorrect" sentence by giving it a certain score value between '0' and '1'.
+<>A set of highest score sentences are chronologically specified as a document summary based on the compression rate.
+</introduction>
+
+<background>
+<>We concentrate our presentation in two main points: (1) the set of employed features; and (2) the framework defined for the trainable summarizer, including the employed classifiers.
+<>A large variety of features can be found in the text-summarization literature.
+<>In our proposal we employ the following set of features: (F1) Sentence Length; (F2) Sentence Position; (F3) Similarity to Title; (F4) Similarity to Keywords; (F5) Occurrence of proper nouns; (F6) Indicator of main concepts; (F7) Occurrence of non-essential information; (F8) Sentence-to-Centroid Cohesion.
+<>A frequently employed text model is the vectorial model.
+<>After the preprocessing step each text element - a sentence in the case of text summarization - is considered as a N-dimensional vector.
+<>So it is possible to use some metric in this space to measure similarity between text elements.
+<>The most employed metric is the cosine measure, defined as: cos (o) = (<x.y>) / (|x|.|y|).
+<>For vectors x and y, where (<,>) indicates the scalar product, and |x| indicates the module of x.
+<>Therefore maximum similarity corresponds to cos(o)= 1, whereas cos(o)=0 indicates total discrepancy between the text elements.
+<>In order to implement text summarization based on fuzzy logic, we used MATLAB since it is possible to simulate fuzzy logic in this software.
+<>To do so; first, we consider each characteristic of a text such as sentence length, location in paragraph, similarity to key word and etc, which was mentioned in the previous part, as the input of fuzzy system.
+<>Then, we enter all the rules needed for summarization, in the knowledge base of this system (All those rules are formulated by several expends in this field).
+<>After ward, a value from zero to one is obtained for each sentence in the output based on sentence characteristics and the available rules in the knowledge base.
+<>The obtained value in the output determines the degree of the importance of the sentence in the final summary.
+<>To do these steps, we summarize the same text using fuzzy logic.
+<>Genetic programming (GP) is an evolutionary algorithm that evolves computer programs and predicts mathematical models from experimental data.
+<>The algorithm is similar to Genetic Algorithm (GA), but uses fixed-length character strings (called chromosomes) to represent computer programs which are afterwards expressed as expression trees (ETs).
+<>GP begins with a random population of candidate solutions in the form of chromosomes.
+<>The chromosomes are then mapped into ETs, evaluated based on a fitness function and selected by fitness to reproduce with modification via genetic operations.
+<>The new generation of solutions goes through the same process until the stop condition is satisfied.
+<>The fittest individual serves as the final solution.
+<>GP has been used to solve symbolic regression, sequence induction, and classification problems efficiently.
+<>We utilized GP to find the explicit form of sentence ranking functions for the automatic text summarization.
+</background>
+
+<proposal>
+<>We have two modes of operations.
+<>Training mode where features are extracted from 16 manually summarized English documents and used to train Genetic programming, Fuzzy and Vector models.
+<>Testing mode, in which features are calculated for sentences from one English document (These documents are different from those that were used for training).
+<>The sentences are ranked according to the sets of feature weights calculated during the training stage.
+<>Summaries consist of the highest-ranking sentences.
+<>The basic purpose of genetic programming (GP) is optimization.
+<>Since optimization problems arise frequently, this makes GP quite useful for a great variety of tasks.
+<>As in all optimization problems, we are faced with the problem of maximizing/minimizing an objective function f(x) over a given space X of arbitrary dimension.
+<>Therefore, GP can be used to specify the weight of each text feature.
+<>For a sentence s, a weighted score function, is exploited to integrate all the eight feature scores mentioned in Section 2, where 'iw' indicates the weight of 'if'.
+<>The genetic programming (GP) is exploited to obtain an appropriate set of feature weights using the 17 manually summarized English documents.
+<>A chromosome is represented as the combination of all feature weights in the form of 'iw'.
+<>Thousand genomes for each generation were produced.
+<>Evaluate fitness of each genome (we define fitness as the average precision obtained with the genome when the summarization process is applied on the training corpus), and retain the fittest 8 genomes to mate for new ones in the next generation.
+<>In this experiment, thousand generations are evaluated to obtain steady combinations of feature weights.
+<>A suitable combination of feature weights is found by applying GP.
+<>All document sentences are ranked in a descending order according to their scores.
+<>A set of highest score sentences are chronologically specified as a document summary based on the compression rate.
+</proposal>
+
+<results>
+<>Seventeen English articles in the domain of science were collected from the Reading Book.
+<>Seventeen English articles were manually summarized using compression rate of 30%.
+<>These manually summarized articles were used to train the previously mentioned three models.
+<>The other one English articles were used for testing.
+<>The average number of sentences per English articles is 85.8, respectively.
+<>We are going to exploit the GP approach of [Ferrier 2001], for summarization and use it as a baseline approach.
+<>For a sentence s, a weighted score function, is exploited to integrate the eight feature scores mentioned in previous section, where 'iw' indicates the weight of 'if'.
+<>We use the approach for testing; a set of 17 English documents was used.
+<>We apply 'if' after using the defined weights from GP execution.
+<>All document sentences are ranked in a descending order according to their scores.
+<>A set of highest score sentences are chronologically specified as a document summary based on the compression rate.
+<>Related parameters for the training and testing of the GP model like Data, Program Structure, general setting, genetic operators and numerical constants are given in Table I and II.
+<>We have exploited the GP approach [Ferreira 2006], for summarization as described above.
+<>Therefore, we have exploited the eight features for summarization.
+<>The system calculates the feature weights using genetic programming.
+<>All document sentences are ranked in a descending order according to their scores.
+<>A set of highest score sentences are chronologically specified as a document summary based on the compression rate.
+<>To do GP concepts we using GP Classification model.
+<>It is clear from Table IV and Fig.4 that this approach can be extended to the genre of newswire text.
+<>Fig.5 show the total system performance in terms of precision for in case of all models for English articles, respectively.
+<>It is clear from the figure that GP approach gives the best results since GP has a good capability to model arbitrary densities.
+<>The Fuzzy model has better precision than the Vector model.
+</results>
+
+<conclusion>
+<>In this paper, we have investigated the use of genetic programming (GP), vector approach and fuzzy approach for automatic text summarization task.
+<>We have applied our new approaches on a sample of 17 English scientific articles.
+<>Our approach results outperform the baseline approach results.
+<>Our approaches have been used the feature extraction criteria which gives researchers opportunity to use many varieties of these features based on the text type.
+<>In the future work, we will extend this approach to multi-document summarization by addressing some anti-redundancy methods which are needed, since the degree of redundancy is significantly higher in a group of topically related articles than in an individual article as each article tends to describe the main point as well as necessary shared background.
+</conclusion>

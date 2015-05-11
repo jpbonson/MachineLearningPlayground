@@ -1,0 +1,113 @@
+Text Document Classification Using Swarm Intelligence
+
+<introduction>
+<>Until very recently, obtaining information about a given subject involved going to a library or university and searching for the desired contents.
+<>All bibliographical resources of a library (e.g., books, journals, magazines and newspapers) are grouped by indices, i.e., collections of terms that point to the sites where they can be found.
+<>These terms can be the names of the authors, the subjects, the year of publication, and so forth.
+<>With time, not only the number of libraries increases, but also the amount of information available.
+<>To minimize this problem, information retrieval systems have been developed and widely used in libraries, universities, companies and all other places where information resources have to be stored and consulted.
+<>Information retrieval systems are aimed at helping the storage of new information resources and speeding up the search for a specific subject.
+<>The Internet has emerged as one of the most important information resources, in most cases of public use, available nowadays.
+<>This can be easily observed by the broad number of digital libraries in the Web.
+<>As is the case with the “physical” libraries, digital or virtual libraries also suffer from the difficulties in organizing and searching for information.
+<>Although information retrieval systems have contributed significantly to the organization and retrieval of information, the success of the system still depends on maintenance, because one has to be responsible for taking the new information resources, indexing and cataloguing them.
+<>These processes are tedious and time consuming.
+<>This paper presents a system for the automatic organization of digital documents in PDF format.
+<>The approach is based on an ant-clustering algorithm proposed by Lumer and Faieta as a development of the ideas introduced by Deneubourg et al.
+<>This method was designed as part of an academic virtual community currently under development.
+<>This community is characterized as a scientific paper collection (PDF files) automatically classified and stored in folder structures of a server and in which academics are able to exchange experience and knowledge.
+</introduction>
+
+<background>
+<>The social behavior of ants has attracted the interest of researchers in many different disciplines, from the biosciences to computer science and engineering.
+<>One emerging field of investigation that has been increasingly receiving attention over the past years is the so-called biologically inspired computing, in particular, swarm intelligence.
+<>The term swarm intelligence was coined in the late 1980’s to refer to cellular robotic systems in which a collection of simple agents in an environment interact according to local rules.
+<>Two main lines of research can be identified in swarm intelligence: 1) the works based on social insects; and 2) the works based on the ability of human societies to process knowledge.
+<>Although the resultant approaches are quite different in sequence of steps and sources of inspiration, they present some commonalities.
+<>In general terms, both rely on a population (colony or swarm) of individuals (social insects or particles) capable of interacting (directly or indirectly) with the environment and each other.
+<>As a result of these interactions there may be a change in the environment and/or in the individuals, what will lead to useful emergent phenomena.
+<>Among the many social behaviors of ants, researchers have registered the way some ant species work collaboratively in the task of grouping dead bodies so as to keep the nest clean.
+<>After placing corpses of ants randomly in a certain environment, it can be observed that, with time, the ants tend to cluster all dead bodies in specific regions of the environment, thus forming piles of dead bodies.
+<>The first antclustering algorithm inspired by this clustering behavior of ants was introduced in [5], where a population of robots had to group together objects without any central control.
+<>Lumer and Faieta adapted the robots ant-clustering algorithm for the analysis and classification of numerical data, thus introducing the standard ant-clustering algorithm (ACA).
+<>Since its proposal, in 1994, the ACA has passed through some modifications and has been applied to several domains, from data mining, to graphpartitioning, to text-mining.
+<>Independently of the application domain and particular version of the algorithm, ant-clustering algorithms based on ACA follow a set of basic, general principles.
+<>Given an input data set composed of N l-dimensional vectors to be clustered, these data are spread all over a bidimensional (toroidal) grid of size m x m.
+<>Actually, the data themselves are not spread over the grid, only some sort of indices that indicate where a given object is placed.
+<>A colony of ants (agents) is allowed to move on the grid picking up, carrying and dropping off objects based on some probabilistic rules.
+<>The movement of an ant is characterized by its displacement in a grid cell in any direction adjacent to its current position.
+<>The ants can perceive a neighborhood in the environment, the most common one being a square neighborhood of size 3 x 3.
+<>In the beginning of the iterative process of adaptation, objects and ants are randomly placed on the grid.
+<>The ants then start moving randomly on the grid.
+<>If an ant is not carrying an object and finds an object i in its neighborhood, it picks up this object with a probability that is inversely proportional to the number of similar objects in the neighborhood, as described in Eq.(1).
+<>If, however, the ant is carrying an object i and perceives a neighbor cell in which there are other objects, then the ant drops off the object it is carrying, with a probability that is directly proportional to the object’s similarity with the perceived ones, as described in Eq.(2).
+<>The parameters kp and kd are, respectively, the picking and dropping constants that weighs the influence of the function f(i) on the picking and dropping probabilities.
+<>Function f(i) provides an estimate of the density and similarity of elements in the neighborhood of object i.
+<>The pseudocode presented in Algorithm 1 summarizes the standard ant-clustering algorithm (ACA).
+<>The authors [4] suggested the following function f(i) as the local density of items in the neighborhood of object i: Eq.(3), where f(i) is a measure of the average similarity of object i with another object j in the neighborhood of i, alfa is a factor that defines the scale of dissimilarity, and d(i,j) is the distance between two items in their original l-dimensional space.
+<>Parameter alfa determines when two items should or should not be located next to each other.
+<>For instance, if alfa is too large, there is not much discrimination between two items, leading to the formation of clusters composed of items that should not belong to the same cluster; and vice-versa.
+</background>
+
+<proposal>
+<>To cluster PDF files, it is first necessary to convert them into text documents.
+<>Then, they have to be transformed into collections of words that will represent an object on the grid.
+<>This transformation is automatically obtained through the calculation of the relative frequency of a word in the documents (Eq.(4)).
+<>Let fj(w) corresponds to the number of times word w appears in document j, i.e., the frequency of word w in document j.
+<>Then, Fj(w) represents the relative frequency of word w in all documents.
+<>Note that 0 < Fj(w) < 1 and SUM(w) Fj(w) = 1.
+<>This normalization serves the purpose of disregarding the number of words in the document and, instead, measure the relative importance of a word compared to the other words contained in the same document.
+<>Instead of using the Euclidean distance as a measure of dissimilarity, the cosine measure, which determines the similarity between two vectors independently of their magnitude, is going to be used.
+<>One vector represents the set of words extracted from the document being carried by the ant, and the other vector represents the collection of words extracted from the documents in the neighborhood of the ant.
+<>Eq.(5) returns the cosine of the angle between these two vectors.
+<>The cosine is equal to 1 when the vectors point in the same direction, and zero when they form a 90 degrees angle.
+<>FDk is the frequency of word k in the set of words extracted from the document being carried by ant D, and FQk is the relative frequency of word k in document Q that exists in the neighborhood of the ant.
+<>Thus, each document is transformed into an object whose structure is an l-dimensional vector, x1x2.
+<>xl which corresponds the relative frequencies of the relevant words extracted.
+<>After the generation of the objects, the ant-clustering algorithm described previously is applied.
+<>The only difference is the calculation of f(i), where the cosine measure (sim(.,.)/alfa), is used instead of (1 - d(.,.)/alfa).
+<>After some preliminary tests, it was noticed that the algorithm could never converge to a stable configuration of the grid; that is, the ants were constantly building and destructing clusters.
+<>Therefore, one form of modifying ACA in order to promote a stabilization of the grid had to be proposed.
+<>The approach adopted here corresponds to gradually cooling down the value of parameter kp so as to reduce the probability of an ant picking up an object after a certain number of iteration steps have passed.
+<>With this simple modification, the stopping criterion of the algorithm becomes either a maximum number of cycles (1 cycle = 10,000 steps of each ant) or a minimum value for kp.
+<>In both cases, the chosen value has to be such that ants are no longer picking up objects from the grid, thus resulting in a final, stable clustering solution.
+</proposal>
+
+<results>
+<>In order to assess the applicability of the modified algorithm, called here ACA*, for text document clustering, a benchmark dataset was used.
+<>Sets of PDF files were copied from the WCCI – IEEE 1998 World Congress on Computational Intelligence: Proceedings of IJCNN 1998, FUZZ-IEEE 1998 and ICEC 1998.
+<>Initially, the ACA* was tested using 15 articles of three distinct groups (areas): evolutionary computation (EC), artificial neural networks (ANN) and fuzzy systems (FS).
+<>The algorithm was run 20 times, with each execution corresponding to 30 cycles.
+<>The parameters used for running the algorithm were: kp = 0.01 (initial value); alfa = 0.7; kd = 0.06; kpmin = 0.001; Nants = 1; grid size: 13x13.
+<>In these initial tests, two objects from the whole data set behaved abnormally.
+<>Object number 2, which according to the database is classified as a document related to EC, often appeared in the FS group (objects 6 to 10).
+<>The same behavior was observed in the object number 11, which is related with ANN, but sometimes appeared in the EC group.
+<>After investigating the contents of objects 2 and 11, it was possible to note that the relative frequency of their words pointed them to other groups.
+<>For instance, object 2, which originally belongs to the EC group, is titled “Adjusting fuzzy partitions by genetic algorithms and histograms for pattern classification problems”, and presents 96 occurrences of the word fuzzy.
+<>Motivated by the encouraging results obtained with a small sample of documents, we took a larger number of objects to evaluate the algorithm.
+<>Out of a total of 1,151 PDF files on the WCCI 1998 CD, we randomly chose 90 documents for the next experiments.
+<>The reasons why choosing only 90 out of 1,151 files were twofold: i) the high computational cost necessary for running the algorithm for the whole data set; and ii) the grid size required to accommodate all the objects.
+<>In the present experiment, 30 objects from each group (EC, ANN, FS) were taken, and the following parameters used: kp = 0.01 (initial value); grid size: 30x30; kd = 0.06; kpmin = 0.001; alfa = 0.7; Nants = 10.
+<>Note that the only parameters that changed in relation to the previous experiments were the number of ants and the grid size.
+<>In this case, objects 0 to 29 belong to the EC group, objects 30 to 59 belong to the FS group, and objects 60 to 89 belong to the ANN group.
+<>Nine different clusters were determined by the ACA* algorithm, and only four objects were left isolated: 6, 10, 14, and 42.
+<>By investigating the isolated objects we observed the following: object 6 could not be appropriately converted from PDF to text file; objects 14 and 42 deal with, respectively, extracting rules from fuzzy neural networks and the use of fuzzy clustering; and object 10 proposed the development of an artificial brain based on the evolution of neural networks.
+<>After investigating why some items are clustered in the wrong group, it could be observed that, although some documents do belong to one particular group, when the document is converted into an object for clustering, the context of the document is transformed into a collection of words with their respective relative frequencies.
+<>As an outcome, some words that are more characteristic of a certain group may appear too often in other groups as well.
+<>For instance, by taking object 4, titled “A spanning tree-based genetic algorithm for bicriteria topological network design”, we noticed that the word “network” occurred 45 times in this document, and “network” is a word very characteristic of the ANN group.
+</results>
+
+<conclusion>
+<>This paper presented an algorithm for the automatic clustering of text documents using a classification technique inspired by the behavior of some ant species while organizing and cleaning their nests.
+<>As the ant-clustering algorithm used was originally developed to tackle numeric data, some modifications had to be introduced in order to adapt it to deal with text data.
+<>Furthermore, we also proposed a cooling schedule for a parameter of the algorithm resulting in the improvement of its convergence properties.
+<>To evaluate the performance of the algorithm, real-world documents were extracted from the IEEE WCCI 1998 CD and presented to the algorithm.
+<>The system demonstrated to be capable of grouping together documents belonging to the same original group (fuzzy, neural or evolutionary).
+<>The cases the algorithm mixed a document corresponded to those cases in which the paper (PDF file) referred to hybrid approaches or in which the paper could be correctly classified into more than one group, thus leaving margin for a dual right classification.
+<>Furthermore, in many cases a document was inappropriately classified because it contained several words that were more common in a group than in its original group; for instance, the word network may appear several times in an EC paper.
+<>There are several avenues for further investigation.
+<>An aspect that deserves particular attention is the misclassification due to the object (vector) generated from the words.
+<>An approach that can be used to tackle this problem is the automatic extraction of keywords from the documents instead of taking all words.
+<>This would also reduce the associated computational cost.
+<>It is necessary to investigate the possibility of incorporating pheromone to the grid; and implementing piles of objects, instead of placing one object per grid cell.
+</conclusion>

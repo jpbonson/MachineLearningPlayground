@@ -1,0 +1,32 @@
+<>In our question answering system, PIQUANT, we utilize in parallel multiple answering agents that adopt different processing strategies and consult different knowledge sources in identifying answers to given questions, and we employ resolution mechanisms to combine the results produced by the individual answering agents.
+<>In this paper, we focus on two answering agents that adopt fundamentally different strategies: one agent uses predominantly knowledge-based mechanisms, whereas the other agent is based on statistical methods.
+<>In our architecture, a question is first processed by the question analysis component.
+<>The analysis results are represented as a QFrame, which minimally includes a set of question features that help activate one or more answering agents.
+<>Each answering agent takes the QFrame and generates its own set of requests to a variety of knowledge sources.
+<>The (intermediate) results from the individual answering agents are then passed on to the answer resolution component, which combines and resolves the set of results, and either produces the system's final answers or feeds the intermediate results back to the answering agents for further processing.
+<>The knowledge-based and statistical answering agents are general-purpose agents that adopt different processing strategies and consult a number of different text resources.
+<>We focus on two end-to-end answering agents designed to answer short, fact-seeking questions from a collection of text documents, as motivated by the requirements of the TREC QA track.
+<>Both answering agents adopt the classic pipeline architecture, consisting roughly of question analysis, passage retrieval, and answer selection components.
+<>Our first answering agent utilizes a primarily knowledge-driven approach, based on Predictive Annotation.
+<>In other words, the corpus is indexed not only with keywords, as is typical for most search engines, but also with the semantic classes of these pre-identified potential answers.
+<>During the question analysis phase, a rule-based mechanism is employed to select one or more expected answer types, from a set of about 80 classes used in the predictive annotation process, along with a set of question keywords.
+<>A weighted search engine query is then constructed from the keywords, their morphological variations, synonyms, and the answer type(s).
+<>The search engine returns a hit list of typically 10 passages, each consisting of 1-3 sentences.
+<>The candidate answers in these passages are identified and ranked based on three criteria: 1) match in semantic type between candidate answer and expected answer, 2) match in weighted grammatical relationships between question and answer passages, and 3) frequency of answer in candidate passages (redundancy).
+<>The answering agent returns the top n ranked candidate answers along with a confidence score for each answer.
+<>The second answering agent takes a statistical approach to question answering.
+<>It models the distribution p(c|q, a), which measures the “correctness” (c) of an answer (a) to a question (q), by introducing a hidden variable representing the answer type (e) as follows: p(c|q, a) = SUM(e) p(c, e|q, a) = SUM(e) p(c|e, q, a) p(e|q, a).
+<>Given a question, an answer, and the predicted answer type, it seeks to model the correctness of this configuration.
+<>These distributions are modeled using a maximum entropy formulation, using training data which consists of human judgments of question answer pairs.
+<>During runtime, the question is first analyzed by the answer type model, which selects one out of a set of 31 types for use by the answer selection model.
+<>Simultaneously, the question is expanded using local context analysis with an encyclopedia, and the top 1000 documents are retrieved by the search engine.
+<>From these documents, the top 100 passages are chosen that 1) maximize the question word match, 2) have the desired answer type, 3) minimize the dispersion of question words, and 4) have similar syntactic structures as the question.
+<>From these passages, candidate answers are extracted and ranked using the answer selection model.
+<>The top n candidate answers are then returned, each with an associated confidence score.
+<>The baseline systems are the knowledge-based and statistical agents performing individually against a single reference corpus.
+<>We thus configured a version of our knowledge-based agent to make use of three available text corpora, the AQUAINT corpus (news articles from 1998-2000), the TREC corpus (news articles from 1988-1994), and a subset of the Encyclopedia Britannica.
+<>The two test sets were selected from the TREC 10 and 11 QA track questions.
+<>Two established TREC QA evaluation metrics are adopted to assess the results for each run as follows: 1.% Correct: Percentage of correct answers; 2.Average Precision: A confidence-weighted score that rewards systems with high confidence in correct answers as follows, where N is the number of questions: 1/N SUM(1,N) # correct up to question i/i.
+<>Overall, PIQUANT's multi-strategy and multi-source approach achieved a 35.0% relative improvement in the number of correct answers and a 32.8% improvement in average precision on the TREC 11 data set.
+<>On TREC 10 data, 194 questions fall into the highly likely, likely, and possible categories, out of which the voting algorithm successfully selected 155 correct answers in 1st place.
+<>On TREC 11 data, 197 correct answers were selected out of 248 questions that fall into these categories.

@@ -1,0 +1,25 @@
+<>We propose a document Clustering algorithm based on Swarm Intelligence and k-Means: CSIM in this paper.
+<>Swarm Intelligence is defined as any attempt to design algorithms or distributed problem-solving devices inspired by the collective behavior of the social insect colonies and other animal societies.
+<>There are three main procedures in the clustering algorithm based on swarm intelligence (CSI).
+<>Firstly, data objects are randomly projected onto low dimension space, usually a plane.
+<>Secondly, simple agents perceive the swarm similarity of current object within the local region, compute the picking-up or dropping probability by probability conversion function, and act according to this probability.
+<>Clusters are visually formed through simple agents’ collective actions.
+<>Finally, clusters results are collected from the plane by a recursive algorithm.
+<>Def.1 Swarm similarity is the integrated similarity of a data object with other data objects within its  neighborhood.
+<>The parameter alfa is defined as swarm similarity coefficient.
+<>It is a key coefficient that directly affects the number of cluster and convergence of the algorithm.
+<>Def.2 Probability conversion function is a function which converts the swarm similarity of a data object into picking-up or dropping probability for a simple agent.
+<>Vector Space Model (VSM) is most frequently applied in information retrieval.
+<>For each document oi in a collection C, let V be the set of unique word items occurring in C and let m=|V|.
+<>Vector Oi =(wi1,wi2,wi3,...,wim) represents document oi, where Wij denotes the term frequency of word wj in document oi.
+<>Initially, dimensions representing stop words (non-meaningful terms) are eliminated from the document vectors.
+<>Secondly, those terms that have very high or very low term frequency are eliminated.
+<>To measure the similarity between a pair of documents, Oi and oj , let us employ the cosine distance function (Equation 4), where(wil,...,wim)denotes document oi, and(wjl,..., wjm) denotes document oj.
+<>An initial set of clusters is formed by CSI in the first phase.
+<>K-means clustering method is employed to hrther optimize the results in the second phase.
+<>From Table 2, we can see that CSIM is a high accuracy document clustering method.
+<>Its accuracy is higher than k-means .
+<>It means that CSIM is converged on better local optimum than k-means alone initialized with random cluster centers.
+<>Although there are some difference on data preprocessing and the number of selected documents, comparing Table 2 with the experimental results available from [16], we find that on the aspect of clustering accuracy CSIM achieved the same level of SONIA, which is much better than ScattedGather and TFIDF methods.
+<>Furthermore, on the aspect of clustering automation, CSIM is better than SONIA.
+<>Good performance of this hybrid document clustering algorithm exhibited in the experiments.

@@ -1,0 +1,139 @@
+CSIM: A Document Clustering Algorithm Based On Swarm Intelligence
+
+<introduction>
+<>The amount of information on the World Wide Web and other networked information sources such as Digital Libraries is quickly increasing.
+<>The huge information space spurs the development of text mining and information retrieval techniques.
+<>Clustering has been applied to automatic document organization.
+<>Document clustering can provide azway of summarizing a large number of documents into a small! number of groups which are suitable for retrieval and browsing.
+<>Generally, major clustering methods can be classified into five categories: partitioning methods, hierarchical methods, density-based methods, grid-based methods, and model-based methods.
+<>Many of the clustering techniques can be directly applied to clustering documents by vector space model.
+<>Partitioning method is used in both ScatterIGather and SONIA.
+<>Bisecting k-means algorithm proposed recently also belongs to partition method.
+<>The time complexity of the k-means method is almost linear, which makes it applied widely.
+<>But the k-means method is sensitive to the outliers and the order of inputs.
+<>Especially, it is not easy for this method to specify a proper number of clusters for a set of documents in advance.
+<>The hierarchical agglomerative clustering method is used in SONIA  for initial clusters.
+<>However, the time complexity of this method is quadratic and improper mergence may lead to low quality clusters.
+<>Self-organizing feature Map (SOM) which is one of the model-based methods is used in WEBSOM system and ET-Map.
+<>But SOM is hampered by long processing times.
+<>For instance, Multi-layered Self-organizing Feature Maps needs recursive procedure of generating self-organizing map.
+<>We propose a document Clustering algorithm based on Swarm Intelligence and k-Means: CSIM in this paper.
+<>Swarm Intelligence is defined as any attempt to design algorithms or distributed problem-solving devices inspired by the collective behavior of the social insect colonies and other animal societies.
+<>CSIM combines swarm intelligence with k-means clustering technique.
+<>It is a two-phase process.
+<>Firstly, an initial set of clusters is formed by swarm intelligence based clustering method which is derived from a basic model interpreting ant colony organization of cemeteries.
+<>Secondly, an iterative partitioning phase is employed to further optimize the results.
+<>Self-organizing clusters are formed by this method.
+<>The number of clusters is also adaptively acquired.
+<>Moreover, it is insensitive to the outliers and the order of input.
+<>Obviously, it offsets the weakness of partitioning method and shortens the iterative times in the second phase.
+<>Actually, the swarm intelligence based clustering method can be applied independently.
+<>But by second phase, the outliers which are single points on the ant-work plane are converged on the nearest neighbor clusters and the clusters which are piled too closely to collect correctly on the plane by chance are also split.
+<>K-means clustering phase softens the casualness of the swarm intelligence based method which is originated from a probabilistic model.
+</introduction>
+
+<background>
+<>Swarm Intelligence emerges from the collective behavior of the social insect colonies and other animal societies.
+<>Swarm intelligence exhibits a number of interesting properties such as flexibility, robustness, decentralization and self-organization.
+<>It has attracted more attention from computational intelligence researchers.
+<>Implementations of optimization and control algorithms based on swarm intelligence such as Ant Colony Optimization and Ant Colony Routing have been well known.
+<>Other techniques, inspired by co-operative brood sorting by ants or other behavior, are still in a preliminary, proof-of-concept stage, lack of systematic benchmarking of their performance.
+<>The entomologists who observe societies of ants found that larvae and food are not scattered randomly about the nest, but in fact they are sorted into homogenous piles.
+<>Deneubourg et al. proposed a basic model interpreting the behavior where the spatial structure of the nest emerges as a result of simple, local interactions without the need of any centralized control or global representation of the environment.
+<>Becker et al. applied related model to robotics to accomplish complex tasks by several simple robots.
+<>Lumer and Faieta extended the model to data analysis by introducing a measure of dissimilarity between data objects.
+<>Kuntz et al. applied it to graph partition and VLSI circuit design.
+<>A Clustering algorithm based on Swarm Intelligence (CSI) is systematically proposed by Wu and Shi.
+<>There are three main procedures in the clustering algorithm based on swarm intelligence (CSI).
+<>Firstly, data objects are randomly projected onto low dimension space, usually a plane.
+<>Secondly, simple agents perceive the swarm similarity of current object within the local region, compute the picking-up or dropping probability by probability conversion function, and act according to this probability.
+<>Clusters are visually formed through simple agents’ collective actions.
+<>Finally, clusters results are collected from the plane by a recursive algorithm.
+<>Two important concepts are explained as follows.
+<>Def.1 Swarm similarity is the integrated similarity of a data object with other data objects within its  neighborhood.
+<>A basic formula of measuring the swarm similarity is showed as formula (1), where Neigh(r) denotes the local region, it is usually a rounded area with a radius r.
+<>d(oi,oj) denotes the distance of data object oi with oj in the space of attributes.
+<>It is usually Euclidean distance or cosine distance.
+<>The parameter alfa is defined as swarm similarity coefficient.
+<>It is a key coefficient that directly affects the number of cluster and convergence of the algorithm.
+<>If swarm similarity coefficient is too large, the dissimilar data objects will cluster together, and the algorithm will converge quickly, whereas if swarm similarity coefficient is too small, the similar data objects will not cluster together, and the algorithm will converge slowly.
+<>Def.2 Probability conversion function is a function which converts the swarm similarity of a data object into picking-up or dropping probability for a simple agent.
+<>Obviously, swarm similarity is one of its variables.
+<>The value domain is [0,1].
+<>Probability conversion function is also called probability conversion curve.
+<>There are usually two related curves.
+<>One is for picking-up probability; the other is for dropping probability.
+<>It is an important element in CSI.
+<>The general idea of configuring probability conversion function is that the bigger swarm similarity is, the smaller picking-up probability is and the bigger dropping Probability is, and vice versa.
+<>According to the general idea of configuring probability conversion function, new probability conversion function which is simpler than the function in basic model is employed in CSI.
+<>They are two lines with a slope k, showed as formula (2) and (3).
+</background>
+
+<proposal>
+<>Vector Space Model (VSM) is most frequently applied in information retrieval.
+<>For each document oi in a collection C, let V be the set of unique word items occurring in C and let m=|V|.
+<>Vector Oi =(wi1,wi2,wi3,...,wim) represents document oi, where Wij denotes the term frequency of word wj in document oi.
+<>Some strategies are used in word selection.
+<>It is a procedure of feature selection.
+<>CSIM incorporates two forms of feature selection.
+<>Initially, dimensions representing stop words (non-meaningful terms) are eliminated from the document vectors.
+<>Some adjective, adverb and quantifier which can be regarded as stop words are also eliminated.
+<>Secondly, those terms that have very high or very low term frequency are eliminated.
+<>To measure the similarity between a pair of documents, Oi and oj , let us employ the cosine distance function (Equation 4), where(wil,...,wim)denotes document oi, and(wjl,..., wjm) denotes document oj.
+<>Since swarm similarity coefficient alfa is a key parameter in CSIM, we change the basic swarm similarity measure function as formula (5) in order to specify alfa easily.
+<>Generally alfa is between [1,10].
+<>CSIM is a two-phase process.
+<>An initial set of clusters is formed by CSI in the first phase.
+<>K-means clustering method is employed to hrther optimize the results in the second phase.
+<>Step 1 to 3 is the initialization procedure.
+<>Step 4 is the ant clustering procedure.
+<>Its time complexity is approximately O(n.ant-number.(Aver+R^2)) on the condition of using similarity matrix, where n is the iterative times, ant-number is the number of ants, Aver is the average number of patterns within the local area, R is the inspective radius.
+<>Step 5 is the first clustering results collecting procedure.
+<>Step 6 to 8 is a standard k-means clustering procedure.
+</proposal>
+
+<results>
+<>Three datasets are tested in this paper.
+<>Two of them are subsets of documents from the Reuters-2 1578 collection of newswire articles.
+<>The topics of documents are hand-labeled.
+<>The third set is Chinese web documents mainly focused on football news.
+<>Table 2 is the experimental results of the first two datasets by using CSIM, k-means and CSI respectively.
+<>Each experiment is done 10 times.
+<>Clusters number is the average number formed by CSI.
+<>We use the same strategy that is in, i.e. the correct number is the sum of the biggest number in each cluster, to calculate the accuracy.
+<>From Table 2, we can see that CSIM is a high accuracy document clustering method.
+<>Its accuracy is higher than k-means .
+<>It means that CSIM is converged on better local optimum than k-means alone initialized with random cluster centers.
+<>Although CSI has higher accuracy when alfa=6.5 and 8, it has many outliers.
+<>The number of outlier can be controlled by alfa and other parameters, but the number is decreased while accuracy is also decreased.
+<>It also shows that cluster number is decreased while alfa is increased.
+<>Alfa is a key coefficient that directly affects the number of cluster and clustering quality of CSI.
+<>But the accuracy of CSIM is little affected by alfa within a certain range.
+<>Although there are some difference on data preprocessing and the number of selected documents, comparing Table 2 with the experimental results available from [16], we find that on the aspect of clustering accuracy CSIM achieved the same level of SONIA, which is much better than ScattedGather and TFIDF methods.
+<>Furthermore, on the aspect of clustering automation, CSIM is better than SONIA.
+<>The former obtains the number of clusters adaptively and the latter fixes the number to be the same as the known number of categories innthe data.
+<>The third data set is a group of 1000 Chinese web documents mainly related with football news.
+<>More details can be available in [20].
+<>It is not a standard document set.
+<>However, the experimental results show that documents focused on one topic such as women football, league matches and teams, football stars are more correctly and completely clustered together by CSIM compared with other methods.
+<>Moreover, its processing time is shorter than other self-organizing clustering algorithms such as M-SOM while the clustering result is better than that of M-SOM.
+<>We use the highest weight term in the clusters vector obtained by CSIM as the cluster label, some labels are women football, Football Association, World Cup, Bora Milutinovic, Beckham, etc.
+<>The precision and recall of the cluster labeled with women football is respectively 100% and 79%.
+<>The similar results are got in other clusters.
+</results>
+
+<conclusion>
+<>This paper focuses on a swarm intelligence and k-means based document clustering algorithm: CSIM.
+<>It is a two-phase process.
+<>Firstly, an initial set of clusters is formed by swarm intelligence based clustering method Secondly, an iterative partitioning phase is employed to further optimize the results.
+<>The clustering method based on swarm intelligence provides good initial clusters for next k-means clustering due to its self-organizing and other eminent properties.
+<>Experimental results show that the algorithm CSIM actually absorbs the prominent properties of both swarm intelligence and k-means.
+<>It also offsets the weakness of those two techniques.
+<>Good performance of this hybrid document clustering algorithm exhibited in the experiments.
+<>Since CSIM combined two clustering method, however the time complexities of the two main procedures are almost linear.
+<>Its efficiency will be improved by properly selecting combination point and parameters.
+<>Moreover CSI itself is not a well-developed technique.
+<>It can also be perfected by further application.
+<>As for document clustering, there are some refinements for feature selection and other phases.
+<>We are applying CSIM to concept clustering in a semantic index system.
+</conclusion>

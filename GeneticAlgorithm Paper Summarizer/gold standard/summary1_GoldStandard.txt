@@ -1,0 +1,18 @@
+<>We employ an evolutionary algorithm, Genetic programming (GP), as the learning mechanism in our Adaptive Text Summarization (ATS) system to learn sentence ranking functions.
+<>The trainable summarizer is expected to "learn" the patterns which lead to the summaries, by identifying relevant feature values which are most correlated with the classes "correct" or "incorrect".
+<>When a new document is given to the system, the "learned" patterns are used to classify each sentence of that document into either a "correct" or "incorrect" sentence by giving it a certain score value between '0' and '1'.
+<>In our proposal we employ the following set of features: (F1) Sentence Length; (F2) Sentence Position; (F3) Similarity to Title; (F4) Similarity to Keywords; (F5) Occurrence of proper nouns; (F6) Indicator of main concepts; (F7) Occurrence of non-essential information; (F8) Sentence-to-Centroid Cohesion.
+<>GP begins with a random population of candidate solutions in the form of chromosomes.
+<>The chromosomes are then mapped into ETs, evaluated based on a fitness function and selected by fitness to reproduce with modification via genetic operations.
+<>Training mode where features are extracted from 16 manually summarized English documents and used to train Genetic programming, Fuzzy and Vector models.
+<>Testing mode, in which features are calculated for sentences from one English document (These documents are different from those that were used for training).
+<>The sentences are ranked according to the sets of feature weights calculated during the training stage.
+<>Therefore, GP can be used to specify the weight of each text feature.
+<>A chromosome is represented as the combination of all feature weights in the form of 'iw'.
+<>A set of highest score sentences are chronologically specified as a document summary based on the compression rate.
+<>We are going to exploit the GP approach of [Ferrier 2001], for summarization and use it as a baseline approach.
+<>We use the approach for testing; a set of 17 English documents was used.
+<>It is clear from the figure that GP approach gives the best results since GP has a good capability to model arbitrary densities.
+<>The Fuzzy model has better precision than the Vector model.
+<>In this paper, we have investigated the use of genetic programming (GP), vector approach and fuzzy approach for automatic text summarization task.
+<>Our approach results outperform the baseline approach results.

@@ -1,0 +1,26 @@
+<>Artifacts have been recently proposed as first-class abstractions to model and engineer computational environments in software Multi-Agent Systems (MASs).
+<>Artifacts can be generally conceived as function-oriented computational devices - i.e.designed to provide some kind of function -, that agents can exploit to support their individual and collective (social) activities.
+<>Analogously, CArtAgO is meant to be exploited for creating and sustaining the existence at runtime of computational environments engineered in terms of artifacts, providing on the one side basic services for agents to instantiate and use artifacts, on the other side a flexible way for MAS engineers (and possibly agents) to design and construct any useful kind of artifact.
+<>The objective of this paper is to define an abstract model and architecture for CArtAgO, which can be suitably exploited to drive a concrete reference implementation.
+<>Agents interact with their computational environment by means of suitable actions provided for artifact construction, selection and usage, and by perceiving observable events generated from such artifacts: we refer to such a kind of actions here as pragmatic acts.
+<>In CArtAgO, sensors are structures provided by the infrastructure that agents can flexibly create and use to partition and control the information flow perceived from artifacts, possibly providing specific functionalities such as buffering, filtering and ordering, managing priorities.
+<>Each artifact has a logic name specified by the artifact creator at the instantiation time, and an id, released by the infrastructure, to univocally identify the artifact.
+<>Each artifact has a usage interface that agents exploit in order to interact with it, i.e use it.
+<>A usage interface is defined as a set of operations: agents interact with artifacts by invoking operations and observing events generated from them, perceived through sensors.
+<>Artifacts are stateful reactive entities, with a state that can change according to the operations executed by agents.
+<>Artifacts (and agents) are logically situated in workspaces, which can be used to define the topology of the computational environment.
+<>A workspace can be defined as an open sets of artifacts and agents: artifacts can be dynamically added to or removed from workspaces, agents can dynamically enter (join) or exit workspaces.
+<>A workspace is typically spread over the nodes of an underlying network infrastructure, such as Internet.
+<>The agent context layer acts as a bridge between agents and CArtAgO computational environments, and is responsible for the allocation and management of agent contexts.
+<>On the artifact side we can identify (top-down): anartifact layer, a workspace layer, and the same transport layer.
+<>In order to start a working session, an agent must first execute a getContext action, obtaining its local context, enabling its participation to the computational environment.
+<>Once got a local context, an agent can join one or more workspace(s), in order to create or use artifacts situated there.
+<>By adopting a minimal approach, we instrument each workspace with a simple artifact called artifacts registry, which can be used by agents to know what artifacts are actually present in the workspace.
+<>Artifacts registry could provide also basic services for artifact searching and match-making, by keeping track—beside the names and the ids— also of the function descriptions and possibly of the operating instructions.
+<>To execute an operation the action invokeOp is provided, specifying the artifact id, the operation name, the parameters, possibly the specific sensor where to collects events related to the operation execution (including the possible results of the operation).
+<>Specific services are provided to manage sensors, in particular to create a sensor (createSensor), to inspect it in order to sense and process the events (sense).
+<>Finally, in order to support a cognitive use of artifacts, actions are provided to inspect their operating instructions (getOI ), their full usage interface (getUID) and also their dynamic observable state (getState).
+<>It is worth remarking the strong difference between communication taking places between agents through speech acts and interaction taking place between agents using artifacts: in particular, in the first case interaction is at the knowledge level, in the latter case the interaction is at the operational level, since specified and constrained by artifact interface.
+<>Artifacts are meant to be created and manipulated dynamically.
+<>Artifact creation is realised by the action createAr, specifying the logic name of the artifact, the template to be used for driving its creation, parameters needed for artifact creation and optionally the workspace id where the artifact should be created.
+<>Besides creating and manipulating artifacts, some basic actions are provided to create and manage workspaces, defining dynamically the topology of the computational environment on top of network nodes.
