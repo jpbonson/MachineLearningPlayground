@@ -3,7 +3,7 @@ Machine Learning Playground
 I use this github project to store ML projects that I have worked on, but that have not been used in the industry. Except for the ones with its own github project, the code is a mess.
 
 ### ClassificationPlayground:
-  - **BioinformaticsProject**: Use SVM and tree algorithms from the sklearn library to classify data extracted from biophysical simulations. Includes preprocessing and feature selection (Python).
+  - **BioinformaticsProject**: Use SVM and decision tree algorithms to classify data extracted from biophysical simulations. Includes preprocessing and feature selection (Python).
   - **VisualizationToolForMLData**: A tool for visualization of classification datasets. (Javascript+Python) (it has its own project under VisualizationToolForMLData)
 
 ### ClusteringPlayground:
