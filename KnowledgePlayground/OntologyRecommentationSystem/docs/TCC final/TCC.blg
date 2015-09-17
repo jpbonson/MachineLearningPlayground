@@ -1,0 +1,66 @@
+This is BibTeX, Version 0.99c (TeX Live 2009/Debian)
+The top-level auxiliary file: TCC.aux
+The style file: ufscThesis/ufsc-alf.bst
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Reallocated field_info (elt_size=4) to 11003 items from 5000.
+Database file #1: abnt-options.bib
+Database file #2: biblio.bib
+Warning--entry type for "ref56" isn't style-file defined
+--line 725 of file biblio.bib
+Warning--entry type for "ref60" isn't style-file defined
+--line 799 of file biblio.bib
+Warning--entry type for "ref71" isn't style-file defined
+--line 881 of file biblio.bib
+Warning--entry type for "ref72" isn't style-file defined
+--line 897 of file biblio.bib
+Warning--entry type for "ref74" isn't style-file defined
+--line 931 of file biblio.bib
+Warning--I didn't find a database entry for "abnt-url-package=html"
+Reallocated wiz_functions (elt_size=4) to 9000 items from 6000.
++---------------------------------------------------------+
+| Estilo bibliográfico abnt-alf.bst versão 1.45.2.1           |
+| Em caso de dúvidas ou problemas com este estilo procure |
+| http://abntex.codigolivre.org.br                        |
++---------------------------------------------------------+
+You've used 86 entries,
+            6480 wiz_defined-function locations,
+            1513 strings with 20547 characters,
+and the built_in function-call counts, 65161 in all, are:
+= -- 4405
+> -- 2995
+< -- 45
++ -- 1187
+- -- 897
+* -- 5007
+:= -- 8989
+add.period$ -- 292
+call.type$ -- 88
+change.case$ -- 1005
+chr.to.int$ -- 114
+cite$ -- 83
+duplicate$ -- 2871
+empty$ -- 4722
+format.name$ -- 4316
+if$ -- 15238
+int.to.chr$ -- 8
+int.to.str$ -- 0
+missing$ -- 1450
+newline$ -- 401
+num.names$ -- 415
+pop$ -- 2077
+preamble$ -- 1
+purify$ -- 370
+quote$ -- 0
+skip$ -- 3509
+stack$ -- 1
+substring$ -- 1800
+swap$ -- 1087
+text.length$ -- 33
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 21
+warning$ -- 0
+while$ -- 531
+width$ -- 0
+write$ -- 1203
+(There were 6 warnings)

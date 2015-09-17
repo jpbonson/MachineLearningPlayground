@@ -1,0 +1,26 @@
+\select@language {brazil}
+\contentsline {figure}{\numberline {1}{\ignorespaces Modelo b\'asico de um agente \cite {ref16}\relax }}{18}
+\contentsline {figure}{\numberline {2}{\ignorespaces Camadas de abstra\c c\~ao de um SMA, retirado e traduzido de \cite {ref16}.\relax }}{21}
+\contentsline {figure}{\numberline {3}{\ignorespaces O modelo A\&A expressado em uma nota\c c\~ao similar \`a UML (Unified Modelling Language), retirado e traduzido de \cite {ref5}.\relax }}{26}
+\contentsline {figure}{\numberline {4}{\ignorespaces Uma representa\c c\~ao metaf\'orica de um SMA de acordo com o modelo A\&A, retirado e adaptado de \cite {ref6}.\relax }}{27}
+\contentsline {figure}{\numberline {5}{\ignorespaces Representa\c c\~ao abstrata de um artefato, retirado e traduzido de \cite {ref5}.\relax }}{28}
+\contentsline {figure}{\numberline {6}{\ignorespaces Exemplos de intera\c c\~oes dos agentes com uma \'area de trabalho, retirada e adaptada de \cite {ref6}.\relax }}{30}
+\contentsline {figure}{\numberline {7}{\ignorespaces Utiliza\c c\~ao de um artefato, retirada e traduzida de \cite {ref5}.\relax }}{31}
+\contentsline {figure}{\numberline {8}{\ignorespaces Foco em um artefato, retirada e traduzida de \cite {ref5}.\relax }}{31}
+\contentsline {figure}{\numberline {9}{\ignorespaces Representa\c c\~ao de como a integra\c c\~ao entre as plataformas de agentes e o Cartago funciona, retirada de \cite {ref6}.\relax }}{38}
+\contentsline {figure}{\numberline {10}{\ignorespaces Exemplo de ontologia OWL desenvolvida no Prot\'eg\'e.\relax }}{47}
+\contentsline {figure}{\numberline {11}{\ignorespaces Vis\~ao geral da ferramenta.\relax }}{58}
+\contentsline {figure}{\numberline {12}{\ignorespaces Vis\~ao geral do sistema multi-agente.\relax }}{59}
+\contentsline {figure}{\numberline {13}{\ignorespaces Screenshot da categoria General.\relax }}{59}
+\contentsline {figure}{\numberline {14}{\ignorespaces Screenshots das categoria LifeCycle, Technical e Rights.\relax }}{60}
+\contentsline {figure}{\numberline {15}{\ignorespaces Screenshot da aba de ajuda.\relax }}{60}
+\contentsline {figure}{\numberline {16}{\ignorespaces Diagrama de fluxo da ferramenta de autoria.\relax }}{62}
+\contentsline {figure}{\numberline {17}{\ignorespaces Sa\IeC {\'\i }da da ferramenta com o campo Keywords preenchido com a palavra ``bison" para o campo Title.\relax }}{76}
+\contentsline {figure}{\numberline {18}{\ignorespaces Agente deliberativo Aspirador no Mundo do V\'acuo \cite {ref18}\relax }}{96}
+\contentsline {figure}{\numberline {19}{\ignorespaces Diagrama do processo de racioc\IeC {\'\i }nio em uma arquitetura BDI gen\'erica. \cite {ref24}\relax }}{97}
+\contentsline {figure}{\numberline {20}{\ignorespaces Os tr\^es tipos de fluxo de controle e de informa\c c\~ao que uma arquitetura em camadas pode ter \cite {ref18}.\relax }}{100}
+\contentsline {figure}{\numberline {21}{\ignorespaces Representa\c c\~ao abstrata do Artefato Contador\relax }}{113}
+\contentsline {figure}{\numberline {22}{\ignorespaces Representa\c c\~ao abstrata do Artefato Rel\'ogio\relax }}{116}
+\contentsline {figure}{\numberline {23}{\ignorespaces Representa\c c\~ao abstrata do Artefato Sincronizador\relax }}{118}
+\contentsline {figure}{\numberline {24}{\ignorespaces Representa\c c\~ao abstrata do Artefato TupleSpace\relax }}{121}
+\contentsline {figure}{\numberline {25}{\ignorespaces Representa\c c\~ao abstrata do Artefato MarsEnv\relax }}{133}

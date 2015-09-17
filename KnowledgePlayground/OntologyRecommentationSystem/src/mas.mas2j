@@ -1,0 +1,15 @@
+MAS example01_useobs {
+
+    environment: c4jason.CartagoEnvironment
+
+    agents:  
+   	 	inicializador agentArchClass c4jason.CAgentArch #1;
+    	atuador_por_individuos agentArchClass c4jason.CAgentArch #3;
+		atuador_por_classes agentArchClass c4jason.CAgentArch #3;
+		atuador_por_categorias agentArchClass c4jason.CAgentArch #3;
+
+    classpath: "../lib/cartago.jar";"../lib/c4jason.jar";"../lib/lib-jena/*.jar";"../lib/lucene-3.6.2/*.jar";"../lib/lucene-3.6.2/contrib/analyzers/common/*.jar";
+	
+	aslSourcePath:
+    "agents";
+}

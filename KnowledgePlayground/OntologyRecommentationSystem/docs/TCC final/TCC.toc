@@ -1,0 +1,48 @@
+\select@language {brazil}
+\contentsline {chapter}{\numberline {1}\MakeUppercase {Introdu\c c\~ao}}{13}
+\contentsline {section}{\numberline {1.1}Objetivos}{14}
+\contentsline {section}{\numberline {1.2}Motiva\c c\~ao}{15}
+\contentsline {chapter}{\numberline {2}\MakeUppercase {Fundamenta\c c\~ao Te\'orica}}{17}
+\contentsline {section}{\numberline {2.1}Agentes e Sistemas Multi-Agente}{17}
+\contentsline {subsection}{\numberline {2.1.1}Agentes}{17}
+\contentsline {subsection}{\numberline {2.1.2}Sistemas Multi-Agente}{19}
+\contentsline {subsection}{\numberline {2.1.3}Jason}{21}
+\contentsline {section}{\numberline {2.2}Agentes \& Artefatos}{24}
+\contentsline {subsection}{\numberline {2.2.1}Introdu\c c\~ao}{24}
+\contentsline {subsection}{\numberline {2.2.2}Artefatos}{27}
+\contentsline {subsection}{\numberline {2.2.3}Funcionalidades dos Artefatos}{32}
+\contentsline {subsection}{\numberline {2.2.4}Caracter\IeC {\'\i }sticas do modelo de Agentes \& Artefatos }{34}
+\contentsline {subsection}{\numberline {2.2.5}Framework de A\&A Cartago}{36}
+\contentsline {section}{\numberline {2.3}Ontologias e Reposit\'orios Sem\^anticos}{42}
+\contentsline {subsection}{\numberline {2.3.1}Web Sem\^antica}{42}
+\contentsline {subsection}{\numberline {2.3.2}Ontologias}{43}
+\contentsline {subsection}{\numberline {2.3.3}RDF e OWL / OWL 2}{44}
+\contentsline {subsection}{\numberline {2.3.4}Reposit\'orios Sem\^anticos}{48}
+\contentsline {subsection}{\numberline {2.3.5}DBPedia}{50}
+\contentsline {section}{\numberline {2.4}Ferramentas de Autoria de Objetos de Aprendizagem}{50}
+\contentsline {subsection}{\numberline {2.4.1}Introdu\c c\~ao}{50}
+\contentsline {subsection}{\numberline {2.4.2}Exemplos de Ferramentas de Autoria}{52}
+\contentsline {subsection}{\numberline {2.4.3}Trabalho Relacionado: Ferramenta CARLOS}{53}
+\contentsline {subsection}{\numberline {2.4.4}Requisitos da Ferramenta de Autoria deste trabalho}{54}
+\contentsline {section}{\numberline {2.5}Trabalhos Relacionados com Acesso de Agentes a Web Sem\^antica}{54}
+\contentsline {chapter}{\numberline {3}\MakeUppercase {Desenvolvimento}}{57}
+\contentsline {section}{\numberline {3.1}Vis\~ao Geral}{57}
+\contentsline {section}{\numberline {3.2}Ferramenta de Autoria de Metadados}{58}
+\contentsline {section}{\numberline {3.3}Modelo de Sugest\~oes}{62}
+\contentsline {subsection}{\numberline {3.3.1}Abordagens de Busca Sem\^antica}{62}
+\contentsline {subsection}{\numberline {3.3.2}SMA}{63}
+\contentsline {subsection}{\numberline {3.3.3}Prefixos}{64}
+\contentsline {subsection}{\numberline {3.3.4}Filtros}{65}
+\contentsline {subsection}{\numberline {3.3.5}Abordagem por Individuo}{65}
+\contentsline {subsection}{\numberline {3.3.6}Abordagem por Classes}{69}
+\contentsline {subsection}{\numberline {3.3.7}Abordagem por Categorias}{71}
+\contentsline {subsection}{\numberline {3.3.8}Processamento dos resultados}{72}
+\contentsline {section}{\numberline {3.4}An\'alise dos Resultados das Abordagens}{75}
+\contentsline {chapter}{\numberline {4}\MakeUppercase {Conclus\~oes}}{79}
+\contentsline {chapter}{\numberline {5}\MakeUppercase {Agradecimentos}}{83}
+\contentsline {chapter}{REFER\^ENCIAS}{85}
+\contentsline {chapter}{\MakeUppercase {Ap\^endice{}} A{} -$\mskip -\thinmuskip $-{} Background de Sistemas Multi-Agentes}{95}
+\contentsline {chapter}{\MakeUppercase {Ap\^endice{}} B{} -$\mskip -\thinmuskip $-{} Informa\c c\~oes adicionais sobre Agentes \& Artefatos}{111}
+\contentsline {chapter}{\MakeUppercase {Ap\^endice{}} C{} -$\mskip -\thinmuskip $-{} Informa\c c\~oes adicionais sobre o Desenvolvimento}{143}
+\contentsline {chapter}{\MakeUppercase {ANEXO{}} A{} -$\mskip -\thinmuskip $-{} Artigo SBC}{153}
+\contentsline {chapter}{\MakeUppercase {ANEXO{}} B{} -$\mskip -\thinmuskip $-{} C\'odigo-fonte}{155}

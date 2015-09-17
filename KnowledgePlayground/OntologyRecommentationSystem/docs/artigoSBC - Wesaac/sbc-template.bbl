@@ -1,0 +1,84 @@
+\begin{thebibliography}{}
+
+\bibitem[Berners-Lee et~al. 2001]{refOPQ}
+Berners-Lee, T., Hendler, J., Lassila, O., et~al. (2001).
+\newblock The semantic web.
+\newblock {\em Scientific american}, 284(5):28--37.
+
+\bibitem[Bizer et~al. 2009]{refXYZ}
+Bizer, C., Lehmann, J., Kobilarov, G., Auer, S., Becker, C., Cyganiak, R., and
+  Hellmann, S. (2009).
+\newblock Dbpedia-a crystallization point for the web of data.
+\newblock {\em Web Semantics: Science, Services and Agents on the World Wide
+  Web}, 7(3):154--165.
+
+\bibitem[Chen et~al. 2004]{refE}
+Chen, H., Finin, T., Joshi, A., Kagal, L., Perich, F., and Chakraborty, D.
+  (2004).
+\newblock Intelligent agents meet the semantic web in smart spaces.
+\newblock {\em IEEE Internet Computing}, 8(6).
+
+\bibitem[da~Silva and Vieira 2007]{refC}
+da~Silva, D.~M. and Vieira, R. (2007).
+\newblock Argonaut: Integrating jason and jena for context aware computing
+  based on owl ontologies.
+\newblock {\em Agent, Web Services, and Ontologies Integrated Methodologies},
+  page~19.
+
+\bibitem[Kagal et~al. 2003]{refA}
+Kagal, L., Perich, F., Chen, H., Tolia, S., Zou, Y., Finin, T., Joshi, A.,
+  Peng, Y., Cost, R.~S., and Nicholas, C. (2003).
+\newblock Agents making sense of the semantic web.
+\newblock In {\em Innovative Concepts for Agent-Based Systems}, pages 417--433.
+  Springer.
+
+\bibitem[Katasonov and Terziyan 2008]{refF}
+Katasonov, A. and Terziyan, V. (2008).
+\newblock Semantic agent programming language (s-apl): A middleware platform
+  for the semantic web.
+\newblock In {\em Proceedings of the 2008 IEEE International Conference on
+  Semantic Computing}, ICSC '08, pages 504--511. IEEE Computer Society.
+
+\bibitem[Klapiscak and Bordini 2009]{refB}
+Klapiscak, T. and Bordini, R.~H. (2009).
+\newblock Jasdl: A practical programming approach combining agent and semantic
+  web technologies.
+\newblock In {\em Declarative Agent Languages and Technologies VI}, pages
+  91--110. Springer.
+
+\bibitem[Omicini et~al. 2008a]{ref1}
+Omicini, A., Ricci, A., and Viroli, M. (2008a).
+\newblock Artifacts in the a\&a meta-model for multi-agent systems.
+\newblock {\em Autonomous Agents and Multi-Agent Systems}, 17(3):432--456.
+
+\bibitem[Omicini et~al. 2008b]{ref78}
+Omicini, A., Ricci, A., and Viroli, M. (2008b).
+\newblock Artifacts in the a\&a meta-model for multi-agent systems.
+\newblock {\em Autonomous Agents and Multi-Agent Systems}, 17(3):432--456.
+
+\bibitem[Ricci et~al. 2007]{ref7}
+Ricci, A., Viroli, M., and Omicini, A. (2007).
+\newblock Give agents their artifacts: the a\&a approach for engineering
+  working environments in mas.
+\newblock In {\em Proceedings of the 6th international joint conference on
+  Autonomous agents and multiagent systems}, page 150. ACM.
+
+\bibitem[Ricci et~al. 2008]{ref10}
+Ricci, A., Viroli, M., and Omicini, A. (2008).
+\newblock The a\&a programming model and technology for developing agent
+  environments in mas.
+\newblock In {\em Programming multi-agent systems}, pages 89--106. Springer.
+
+\bibitem[Weyns et~al. 2007]{ref3}
+Weyns, D., Omicini, A., and Odell, J. (2007).
+\newblock Environment as a first class abstraction in multiagent systems.
+\newblock {\em Autonomous agents and multi-agent systems}, 14(1):5--30.
+
+\bibitem[Zou et~al. 2003]{refD}
+Zou, Y., Finin, T., Ding, L., Chen, H., and Pan, R. (2003).
+\newblock Using semantic web technology in multi-agent systems: a case study in
+  the taga trading agent environment.
+\newblock In {\em Proceedings of the 5th international conference on Electronic
+  commerce}, pages 95--101. ACM.
+
+\end{thebibliography}

@@ -1,0 +1,179 @@
+\begin{thebibliography}{}
+
+\bibitem[Baader et~al., 2003]{refDL}
+Baader, F., Calvanese, D., McGuinness, D.~L., Nardi, D., and Patel-Schneider,
+  P.~F., editors (2003).
+\newblock {\em The description logic handbook: theory, implementation, and
+  applications}.
+\newblock Cambridge University Press, New York, NY, USA.
+
+\bibitem[Berners-Lee, 2008]{refEntrevista}
+Berners-Lee, T. (2008).
+\newblock Sir tim berners-lee talks with talis about the semantic web.
+\newblock transcripted interview.
+
+\bibitem[Berners-Lee et~al., 2001]{refOPQ}
+Berners-Lee, T., Hendler, J., and Lassila, O. (2001).
+\newblock The semantic web.
+
+\bibitem[Bez et~al., 2009]{refOBAA}
+Bez, M.~R., da~Silva, J. M.~C., Santos, E., Primo, T., and Bordignon, A.
+  (2009).
+\newblock Obaa project: An approach to interoperable learning objects based on
+  web and digital television.
+
+\bibitem[Bizer et~al., 2009]{refXYZ}
+Bizer, C., Lehmann, J., Kobilarov, G., Auer, S., Becker, C., Cyganiak, R., and
+  Hellmann, S. (2009).
+\newblock Dbpedia - a crystallization point for the web of data.
+\newblock {\em Web Semantics: Science, Services and Agents on the World Wide
+  Web}.
+
+\bibitem[Bordini and Hubner, 2007]{ref35}
+Bordini, R.~H. and Hubner, J.~F. (2007).
+\newblock Jason: A java-based interpreter for an extended version of
+  agentspeak.
+
+\bibitem[Chen et~al., 2004]{refE}
+Chen, H., Finin, T., Joshi, A., Kagal, L., Perich, F., and Chakraborty, D.
+  (2004).
+\newblock Intelligent agents meet the semantic web in smart spaces.
+\newblock {\em IEEE Internet Computing}, 8(6).
+
+\bibitem[Duval et~al., 2002]{ref42}
+Duval, E., Hodgins, W., Sutton, S., and Weibel, S.~L. (2002).
+\newblock Metadata principles and practicalities.
+\newblock {\em D-Lib Magazine}.
+
+\bibitem[Erling and Mikhailov, 2010]{refVIRT}
+Erling, O. and Mikhailov, I. (2010).
+\newblock Virtuoso: Rdf support in a native rdbms.
+\newblock In {\em Semantic Web Information Management}, pages 501--519.
+
+\bibitem[Graves et~al., 2007]{refFOAF}
+Graves, M., Constabaris, A., and Brickley, D. (2007).
+\newblock {FOAF: Connecting People on the Semantic Web}.
+\newblock {\em Cataloging \& classification quarterly}, 43(3):191--202.
+
+\bibitem[Hartig et~al., 2009]{refABC}
+Hartig, O., Bizer, C., and Freytag, J.-C. (2009).
+\newblock Executing sparql queries over the web of linked data.
+\newblock In {\em The Semantic Web - ISWC 2009}. Springer Berlin Heidelberg.
+
+\bibitem[Hendler and van Harmelen, 2008]{ref54}
+Hendler, J. and van Harmelen, F. (2008).
+\newblock The semantic web: Webizing knowledge representation.
+\newblock In {\em Handbook of KnowledgeRepresentation}. Elsevier.
+
+\bibitem[Horrocks, 2008]{ref53}
+Horrocks, I. (2008).
+\newblock Ontologies and the semantic web.
+\newblock {\em Commun. ACM}.
+
+\bibitem[IEEE, 2002]{ref40}
+IEEE (2002).
+\newblock Ieee-sa standard 1484.12.1 draft standard for learning object
+  metadata.
+
+\bibitem[Jennings et~al., 1996]{ref36}
+Jennings, N.~R., Sycara, K., and Wooldridge, M. (1996).
+\newblock A roadmap of agent research and development.
+\newblock {\em Autonomous Agents and Multi-Agent Systems}.
+
+\bibitem[Kagal et~al., 2003]{refA}
+Kagal, L., Perich, F., Chen, H., Tolia, S., Zou, Y., Finin, T., Joshi, A.,
+  Peng, Y., Cost, R., and Nicholas, C. (2003).
+\newblock Agents making sense of the semantic web.
+\newblock In {\em Innovative Concepts for Agent-Based Systems}. Springer Berlin
+  Heidelberg.
+
+\bibitem[Katasonov and Terziyan, 2008]{refF}
+Katasonov, A. and Terziyan, V. (2008).
+\newblock Semantic agent programming language (s-apl): A middleware platform
+  for the semantic web.
+\newblock In {\em Proceedings of the 2008 IEEE International Conference on
+  Semantic Computing}, ICSC '08, pages 504--511. IEEE Computer Society.
+
+\bibitem[Klapiscak and Bordini, 2009]{refB}
+Klapiscak, T. and Bordini, R.~H. (2009).
+\newblock Jasdl: A practical programming approach combining agent and semantic
+  web technologies.
+\newblock In {\em In Proc. of DALT 2008, volume 5397 of LNAI}, pages 91--110.
+  Springer.
+
+\bibitem[McBride, 2002]{refJENA}
+McBride, B. (2002).
+\newblock Jena: a semantic web toolkit.
+\newblock {\em Internet Computing, IEEE}, 6(6):55--59.
+
+\bibitem[Omicini et~al., 2008]{ref1}
+Omicini, A., Ricci, A., and Viroli, M. (2008).
+\newblock Artifacts in the a\&a meta-model for multi-agent systems.
+\newblock {\em Autonomous Agents and Multi-Agent Systems}.
+
+\bibitem[P{\'e}rez et~al., 2009]{refDEF}
+P{\'e}rez, J., Arenas, M., and Gutierrez, C. (2009).
+\newblock Semantics and complexity of sparql.
+\newblock {\em ACM Trans. Database Syst.}
+
+\bibitem[Ricci et~al., 2010a]{ref5}
+Ricci, A., Piunti, M., and Viroli, M. (2010a).
+\newblock Environment programming in multi-agent systems.
+\newblock {\em Autonomous Agents and Multi-Agent Systems}.
+
+\bibitem[Ricci et~al., 2008a]{ref10}
+Ricci, A., Viroli, M., and Omicini, A. (2008a).
+\newblock The a\&a programming model and technology for developing agent
+  environments in mas.
+\newblock In {\em Programming Multi-Agent Systems}. Springer Berlin Heidelberg.
+
+\bibitem[Ricci et~al., 2008b]{ref78}
+Ricci, A., Viroli, M., and Omicini, A. (2008b).
+\newblock A meta-model for multi-agent systems.
+\newblock {\em Autonomous Agents and Multi-Agent Systems}.
+
+\bibitem[Ricci et~al., 2010b]{ref7}
+Ricci, A., Viroli, M., and Omicini, A. (2010b).
+\newblock Give agents their artifacts: The a\&a approach for engineering
+  working environments.
+\newblock In {\em AAMAS '07, Proceedings of the 6th international joint
+  conference on Autonomous agents and multiagent systems}. ACM.
+
+\bibitem[Shoham, 1993]{ref20}
+Shoham, Y. (1993).
+\newblock Agent-oriented programming.
+\newblock {\em Artificial Intelligence}.
+
+\bibitem[Silva and Vieira, ]{refC}
+Silva, D. M.~D. and Vieira, R.
+\newblock Argonaut: Integrating jason and jena for context aware computing
+  based on owl ontologies (short paper.
+\newblock In {\em Proceedings of the Workshop on Agents, Web Services, and
+  Ontologies – Integrated Methodologies (AWESOME’007) held as part of
+  MALLOW’007, Durham 3–7 September}.
+
+\bibitem[Suchanek et~al., 2007]{refYAGO}
+Suchanek, F.~M., Kasneci, G., and Weikum, G. (2007).
+\newblock Yago: a core of semantic knowledge.
+\newblock In {\em Proceedings of the 16th international conference on World
+  Wide Web}, WWW '07. ACM.
+
+\bibitem[Weyns et~al., 2006]{ref3}
+Weyns, D., Omicini, A., and Odell, J. (2006).
+\newblock Environment as a first class abstraction in multiagent systems.
+\newblock {\em Autonomous Agents and Multi-Agent Systems}.
+
+\bibitem[Xavier and Gluz, 2009]{ref38}
+Xavier, A.~C. and Gluz, J.~C. (2009).
+\newblock Relatorio tecnico rt-obaa-06 subgrupo agentes e ontologias: Analise
+  comparativa de editores de objetos de aprendizagem.
+\newblock Technical report, UFRGS.
+
+\bibitem[Zou et~al., 2003]{refD}
+Zou, Y., Finin, T., Ding, L., Chen, H., and Pan, R. (2003).
+\newblock Using semantic web technology in multi-agent systems: a case study in
+  the taga trading agent environment.
+\newblock In {\em Proceedings of the 5th international conference on Electronic
+  commerce}, ICEC '03, pages 95--101. ACM.
+
+\end{thebibliography}

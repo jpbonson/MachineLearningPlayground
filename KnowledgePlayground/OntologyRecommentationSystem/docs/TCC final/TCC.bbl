@@ -1,0 +1,485 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{1.45.2.1 }
+
+\bibitem[Arisha et al. 1999]{ref26}
+\abntrefinfo{Arisha et al.}{ARISHA et al.}{1999}
+{ARISHA, K.~A. et al. Impact: A platform for collaborating agents.
+1999.}
+
+\bibitem[Bellifemine et al. 2005]{ref28}
+\abntrefinfo{Bellifemine et al.}{BELLIFEMINE et al.}{2005}
+{BELLIFEMINE, F. et al. Jade: A java agent development framework. In:
+  \emph{Multi-Agent Programming}. [S.l.]: Springer US, 2005. v.~15.}
+
+\bibitem[Bellifemine, Caire e Greenwood 2007]{ref48}
+\abntrefinfo{Bellifemine, Caire e Greenwood}{BELLIFEMINE; CAIRE;
+  GREENWOOD}{2007}
+{BELLIFEMINE, F.~L.; CAIRE, G.; GREENWOOD, D. Developing multi-agent systems
+  with jade.
+2007.}
+
+\bibitem[Berners-Lee 2008]{refEntrevista}
+\abntrefinfo{Berners-Lee}{BERNERS-LEE}{2008}
+{BERNERS-LEE, T. \emph{Sir Tim Berners-Lee Talks with Talis about the Semantic
+  Web}. 2008.
+Transcripted interview.}
+
+\bibitem[Bez et al. 2009]{refOBAA}
+\abntrefinfo{Bez et al.}{BEZ et al.}{2009}
+{BEZ, M.~R. et al. Obaa project: An approach to interoperable learning objects
+  based on web and digital television.
+2009.}
+
+\bibitem[Bishop et al. 2011]{ref75}
+\abntrefinfo{Bishop et al.}{BISHOP et al.}{2011}
+{BISHOP, B. et al. Owlim: A family of scalable semantic repositories.
+2011.}
+
+\bibitem[Bizer et al. 2009]{refXYZ}
+\abntrefinfo{Bizer et al.}{BIZER et al.}{2009}
+{BIZER, C. et al. Dbpedia - a crystallization point for the web of data.
+\emph{Web Semantics: Science, Services and Agents on the World Wide Web},
+  2009.}
+
+\bibitem[Bohl et al. 2002]{ref51}
+\abntrefinfo{Bohl et al.}{BOHL et al.}{2002}
+{BOHL, O. et al. The sharable content object reference model (scorm) - a
+  critical review. In:  \emph{Computers in Education, 2002. Proceedings.
+  International Conference on}. [S.l.: s.n.], 2002.}
+
+\bibitem[Boissier et al. 2011]{ref16}
+\abntrefinfo{Boissier et al.}{BOISSIER et al.}{2011}
+{BOISSIER, O. et al. Organisation and environment oriented programming.
+2011.}
+
+\bibitem[Bordini e Hubner 2007]{ref35}
+\abntrefinfo{Bordini e Hubner}{BORDINI; HUBNER}{2007}
+{BORDINI, R.~H.; HUBNER, J.~F. Jason: A java-based interpreter for an extended
+  version of agentspeak.
+2007.}
+
+\bibitem[Brickley e Guha 2004]{ref63}
+\abntrefinfo{Brickley e Guha}{BRICKLEY; GUHA}{2004}
+{BRICKLEY, D.; GUHA, R.~V. Rdf vocabulary description language 1.0: Rdf schema.
+2004.}
+
+\bibitem[Broekstra, Kampman e Harmelen 2002]{ref73}
+\abntrefinfo{Broekstra, Kampman e Harmelen}{BROEKSTRA; KAMPMAN; HARMELEN}{2002}
+{BROEKSTRA, J.; KAMPMAN, A.; HARMELEN, F. V. Sesame: A generic architecture for
+  storing and querying rdf and rdf schema. In:  \emph{The Semantic Web—ISWC
+  2002}. [S.l.]: Springer, 2002. p. 54--68.}
+
+\bibitem[Brooks 1986]{brooks}
+\abntrefinfo{Brooks}{BROOKS}{1986}
+{BROOKS, R. A robust layered control system for a mobile robot.
+\emph{Robotics and Automation, IEEE Journal of}, IEEE, v.~2, n.~1, p. 14--23,
+  1986.}
+
+\bibitem[Chen et al. 2004]{refE}
+\abntrefinfo{Chen et al.}{CHEN et al.}{2004}
+{CHEN, H. et al. Intelligent agents meet the semantic web in smart spaces.
+\emph{IEEE Internet Computing}, IEEE Educational Activities Department, v.~8,
+  n.~6, nov. 2004.}
+
+\bibitem[Dastani 2008]{ref31}
+\abntrefinfo{Dastani}{DASTANI}{2008}
+{DASTANI, M. 2apl: a practical agent programming language.
+\emph{Autonomous Agents and Multi-Agent Systems}, Springer US, v.~16, n.~3,
+  2008.}
+
+\bibitem[d'Inverno et al. 1998]{ref27}
+\abntrefinfo{d'Inverno et al.}{D'INVERNO et al.}{1998}
+{D'INVERNO, M. et al. A formal specification of dmars. In:  \emph{Intelligent
+  Agents IV Agent Theories, Architectures, and Languages}. [S.l.]: Springer
+  Berlin Heidelberg, 1998. v.~1365.}
+
+\bibitem[Duval et al. 2002]{ref42}
+\abntrefinfo{Duval et al.}{DUVAL et al.}{2002}
+{DUVAL, E. et al. Metadata principles and practicalities.
+\emph{D-Lib Magazine}, 2002.}
+
+\bibitem[Erling e Mikhailov 2010]{refVIRT}
+\abntrefinfo{Erling e Mikhailov}{ERLING; MIKHAILOV}{2010}
+{ERLING, O.; MIKHAILOV, I. Virtuoso: Rdf support in a native rdbms. In:
+  \emph{Semantic Web Information Management}. [S.l.: s.n.], 2010. p. 501--519.}
+
+\bibitem[Faraco 1998]{ref12}
+\abntrefinfo{Faraco}{FARACO}{1998}
+{FARACO, R.~A. Uma arquitetura de agentes para negociação dentro do domínio do
+  comércio eletrônic.
+1998.}
+
+\bibitem[Fisher et al. 1993]{ref25}
+\abntrefinfo{Fisher et al.}{FISHER et al.}{1993}
+{FISHER, M. et al. Computational logics and agents: A roadmap of current
+  technologies and future trend.
+1993.}
+
+\bibitem[Franklin e Graesser 1996]{ref19}
+\abntrefinfo{Franklin e Graesser}{FRANKLIN; GRAESSER}{1996}
+{FRANKLIN, S.; GRAESSER, A. Is it an agent, or just a program?: A taxonomy for
+  autonomous agents.
+1996.}
+
+\bibitem[Friesen, Roberts e Fisher 2002]{ref50}
+\abntrefinfo{Friesen, Roberts e Fisher}{FRIESEN; ROBERTS; FISHER}{2002}
+{FRIESEN, N.; ROBERTS, A.; FISHER, S. Cancore: Metadata for learning objects.
+\emph{Canadian Journal of Learning and Technology / La revue canadienne de
+  l’apprentissage et de la technologie}, v.~28, n.~3, 2002.}
+
+\bibitem[Grau et al. 2008]{ref52}
+\abntrefinfo{Grau et al.}{GRAU et al.}{2008}
+{GRAU, B.~C. et al. Owl 2: The next step for owl.
+2008.}
+
+\bibitem[Graves, Constabaris e Brickley 2007]{refFOAF}
+\abntrefinfo{Graves, Constabaris e Brickley}{GRAVES; CONSTABARIS;
+  BRICKLEY}{2007}
+{GRAVES, M.; CONSTABARIS, A.; BRICKLEY, D. {FOAF: Connecting People on the
+  Semantic Web}.
+\emph{Cataloging \& classification quarterly}, v.~43, n.~3, p. 191--202, 2007.}
+
+\bibitem[Grunewald et al. 2011]{ref46}
+\abntrefinfo{Grunewald et al.}{GRUNEWALD et al.}{2011}
+{GRUNEWALD, D. et al. Agent-based network security simulation.
+2011.}
+
+\bibitem[Haarslev e M{\"u}ller 2001]{ref59}
+\abntrefinfo{Haarslev e M{\"u}ller}{HAARSLEV; M{\"U}LLER}{2001}
+{HAARSLEV, V.; M{\"U}LLER, R. Racer system description. In:  \emph{Automated
+  Reasoning}. [S.l.]: Springer, 2001. p. 701--705.}
+
+\bibitem[Hendler e Harmelen 2008]{ref54}
+\abntrefinfo{Hendler e Harmelen}{HENDLER; HARMELEN}{2008}
+{HENDLER, J.; HARMELEN, F. van. The semantic web: Webizing knowledge
+  representation. In:  \emph{Handbook of KnowledgeRepresentation}. [S.l.]:
+  Elsevier, 2008.}
+
+\bibitem[Hindriks et al. 2001]{ref33}
+\abntrefinfo{Hindriks et al.}{HINDRIKS et al.}{2001}
+{HINDRIKS, K. et al. Agent programming with declarative goals. In:
+  \emph{Intelligent Agents VII Agent Theories Architectures and Languages}.
+  [S.l.]: Springer Berlin Heidelberg, 2001.}
+
+\bibitem[Hoch et al. 2011]{ref45}
+\abntrefinfo{Hoch et al.}{HOCH et al.}{2011}
+{HOCH, N. et al. A user-centric approach for efficient daily mobility planning
+  in e-vehicle infrastructure networks.
+2011.}
+
+\bibitem[Horrocks 2008]{ref53}
+\abntrefinfo{Horrocks}{HORROCKS}{2008}
+{HORROCKS, I. Ontologies and the semantic web.
+\emph{Commun. ACM}, 2008.}
+
+\bibitem[Howden et al. 2001]{ref34}
+\abntrefinfo{Howden et al.}{HOWDEN et al.}{2001}
+{HOWDEN, N. et al. Jack intelligent agents - summary of an agent
+  infrastructure. In:  \emph{In 5th International conference on autonomous
+  agents}. [S.l.: s.n.], 2001.}
+
+\bibitem[Hubner, Bordini e Vieira 2004]{ref24}
+\abntrefinfo{Hubner, Bordini e Vieira}{HUBNER; BORDINI; VIEIRA}{2004}
+{HUBNER, J.~F.; BORDINI, R.~H.; VIEIRA, R. Desenvolvimento de sistemas
+  multiagentes.
+2004.}
+
+\bibitem[IEEE 2002]{ref40}
+\abntrefinfo{IEEE}{IEEE}{2002}
+{IEEE. Ieee-sa standard 1484.12.1 draft standard for learning object metadata.
+2002.}
+
+\bibitem[Jennings, Sycara e Wooldridge 1996]{ref36}
+\abntrefinfo{Jennings, Sycara e Wooldridge}{JENNINGS; SYCARA; WOOLDRIDGE}{1996}
+{JENNINGS, N.~R.; SYCARA, K.; WOOLDRIDGE, M. A roadmap of agent research and
+  development.
+\emph{Autonomous Agents and Multi-Agent Systems}, 1996.}
+
+\bibitem[Kagal et al. 2003]{refA}
+\abntrefinfo{Kagal et al.}{KAGAL et al.}{2003}
+{KAGAL, L. et al. Agents making sense of the semantic web. In:
+  \emph{Innovative Concepts for Agent-Based Systems}. [S.l.]: Springer Berlin
+  Heidelberg, 2003.}
+
+\bibitem[Katasonov e Terziyan 2008]{refF}
+\abntrefinfo{Katasonov e Terziyan}{KATASONOV; TERZIYAN}{2008}
+{KATASONOV, A.; TERZIYAN, V. Semantic agent programming language (s-apl): A
+  middleware platform for the semantic web. In:  \emph{Proceedings of the 2008
+  IEEE International Conference on Semantic Computing}. [S.l.]: IEEE Computer
+  Society, 2008.  (ICSC '08), p. 504--511.}
+
+\bibitem[Kiryakov, Ognyanov e Manov 2005]{ref76}
+\abntrefinfo{Kiryakov, Ognyanov e Manov}{KIRYAKOV; OGNYANOV; MANOV}{2005}
+{KIRYAKOV, A.; OGNYANOV, D.; MANOV, D. Owlim--a pragmatic semantic repository
+  for owl. In:  \emph{Web Information Systems Engineering--WISE 2005
+  Workshops}. [S.l.]: Springer, 2005.}
+
+\bibitem[Klapiscak e Bordini 2009]{refB}
+\abntrefinfo{Klapiscak e Bordini}{KLAPISCAK; BORDINI}{2009}
+{KLAPISCAK, T.; BORDINI, R.~H. Jasdl: A practical programming approach
+  combining agent and semantic web technologies. In:  \emph{In Proc. of DALT
+  2008, volume 5397 of LNAI}. [S.l.]: Springer, 2009.}
+
+\bibitem[Knublauch et al. 2004]{ref61}
+\abntrefinfo{Knublauch et al.}{KNUBLAUCH et al.}{2004}
+{KNUBLAUCH, H. et al. The prot{\'e}g{\'e} owl plugin: An open development
+  environment for semantic web applications. In:  \emph{The Semantic Web--ISWC
+  2004}. [S.l.]: Springer, 2004. p. 229--243.}
+
+\bibitem[Küster et al. 2012]{ref44}
+\abntrefinfo{Küster et al.}{KüSTER et al.}{2012}
+{KüSTER, T. et al. Distributed optimization of energy costs in manufacturing
+  using multi-agent system technology.
+2012.}
+
+\bibitem[McBride 2002]{refJENA}
+\abntrefinfo{McBride}{MCBRIDE}{2002}
+{MCBRIDE, B. Jena: a semantic web toolkit.
+\emph{Internet Computing, IEEE}, v.~6, n.~6, p. 55--59, 2002.}
+
+\bibitem[McGuinness, Harmelen et al. 2004]{ref65}
+\abntrefinfo{McGuinness, Harmelen et al.}{MCGUINNESS; HARMELEN et al.}{2004}
+{MCGUINNESS, D.~L.; HARMELEN, F. V. et al. Owl web ontology language overview.
+\emph{W3C recommendation}, v.~10, n. 2004-03, p.~10, 2004.}
+
+\bibitem[Omicini, Ricci e Viroli 2008]{ref1}
+\abntrefinfo{Omicini, Ricci e Viroli}{OMICINI; RICCI; VIROLI}{2008a}
+{OMICINI, A.; RICCI, A.; VIROLI, M. Artifacts in the a\&a meta-model for
+  multi-agent systems.
+\emph{Autonomous Agents and Multi-Agent Systems}, 2008.}
+
+\bibitem[Omicini, Ricci e Viroli 2008]{ref4}
+\abntrefinfo{Omicini, Ricci e Viroli}{OMICINI; RICCI; VIROLI}{2008b}
+{OMICINI, A.; RICCI, A.; VIROLI, M. Artifacts in the a\&a meta-model for
+  multi-agent systems.
+2008.}
+
+\bibitem[Ontotext 2012]{ref72}
+\abntrefinfo{Ontotext}{ONTOTEXT}{2012}
+{ONTOTEXT. \emph{Semantic Repository}. 2012.
+\ $<$http://www.ontotext.com/semantic-repository$>$. Acessado em 25/06/2012.}
+
+\bibitem[OpenRDF 2012]{ref71}
+\abntrefinfo{OpenRDF}{OPENRDF}{2012a}
+{OPENRDF. \emph{RDF}. 2012.
+\ $<$http://www.openrdf.org/about.jsp$>$. Acessado em 20/06/2012.}
+
+\bibitem[OpenRDF 2012]{ref74}
+\abntrefinfo{OpenRDF}{OPENRDF}{2012b}
+{OPENRDF. \emph{Sesame}. 2012.
+\ $<$http://sourceforge.net/projects/sesame/$>$. Acessado em 25/06/2012.}
+
+\bibitem[Padron 2003]{ref79}
+\abntrefinfo{Padron}{PADRON}{2003}
+{PADRON, C. Carlos: a collaborative authoring tool for reusable learning
+  objects.
+2003.}
+
+\bibitem[Padron et al. 2003]{ref80}
+\abntrefinfo{Padron et al.}{PADRON et al.}{2003}
+{PADRON, C.~L. et al. Carlos: A collaborative authoring tool for reusable
+  learning objects.
+2003.}
+
+\bibitem[P{\'e}rez, Arenas e Gutierrez 2009]{refDEF}
+\abntrefinfo{P{\'e}rez, Arenas e Gutierrez}{P{\'E}REZ; ARENAS; GUTIERREZ}{2009}
+{P{\'E}REZ, J.; ARENAS, M.; GUTIERREZ, C. Semantics and complexity of sparql.
+\emph{ACM Trans. Database Syst.}, 2009.}
+
+\bibitem[Ricci, Omicini e Denti 2003]{ref2}
+\abntrefinfo{Ricci, Omicini e Denti}{RICCI; OMICINI; DENTI}{2003}
+{RICCI, A.; OMICINI, A.; DENTI, E. Activity theory as a framework for mas
+  coordination.
+2003.}
+
+\bibitem[Ricci et al. 2008]{ref15}
+\abntrefinfo{Ricci et al.}{RICCI et al.}{2008}
+{RICCI, A. et al. Integrating artifact-based environments with heterogeneous
+  agent-programming platforms.
+2008.}
+
+\bibitem[Ricci, Piunti e Viroli 2010]{ref5}
+\abntrefinfo{Ricci, Piunti e Viroli}{RICCI; PIUNTI; VIROLI}{2010}
+{RICCI, A.; PIUNTI, M.; VIROLI, M. Environment programming in multi-agent
+  systems.
+\emph{Autonomous Agents and Multi-Agent Systems}, 2010.}
+
+\bibitem[Ricci et al. 2009]{ref6}
+\abntrefinfo{Ricci et al.}{RICCI et al.}{2009}
+{RICCI, A. et al. Environment programming in cartago.
+2009.}
+
+\bibitem[Ricci e Viroli 2007]{ref8}
+\abntrefinfo{Ricci e Viroli}{RICCI; VIROLI}{2007}
+{RICCI, A.; VIROLI, M. simpa: An agent-oriented approach for prototyping
+  concurrent application on top of java.
+2007.}
+
+\bibitem[Ricci, Viroli e Omicini 2008]{ref10}
+\abntrefinfo{Ricci, Viroli e Omicini}{RICCI; VIROLI; OMICINI}{2008a}
+{RICCI, A.; VIROLI, M.; OMICINI, A. The a\&a programming model and technology
+  for developing agent environments in mas. In:  \emph{Programming Multi-Agent
+  Systems}. [S.l.]: Springer Berlin Heidelberg, 2008.}
+
+\bibitem[Ricci, Viroli e Omicini 2008]{ref9}
+\abntrefinfo{Ricci, Viroli e Omicini}{RICCI; VIROLI; OMICINI}{2008b}
+{RICCI, A.; VIROLI, M.; OMICINI, A. Integrating heterogeneous agent programming
+  platforms within artifact-based environments.
+2008.}
+
+\bibitem[Ricci, Viroli e Omicini 2008]{ref78}
+\abntrefinfo{Ricci, Viroli e Omicini}{RICCI; VIROLI; OMICINI}{2008c}
+{RICCI, A.; VIROLI, M.; OMICINI, A. A meta-model for multi-agent systems.
+\emph{Autonomous Agents and Multi-Agent Systems}, 2008.}
+
+\bibitem[Ricci, Viroli e Omicini 2010]{ref7}
+\abntrefinfo{Ricci, Viroli e Omicini}{RICCI; VIROLI; OMICINI}{2010}
+{RICCI, A.; VIROLI, M.; OMICINI, A. Give agents their artifacts: The a\&a
+  approach for engineering working environments. In:  \emph{AAMAS '07,
+  Proceedings of the 6th international joint conference on Autonomous agents
+  and multiagent systems}. [S.l.]: ACM, 2010.}
+
+\bibitem[Richards et al. 2012]{ref39}
+\abntrefinfo{Richards et al.}{RICHARDS et al.}{2012}
+{RICHARDS, J. et al. Authoring tool accessibility guidelines (atag) 2.0.
+2012.}
+
+\bibitem[Russel e Norvig 2003]{ref13}
+\abntrefinfo{Russel e Norvig}{RUSSEL; NORVIG}{2003}
+{RUSSEL, S.; NORVIG, P. \emph{Inteligência Artificial}. [S.l.]: Elsevier,
+  2003.}
+
+\bibitem[Schreiber 2008]{ref55}
+\abntrefinfo{Schreiber}{SCHREIBER}{2008}
+{SCHREIBER, G. Knowledge engineering.
+2008.}
+
+\bibitem[Sesseler, Keiblinger e Varone 2002]{ref37}
+\abntrefinfo{Sesseler, Keiblinger e Varone}{SESSELER; KEIBLINGER; VARONE}{2002}
+{SESSELER, R.; KEIBLINGER, A.; VARONE, N. Software agent technology in mobile
+  service environments.
+2002.}
+
+\bibitem[Shearer, Motik e Horrocks 2008]{ref69}
+\abntrefinfo{Shearer, Motik e Horrocks}{SHEARER; MOTIK; HORROCKS}{2008}
+{SHEARER, R.; MOTIK, B.; HORROCKS, I. Hermit: A highly-efficient owl reasoner.
+  In:  \emph{OWLED}. [S.l.: s.n.], 2008. v.~432.}
+
+\bibitem[Shoham 1993]{ref20}
+\abntrefinfo{Shoham}{SHOHAM}{1993}
+{SHOHAM, Y. Agent-oriented programming.
+\emph{Artificial Intelligence}, 1993.}
+
+\bibitem[Silva e Vieira 2007]{refC}
+\abntrefinfo{Silva e Vieira}{SILVA; VIEIRA}{2007}
+{SILVA, D. M.~D.; VIEIRA, R. Argonaut: Integrating jason and jena for context
+  aware computing based on owl ontologies (short paper. In:  \emph{Proceedings
+  of the Workshop on Agents, Web Services, and Ontologies – Integrated
+  Methodologies (AWESOME’007) held as part of MALLOW’007, Durham 3–7
+  September}. [S.l.: s.n.], 2007.}
+
+\bibitem[Sirin et al. 2007]{ref57}
+\abntrefinfo{Sirin et al.}{SIRIN et al.}{2007}
+{SIRIN, E. et al. Pellet: A practical owl-dl reasoner.
+\emph{Web Semantics: science, services and agents on the World Wide Web},
+  Elsevier, v.~5, n.~2, p. 51--53, 2007.}
+
+\bibitem[Spanoudakis e Moraitis 2007]{ref47}
+\abntrefinfo{Spanoudakis e Moraitis}{SPANOUDAKIS; MORAITIS}{2007}
+{SPANOUDAKIS, N.; MORAITIS, P. An ambient intelligence application integrating
+  agent and service-oriented technologies.
+2007.}
+
+\bibitem[Suchanek, Kasneci e Weikum 2007]{refYAGO}
+\abntrefinfo{Suchanek, Kasneci e Weikum}{SUCHANEK; KASNECI; WEIKUM}{2007}
+{SUCHANEK, F.~M.; KASNECI, G.; WEIKUM, G. Yago: a core of semantic knowledge.
+  In:  \emph{Proceedings of the 16th international conference on World Wide
+  Web}. [S.l.]: ACM, 2007.  (WWW '07).}
+
+\bibitem[Tsarkov e Horrocks 2006]{ref58}
+\abntrefinfo{Tsarkov e Horrocks}{TSARKOV; HORROCKS}{2006}
+{TSARKOV, D.; HORROCKS, I. Fact++ description logic reasoner: System
+  description. In:  \emph{Automated reasoning}. [S.l.]: Springer, 2006. p.
+  292--297.}
+
+\bibitem[Tweedalea et al. 2006]{ref77}
+\abntrefinfo{Tweedalea et al.}{TWEEDALEA et al.}{2006}
+{TWEEDALEA, J. et al. Innovations in multi-agent systems.
+2006.}
+
+\bibitem[W3C 2012]{ref56}
+\abntrefinfo{W3C}{W3C}{2012}
+{W3C. \emph{SemanticWeb: Inference}. 2012.
+\ $<$http://www.w3.org/standards/semanticweb/inference$>$. Acessado em
+  20/06/2012.}
+
+\bibitem[Weibel 1997]{ref49}
+\abntrefinfo{Weibel}{WEIBEL}{1997}
+{WEIBEL, S. The dublin core: A simple content description model for electronic
+  resources.
+\emph{Bulletin of the American Society for Information Science and Technology},
+  Wiley Subscription Services, Inc., A Wiley Company, v.~24, n.~1, 1997.}
+
+\bibitem[Weyns, Omicini e Odell 2006]{ref3}
+\abntrefinfo{Weyns, Omicini e Odell}{WEYNS; OMICINI; ODELL}{2006}
+{WEYNS, D.; OMICINI, A.; ODELL, J. Environment as a first class abstraction in
+  multiagent systems.
+\emph{Autonomous Agents and Multi-Agent Systems}, 2006.}
+
+\bibitem[Weyns e Parunak 2007]{ref14}
+\abntrefinfo{Weyns e Parunak}{WEYNS; PARUNAK}{2007a}
+{WEYNS, D.; PARUNAK, H. V.~D. Special issue on environments for multi-agent
+  systems.
+\emph{Journal of Autonomous Agents and Multi-Agent Systems}, 2007.}
+
+\bibitem[Weyns e Parunak 2007]{ref17}
+\abntrefinfo{Weyns e Parunak}{WEYNS; PARUNAK}{2007b}
+{WEYNS, D.; PARUNAK, H. V.~D. Special issue on environments for multi-agent
+  systems.
+2007.}
+
+\bibitem[Wikipedia 2012]{ref60}
+\abntrefinfo{Wikipedia}{WIKIPEDIA}{2012}
+{WIKIPEDIA. \emph{Ontology Components}. 2012.
+\ $<$http://en.wikipedia.org/wiki/Ontology\_components$>$. Acessado em
+  20/06/2012.}
+
+\bibitem[Wiley 2000]{ref41}
+\abntrefinfo{Wiley}{WILEY}{2000}
+{WILEY, D.~A. Learning object design and sequencing theory.
+2000.}
+
+\bibitem[Wooldridge 2002]{ref18}
+\abntrefinfo{Wooldridge}{WOOLDRIDGE}{2002}
+{WOOLDRIDGE, M. Intelligent agents: The key concepts.
+2002.}
+
+\bibitem[Wooldridge e Jennings 1995]{ref23}
+\abntrefinfo{Wooldridge e Jennings}{WOOLDRIDGE; JENNINGS}{1995a}
+{WOOLDRIDGE, M.; JENNINGS, N.~R. Intelligent agents: Theory and practice.
+1995.}
+
+\bibitem[Wooldridge e Jennings 1995]{ref11}
+\abntrefinfo{Wooldridge e Jennings}{WOOLDRIDGE; JENNINGS}{1995b}
+{WOOLDRIDGE, M.~J.; JENNINGS, N.~R. Agent theories, architectures, and
+  languages: A survey.
+1995.}
+
+\bibitem[Xavier e Gluz 2009]{ref38}
+\abntrefinfo{Xavier e Gluz}{XAVIER; GLUZ}{2009}
+{XAVIER, A.~C.; GLUZ, J.~C. \emph{Relatorio Tecnico RT-OBAA-06 Subgrupo Agentes
+  e Ontologias: Analise Comparativa de Editores de Objetos de Aprendizagem}.
+[S.l.], 2009.}
+
+\bibitem[Zou et al. 2003]{refD}
+\abntrefinfo{Zou et al.}{ZOU et al.}{2003}
+{ZOU, Y. et al. Using semantic web technology in multi-agent systems: a case
+  study in the taga trading agent environment. In:  \emph{Proceedings of the
+  5th international conference on Electronic commerce}. [S.l.]: ACM, 2003.
+  (ICEC '03), p. 95--101.}
+
+\end{thebibliography}

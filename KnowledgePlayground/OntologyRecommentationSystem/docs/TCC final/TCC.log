@@ -1,0 +1,1963 @@
+This is pdfTeX, Version 3.1415926-2.4-1.40.13 (MiKTeX 2.9) (preloaded format=pdflatex 2013.9.20)  11 DEC 2013 11:42
+entering extended mode
+**TCC.tex
+("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\TCC.tex"
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2012-05-30, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, latin, latvian,
+ lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerman, n
+german-x-2012-05-30, nynorsk, oriya, panjabi, pinyin, polish, portuguese, roman
+ian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swissgerm
+an, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, usengl
+ishmax, welsh, loaded.
+("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\ufscThesis.cls"
+Document Class: ufscThesis 
+("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\abnt.cls"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\cvs-id.def")
+Document Class: abnt 2004/11/02 v1.27.2.1 Classe abnt (NBR6024, NBR6027, NBR602
+8, NBR14724)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\calc.sty"
+Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count79
+\calc@Bcount=\count80
+\calc@Adimen=\dimen102
+\calc@Bdimen=\dimen103
+\calc@Askip=\skip41
+\calc@Bskip=\skip42
+LaTeX Info: Redefining \setlength on input line 76.
+LaTeX Info: Redefining \addtolength on input line 77.
+\calc@Ccount=\count81
+\calc@Cskip=\skip43
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\multicol.sty"
+Package: multicol 2011/06/27 v1.7a multicolumn formatting (FMi)
+\c@tracingmulticols=\count82
+\mult@box=\box26
+\multicol@leftmargin=\dimen104
+\c@unbalance=\count83
+\c@collectmore=\count84
+\doublecol@number=\count85
+\multicoltolerance=\count86
+\multicolpretolerance=\count87
+\full@width=\dimen105
+\page@free=\dimen106
+\premulticols=\dimen107
+\postmulticols=\dimen108
+\multicolsep=\skip44
+\multicolbaselineskip=\skip45
+\partial@page=\box27
+\last@line=\box28
+\mult@rightbox=\box29
+\mult@grightbox=\box30
+\mult@gfirstbox=\box31
+\mult@firstbox=\box32
+\@tempa=\box33
+\@tempa=\box34
+\@tempa=\box35
+\@tempa=\box36
+\@tempa=\box37
+\@tempa=\box38
+\@tempa=\box39
+\@tempa=\box40
+\@tempa=\box41
+\@tempa=\box42
+\@tempa=\box43
+\@tempa=\box44
+\@tempa=\box45
+\@tempa=\box46
+\@tempa=\box47
+\@tempa=\box48
+\@tempa=\box49
+\c@columnbadness=\count88
+\c@finalcolumnbadness=\count89
+\last@try=\dimen109
+\multicolovershoot=\dimen110
+\multicolundershoot=\dimen111
+\mult@nat@firstbox=\box50
+\colbreak@box=\box51
+\multicol@sort@counter=\count90
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\report.cls"
+Document Class: report 2007/10/19 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size10.clo"
+File: size10.clo 2007/10/19 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count91
+\c@chapter=\count92
+\c@section=\count93
+\c@subsection=\count94
+\c@subsubsection=\count95
+\c@paragraph=\count96
+\c@subparagraph=\count97
+\c@figure=\count98
+\c@table=\count99
+\abovecaptionskip=\skip46
+\belowcaptionskip=\skip47
+\bibindent=\dimen112
+)
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\setspace\setspace.sty
+Package: setspace 2011/12/19 v6.7a set line spacing
+)
+\ABNTanapindent=\skip48
+\ABNTsignwidth=\skip49
+\ABNTsignthickness=\skip50
+\ABNTsignskip=\skip51
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\indentfirst.sty"
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 1999/03/16 v1.13 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count100
+\Gm@cntv=\count101
+\c@Gm@tempcnt=\count102
+\Gm@bindingoffset=\dimen113
+\Gm@wd@mp=\dimen114
+\Gm@odd@mp=\dimen115
+\Gm@even@mp=\dimen116
+\Gm@layoutwidth=\dimen117
+\Gm@layoutheight=\dimen118
+\Gm@layouthoffset=\dimen119
+\Gm@layoutvoffset=\dimen120
+\Gm@dimlist=\toks15
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\ufscThesis/BUUFSCthesis.s
+ty" ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.sty"
+Package: babel 2008/07/08 v3.8m The Babel package
+
+*************************************
+* Local config file bblopts.cfg used
+*
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\bblopts.cfg"
+File: bblopts.cfg 2006/07/31 v1.0 MiKTeX 'babel' configuration
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\portuges.ldf"
+Language: portuges 2008/03/18 v1.2q Portuguese support from the babel system
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\babel\babel.def"
+File: babel.def 2008/07/08 v3.8m Babel common definitions
+\babel@savecnt=\count103
+\U@D=\dimen121
+)
+\l@brazil = a dialect from \language\l@portuges 
+Package babel Info: Making " an active character on input line 145.
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+Package: inputenc 2008/03/30 v1.1d Input encoding file
+\inpenc@prehook=\toks16
+\inpenc@posthook=\toks17
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ansinew.def"
+File: ansinew.def 2008/03/30 v1.1d Input encoding file
+))
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\ulem\ulem.sty
+\UL@box=\box52
+\UL@hyphenbox=\box53
+\UL@skip=\skip52
+\UL@hook=\toks18
+\UL@height=\dimen122
+\UL@pe=\count104
+\UL@pixel=\dimen123
+\ULC@box=\box54
+Package: ulem 2012/05/18
+\ULdepth=\dimen124
+)
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\subfigure\subfigure.sty
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip53
+\subfigcapskip=\skip54
+\subfigcaptopadj=\dimen125
+\subfigbottomskip=\skip55
+\subfigcapmargin=\dimen126
+\subfiglabelskip=\skip56
+\c@subfigure=\count105
+\c@lofdepth=\count106
+\c@subtable=\count107
+\c@lotdepth=\count108
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\subfigure\subfigure.cfg
+)
+\subfig@top=\skip57
+\subfig@bottom=\skip58
+) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\carlisle\remreset.sty")
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\abntcite.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\cvs-id.def")
+Package: abntcite 2003/10/13 v1.26 Chamadas de referencias no texto (NBR10520)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\abntex-abrev.sty"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\cvs-id.def")
+Package: abntex-abrev 2003/10/13 v1.3 Abreviacoes
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\nbr10522-1988.def"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\cvs-id.def")
+File: nbr10522-1988.def 2003/10/13 v1.2 Abreviacoes bibliograficas (NBR10522:19
+88)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\abntex-abrev-pt_BR.def"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\cvs-id.def")
+File: abntex-abrev-pt_BR.def 2003/10/13 v1.2 definicao de abntex-abrev, traduca
+o de termos en_US/pt_BR
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\nbr10520-2002.def"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\abntex\cvs-id.def")
+File: nbr10520-2002.def 2003/10/13 v1.2 Definicoes para abntcite (NBR10520:2002
+)
+)
+\minimumbiblabelwidth=\skip59
+\ABCIauxlen=\skip60
+\c@ABCIaux=\count109
+\c@ABCImax=\count110
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\relsize.sty"
+Package: relsize 2003/07/04 ver 3.1
+)
+\biblabelsep=\skip61
+LaTeX Info: Redefining \newblock on input line 562.
+LaTeX Info: Redefining \cite on input line 589.
+\ABCItoken=\toks19
+)))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 1999/02/16 v1.0f Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2009/02/05 v1.0o Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 91.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count111
+))
+\Gin@req@height=\dimen127
+\Gin@req@width=\dimen128
+)
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption.sty
+Package: caption 2013/05/02 v3.3-89 Customizing captions (AR)
+
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\caption\caption3.sty
+Package: caption3 2013/05/02 v1.6-88 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 57.
+\captionmargin=\dimen129
+\captionmargin@=\dimen130
+\captionwidth=\dimen131
+\caption@tempdima=\dimen132
+\caption@indent=\dimen133
+\caption@parindent=\dimen134
+\caption@hangindent=\dimen135
+)
+\c@ContinuedFloat=\count112
+Package caption Info: subfigure package is loaded.
+)
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\listings.sty
+\lst@mode=\count113
+\lst@gtempboxa=\box55
+\lst@token=\toks20
+\lst@length=\count114
+\lst@currlwidth=\dimen136
+\lst@column=\count115
+\lst@pos=\count116
+\lst@lostspace=\dimen137
+\lst@width=\dimen138
+\lst@newlines=\count117
+\lst@lineno=\count118
+\lst@maxwidth=\dimen139
+
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstmisc.sty
+File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
+\c@lstnumber=\count119
+\lst@skipnumbers=\count120
+\lst@framebox=\box56
+)
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\listings.cfg
+File: listings.cfg 2013/08/26 1.5b listings configuration
+))
+Package: listings 2013/08/26 1.5b (Carsten Heinz)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 130.
+)
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\latex\listings\lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+)
+
+LaTeX Warning: Unused global option(s):
+    [cleardoublepage=plain].
+
+("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\TCC.aux")
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 84.
+LaTeX Font Info:    ... okay on input line 84.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a5paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(71.13188pt, 307.28978pt, 42.67912pt)
+* v-part:(T,H,B)=(56.9055pt, 497.92325pt, 42.67912pt)
+* \paperwidth=421.10078pt
+* \paperheight=597.50787pt
+* \textwidth=307.28978pt
+* \textheight=497.92325pt
+* \oddsidemargin=-1.1381pt
+* \evensidemargin=-29.59087pt
+* \topmargin=-57.42455pt
+* \headheight=19.91684pt
+* \headsep=22.14322pt
+* \topskip=10.0pt
+* \footskip=19.91684pt
+* \marginparwidth=47.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+(C:\Users\jpbonson\AppData\Roaming\MiKTeX\2.9\tex\context\base\supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count121
+\scratchdimen=\dimen140
+\scratchbox=\box57
+\nofMPsegments=\count122
+\nofMParguments=\count123
+\everyMPshowfont=\toks21
+\MPscratchCnt=\count124
+\MPscratchDim=\dimen141
+\MPnumerator=\count125
+\makeMPintoPDFobject=\count126
+\everyMPtoPDFconversion=\toks22
+)
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: listings package is loaded.
+Package caption Info: End \AtBeginDocument code.
+\c@lstlisting=\count127
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 87.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 87.
+ [1
+
+
+{C:/Users/jpbonson/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+[0
+
+]
+Overfull \hbox (3.95905pt too wide) in paragraph at lines 89--89
+\OT1/cmr/m/n/9 me-tido a Ci^encias da Com-putac~ao para
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 89--89
+
+ []
+
+[1] [2
+
+] [3] [4
+
+] ("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\TCC.lof"
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [5
+
+])
+\tf@lof=\write3
+
+[6] ("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\TCC.lot")
+\tf@lot=\write4
+ [7
+
+]
+[8
+
+] ("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\TCC.las"
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [9])
+\tf@las=\write5
+
+[10] ("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\TCC.toc"
+Overfull \hbox (8.20416pt too wide) in paragraph at lines 22--22
+ [][] []\OT1/cmr/m/n/10 FERRAMENTAS DE AU-TO-RIA DE OB-JE-TOS DE APREN- 
+ []
+
+
+Overfull \hbox (6.74695pt too wide) in paragraph at lines 27--27
+ [][] []\OT1/cmr/m/n/10 TRABALHOS RE-LA-CI-O-NA-DOS COM ACESSO DE AGEN- 
+ []
+
+[11
+
+])
+\tf@toc=\write6
+ [12]
+Cap\'{\i }tulo 1.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [13
+
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [14]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 140.
+
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 140.
+
+Overfull \hbox (13.4052pt too wide) in paragraph at lines 142--143
+[]\OT1/cmr/m/n/10 Compreender o ar-ma-ze-na-mento de da-dos em re-po-sitorios 
+sem^anticos. 
+ []
+
+[15] [16
+
+]
+Cap\'{\i }tulo 2.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [17]
+Overfull \hbox (8.54414pt too wide) in paragraph at lines 190--191
+\OT1/cmr/m/n/10 ma-nos, como noc~oes men-tais (co-nhe-ci-mento, crenca, in-te
+nc~ao, obrigac~ao),
+ []
+
+<figuras/figura1.png, id=67, 475.7775pt x 221.32687pt>
+File: figuras/figura1.png Graphic file (type png)
+
+<use figuras/figura1.png>
+Package pdftex.def Info: figuras/figura1.png used on input line 196.
+(pdftex.def)             Requested size: 237.88815pt x 110.66315pt.
+ [18 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura1.png>]
+ [19]
+Underfull \hbox (badness 10000) in paragraph at lines 220--222
+
+ []
+
+
+Overfull \hbox (6.46797pt too wide) in paragraph at lines 227--228
+[]\OT1/cmr/m/n/10 O nvel dos agen-tes e com-posto por agen-tes in-di-vi-du-a
+is, aut^onomos
+ []
+
+<figuras/figura5.png, id=74, 478.03593pt x 396.7322pt>
+File: figuras/figura5.png Graphic file (type png)
+
+<use figuras/figura5.png>
+Package pdftex.def Info: figuras/figura5.png used on input line 231.
+(pdftex.def)             Requested size: 262.92056pt x 218.20337pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 237--239
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [20]
+[21 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura5.png>]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 251.
+
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omlcmr.fd"
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 251.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 251.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 251.
+
+Overfull \hbox (13.40524pt too wide) in paragraph at lines 269--270
+[]\OT1/cmr/m/n/10 extensibilidade atraves de ac~oes in-ter-nas de-fi-ni-das p
+elo(a) usuario(a); 
+ []
+
+[22]
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 282.
+ [23] [24]
+Overfull \hbox (1.16135pt too wide) in paragraph at lines 316--317
+[]\OT1/cmr/m/n/10 (\OT1/cmr/m/n/8 OMICINI; RICCI; VI-ROLI\OT1/cmr/m/n/10 , 2008
+b; \OT1/cmr/m/n/8 RICCI; PIUNTI; VI-ROLI\OT1/cmr/m/n/10 , 2010)des-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [25]
+<figuras/figura6.png, id=97, 438.13687pt x 272.51813pt>
+File: figuras/figura6.png Graphic file (type png)
+
+<use figuras/figura6.png>
+Package pdftex.def Info: figuras/figura6.png used on input line 324.
+(pdftex.def)             Requested size: 306.69371pt x 190.76138pt.
+
+<figuras/figura7.png, id=98, 380.17032pt x 273.27094pt>
+File: figuras/figura7.png Graphic file (type png)
+
+<use figuras/figura7.png>
+Package pdftex.def Info: figuras/figura7.png used on input line 335.
+(pdftex.def)             Requested size: 266.1174pt x 191.28833pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [26 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura6.png>]
+
+<figuras/figura8.png, id=102, 353.82187pt x 232.61906pt>
+File: figuras/figura8.png Graphic file (type png)
+
+<use figuras/figura8.png>
+Package pdftex.def Info: figuras/figura8.png used on input line 351.
+(pdftex.def)             Requested size: 283.05788pt x 186.09549pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [27 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura7.png>]
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [28 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura8.png>]
+
+Overfull \hbox (8.2015pt too wide) in paragraph at lines 371--372
+\OT1/cmr/m/n/10 de tra-ba-lho. Tambem prov^e operac~oes para de-fi-nir papei
+s e polticas
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [29]
+Overfull \hbox (5.26637pt too wide) in paragraph at lines 373--374
+\OT1/cmr/m/n/10 plo uti-li-zando este ar-te-fato para im-ple-men-tar o Jan-tar 
+dos Filosofos
+ []
+
+<figuras/figura9.png, id=113, 478.03593pt x 112.16907pt>
+File: figuras/figura9.png Graphic file (type png)
+
+<use figuras/figura9.png>
+Package pdftex.def Info: figuras/figura9.png used on input line 381.
+(pdftex.def)             Requested size: 286.82376pt x 67.30194pt.
+
+<figuras/figura10.png, id=114, 478.03593pt x 140.02313pt>
+File: figuras/figura10.png Graphic file (type png)
+
+<use figuras/figura10.png>
+Package pdftex.def Info: figuras/figura10.png used on input line 391.
+(pdftex.def)             Requested size: 286.82376pt x 84.01451pt.
+
+<figuras/figura11.png, id=115, 478.03593pt x 148.30406pt>
+File: figuras/figura11.png Graphic file (type png)
+
+<use figuras/figura11.png>
+Package pdftex.def Info: figuras/figura11.png used on input line 401.
+(pdftex.def)             Requested size: 286.82376pt x 88.98311pt.
+ [30 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura9.png>]
+ [31 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura10.png>
+ <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura11.png>]
+Overfull \hbox (2.65639pt too wide) in paragraph at lines 413--415
+[]\OT1/cmr/m/n/10 Artefatos po-dem ter varias func~oes, (\OT1/cmr/m/n/8 RICCI
+; PIUNTI; VI-ROLI\OT1/cmr/m/n/10 , 2010)
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 413--415
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32]
+Underfull \hbox (badness 10000) in paragraph at lines 422--424
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 427--429
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [33]
+[34]
+Overfull \hbox (13.2343pt too wide) in paragraph at lines 452--453
+\OT1/cmr/m/n/10 Por fim, (\OT1/cmr/m/n/8 OMI-CINI; RICCI; VI-ROLI\OT1/cmr/m/n/1
+0 , 2008a) cita al-gu-mas areas com aplicac~oes
+ []
+
+[35] [36] <figuras/figura12.png, id=138, 478.03593pt x 347.79938pt>
+File: figuras/figura12.png Graphic file (type png)
+
+<use figuras/figura12.png>
+Package pdftex.def Info: figuras/figura12.png used on input line 478.
+(pdftex.def)             Requested size: 286.82376pt x 208.68123pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [37]
+Overfull \hbox (3.40517pt too wide) in paragraph at lines 490--491
+[]\OT1/cmr/m/n/10 joinWorkspace(AreaDeTrabNome):AreaDeTrabId - Par-ti-cipa
+ []
+
+
+Overfull \hbox (24.48859pt too wide) in paragraph at lines 491--492
+[]\OT1/cmr/m/n/10 joinRemoteWorkspace(AreaDeTrabNome,NodoId):AreaDeTrabId
+ []
+
+
+Overfull \hbox (0.82193pt too wide) in paragraph at lines 496--497
+[]\OT1/cmr/m/n/10 makeArtifact(ArtNome, Art-Ti-po-Nome, Pa-ra-me-tro-sI-ni-ci-a
+is):
+ []
+
+[38 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura12.png>]
+
+Overfull \hbox (2.73862pt too wide) in paragraph at lines 498--499
+[]\OT1/cmr/m/n/10 lookupArtifact(ArtName): Ar-tId - Lo-ca-liza um ar-te-fato da
+do
+ []
+
+
+Overfull \hbox (49.31094pt too wide) in paragraph at lines 503--504
+\OT1/cmr/m/n/10 pode-se uti-li-zar a anotac~ao [ar-ti-fact[]name(IdArtefato,``
+NomeArtefato")]
+ []
+
+[39] [40] [41]
+Overfull \hbox (6.00241pt too wide) in paragraph at lines 540--541
+[]\OT1/cmr/m/n/10 @GUARD: Um metodo de re-torno bo-o-le-ano que de-fine as con
+dic~oes
+ []
+
+
+Overfull \hbox (13.28302pt too wide) in paragraph at lines 541--542
+[]\OT1/cmr/m/n/10 @INTERNAL[]OPERATION: In-dica que um metodo e uma operac~a
+o
+ []
+
+
+Overfull \hbox (5.9308pt too wide) in paragraph at lines 547--548
+[]\OT1/cmr/m/n/10 O mesmo metodo pode ser mar-cado com @OPE-RA-TION e @LINK. 
+ []
+
+
+Overfull \hbox (15.24678pt too wide) in paragraph at lines 551--552
+[]\OT1/cmr/m/n/10 Exemplos de im-ple-mentac~oes com Car-tago s~ao des-cri-tos 
+no Ap^endice
+ []
+
+[42]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [43]
+Overfull \hbox (3.54414pt too wide) in paragraph at lines 572--573
+\OT1/cmr/m/n/10 di-men-tos au-tomaticos, no-vas relac~oes den-tro de uma on-t
+o-lo-gia baseando-
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [44]
+Underfull \hbox (badness 10000) in paragraph at lines 582--584
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [45]
+Overfull \hbox (6.95572pt too wide) in paragraph at lines 595--596
+[]\OT1/cmr/m/n/10 Usando o ra-ci-o-na-dor Her-miT 1.3.4 (\OT1/cmr/m/n/8 SHE-A-R
+ER; MO-TIK; HOR-ROCKS\OT1/cmr/m/n/10 ,
+ []
+
+<figuras/figura18.png, id=167, 449.42906pt x 178.41656pt>
+File: figuras/figura18.png Graphic file (type png)
+
+<use figuras/figura18.png>
+Package pdftex.def Info: figuras/figura18.png used on input line 599.
+(pdftex.def)             Requested size: 292.12541pt x 115.96938pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [46]
+[47 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura18.png>]
+[48]
+Overfull \hbox (16.15022pt too wide) in paragraph at lines 657--658
+[]\OT1/cmr/m/n/10 (\OT1/cmr/m/n/8 ONTOTEXT\OT1/cmr/m/n/10 , 2012) cita Se-same 
+como um dos re-po-sitorios sem^anticos
+ []
+
+
+Overfull \hbox (3.61111pt too wide) in paragraph at lines 659--660
+[]\OT1/cmr/m/n/10 Outro exem-plo ci-tado pe-los au-to-res e o OWLIM. OWLIM(\OT
+1/cmr/m/n/8 BISHOP
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [49]
+[50]
+Overfull \hbox (6.33012pt too wide) in paragraph at lines 685--686
+[]\OT1/cmr/m/n/10 Padr~oes de me-ta-da-dos es-ta-be-le-cem me-ta-da-dos com uma
+ sem^antica
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [51]
+[52]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [53]
+[54]
+Overfull \hbox (8.40602pt too wide) in paragraph at lines 756--757
+[]\OT1/cmr/m/n/10 No ar-tigo (\OT1/cmr/m/n/8 SILVA; VI-EIRA\OT1/cmr/m/n/10 , 20
+07) e pro-posto Ar-go-naut, um prototipo
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [55]
+[56]
+Cap\'{\i }tulo 3.
+<figuras/figura1slides.png, id=205, 583.42969pt x 323.70938pt>
+File: figuras/figura1slides.png Graphic file (type png)
+
+<use figuras/figura1slides.png>
+Package pdftex.def Info: figuras/figura1slides.png used on input line 773.
+(pdftex.def)             Requested size: 262.54092pt x 145.66786pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [57
+
+]
+<figuras/figura2slides.png, id=209, 654.19406pt x 469.00218pt>
+File: figuras/figura2slides.png Graphic file (type png)
+
+<use figuras/figura2slides.png>
+Package pdftex.def Info: figuras/figura2slides.png used on input line 785.
+(pdftex.def)             Requested size: 261.67299pt x 187.59755pt.
+
+<figuras/imgGUI1.png, id=211, 572.73975pt x 365.56575pt>
+File: figuras/imgGUI1.png Graphic file (type png)
+
+<use figuras/imgGUI1.png>
+Package pdftex.def Info: figuras/imgGUI1.png used on input line 797.
+(pdftex.def)             Requested size: 229.09183pt x 146.2237pt.
+
+<figuras/imgGUI2v2.png, id=212, 651.6345pt x 349.90726pt>
+File: figuras/imgGUI2v2.png Graphic file (type png)
+
+<use figuras/imgGUI2v2.png>
+Package pdftex.def Info: figuras/imgGUI2v2.png used on input line 805.
+(pdftex.def)             Requested size: 260.64919pt x 139.96042pt.
+
+<figuras/imgGUI5.png, id=213, 389.0535pt x 298.716pt>
+File: figuras/imgGUI5.png Graphic file (type png)
+
+<use figuras/imgGUI5.png>
+Package pdftex.def Info: figuras/imgGUI5.png used on input line 813.
+(pdftex.def)             Requested size: 233.43388pt x 179.23097pt.
+ [58 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura1slides
+.png>] [59 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura2
+slides.png> <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/imgGUI
+1.png>] [60 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/imgGUI
+2v2.png> <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/imgGUI5.p
+ng>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [61]
+<figuras/icaart_portugues.png, id=231, 439.6425pt x 249.3315pt>
+File: figuras/icaart_portugues.png Graphic file (type png)
+
+<use figuras/icaart_portugues.png>
+Package pdftex.def Info: figuras/icaart_portugues.png used on input line 831.
+(pdftex.def)             Requested size: 307.74765pt x 174.53084pt.
+
+Underfull \vbox (badness 1314) has occurred while \output is active []
+
+ [62 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/icaart_portug
+ues.png>]
+[63] [64] [65]
+Underfull \vbox (badness 1043) has occurred while \output is active []
+
+ [66]
+Overfull \hbox (84.17946pt too wide) in paragraph at lines 958--959
+\OT1/cmr/m/n/10 prop:name con-te-nham a palavra-chave. Os metodos fil-trar-Cla
+s-ses(classes[]filtradas[]simples)
+ []
+
+[67]
+Overfull \hbox (77.6777pt too wide) in paragraph at lines 1009--1010
+\OT1/cmr/m/n/10 fil-trar-Ca-te-go-rias(categorias[]filtradas, 4) e fil-trar-Ca-
+te-go-rias(categorias[]filtradas[]avancado,
+ []
+
+[68]
+Underfull \hbox (badness 10000) in paragraph at lines 1011--1014
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1011--1014
+
+ []
+
+
+Overfull \hbox (0.86232pt too wide) in paragraph at lines 1029--1030
+[]\OT1/cmr/m/n/10 O codigo do agente atu-a-dor[]por[]classes e se-me-lhante a
+o do agente
+ []
+
+[69]
+Underfull \vbox (badness 1442) has occurred while \output is active []
+
+ [70]
+[71] [72] [73] [74]
+Overfull \hbox (8.20047pt too wide) in paragraph at lines 1153--1154
+\OT1/cmr/m/n/10 vras, ent~ao fun-ci-o-na-vam tambem como palavras-chave. A bus
+ca SPARQL
+ []
+
+<figuras/imgDesenvolvimento1.png, id=274, 631.76025pt x 381.22424pt>
+File: figuras/imgDesenvolvimento1.png Graphic file (type png)
+
+<use figuras/imgDesenvolvimento1.png>
+Package pdftex.def Info: figuras/imgDesenvolvimento1.png used on input line 116
+6.
+(pdftex.def)             Requested size: 284.28947pt x 171.54932pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 1174--1175
+
+ []
+
+[75]
+Underfull \hbox (badness 10000) in paragraph at lines 1193--1195
+
+ []
+
+[76 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/imgDesenvolvim
+ento1.png>]
+Overfull \hbox (5.96085pt too wide) in paragraph at lines 1202--1214
+ [] 
+ []
+
+
+Overfull \hbox (7.71077pt too wide) in paragraph at lines 1221--1233
+ [] 
+ []
+
+
+Overfull \hbox (17.90523pt too wide) in paragraph at lines 1242--1258
+ [] 
+ []
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Overfull \hbox (1.7468pt too wide) in paragraph at lines 1261--1262
+[]\OT1/cmr/m/n/10 Houveram 70% de re-sul-ta-dos sa-tis-fatorios para as palavr
+as-chaves
+ []
+
+[77] [78]
+Cap\'{\i }tulo 4.
+
+Overfull \hbox (13.4052pt too wide) in paragraph at lines 1271--1272
+[]\OT1/cmr/m/n/10 Compreender o ar-ma-ze-na-mento de da-dos em re-po-sitorios 
+sem^anticos. 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1275--1277
+
+ []
+
+[79
+
+] [80]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [81]
+[82]
+Cap\'{\i }tulo 5.
+("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\TCC.bbl" [83
+
+] [84
+
+]
+[85] [86] [87]
+Underfull \hbox (badness 3118) in paragraph at lines 273--275
+[]\OT1/cmr/m/n/10 OPENRDF. \OT1/cmr/m/it/10 Se-same\OT1/cmr/m/n/10 . 2012. 
+ []
+
+[88] [89]
+Underfull \hbox (badness 1152) in paragraph at lines 416--419
+[]\OT1/cmr/m/n/10 W3C. \OT1/cmr/m/it/10 Se-man-ticWeb: In-fe-rence\OT1/cmr/m/n/
+10 . 2012. 
+ []
+
+[90]) [91] [92
+
+] [93] [94
+
+]
+Apendice A.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [95]
+<figuras/figura2.png, id=345, 344.03531pt x 174.6525pt>
+File: figuras/figura2.png Graphic file (type png)
+
+<use figuras/figura2.png>
+Package pdftex.def Info: figuras/figura2.png used on input line 1331.
+(pdftex.def)             Requested size: 206.42278pt x 104.7923pt.
+
+Overfull \hbox (3.399pt too wide) in paragraph at lines 1337--1338
+\OT1/cmr/m/n/10 BDI (Belief-Desire-Intention, Crenca-Desejo-Intenc~ao)[] (\OT
+1/cmr/m/n/8 SHOHAM\OT1/cmr/m/n/10 , 1993).
+ []
+
+[96 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura2.png>]
+<figuras/figura3.png, id=349, 356.83313pt x 235.63031pt>
+File: figuras/figura3.png Graphic file (type png)
+
+<use figuras/figura3.png>
+Package pdftex.def Info: figuras/figura3.png used on input line 1355.
+(pdftex.def)             Requested size: 321.14684pt x 212.0653pt.
+
+Overfull \hbox (13.85706pt too wide) in paragraph at lines 1355--1356
+ [] 
+ []
+
+[97 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura3.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 1363--1365
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1367--1369
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [98]
+Underfull \hbox (badness 10000) in paragraph at lines 1378--1380
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [99]
+<figuras/figura4.png, id=359, 468.24937pt x 233.37187pt>
+File: figuras/figura4.png Graphic file (type png)
+
+<use figuras/figura4.png>
+Package pdftex.def Info: figuras/figura4.png used on input line 1385.
+(pdftex.def)             Requested size: 327.77231pt x 163.35919pt.
+
+Overfull \hbox (20.48253pt too wide) in paragraph at lines 1385--1386
+ [] 
+ []
+
+[100 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura4.png>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 1393--1395
+
+ []
+
+
+Overfull \hbox (8.37415pt too wide) in paragraph at lines 1400--1401
+[]\OT1/cmr/m/n/10 dMARS (Dis-tri-bu-ted Multi-Agent Re-a-so-ning Sys-tem) (\OT1
+/cmr/m/n/8 D'INVERNO
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [101]
+Overfull \hbox (4.79308pt too wide) in paragraph at lines 1411--1412
+[]\OT1/cmr/m/n/10 IRMA (In-tel-li-gent Resource-bounded Ma-chine Ar-chi-tec-tur
+e) (\OT1/cmr/m/n/8 WO-
+ []
+
+
+Overfull \hbox (1.59546pt too wide) in paragraph at lines 1414--1416
+[]\OT1/cmr/m/n/10 Para (\OT1/cmr/m/n/8 WO-OL-DRIDGE; JEN-NINGS\OT1/cmr/m/n/10 ,
+ 1995a) uma lin-gua-gem de agente
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1414--1416
+
+ []
+
+[102]
+Underfull \hbox (badness 10000) in paragraph at lines 1425--1427
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [103]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [104]
+[105] [106] [107] [108
+
+] [109] [110
+
+]
+Apendice B.
+
+Overfull \hbox (9.9053pt too wide) in paragraph at lines 1522--1523
+\OT1/cmr/m/n/10 dis-ponvel para down-load neste web-site: http://www.alice.un
+ibo.it/simpa 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1524--1526
+
+ []
+
+[111] <figuras/figura13.png, id=399, 97.11281pt x 76.03406pt>
+File: figuras/figura13.png Graphic file (type png)
+
+<use figuras/figura13.png>
+Package pdftex.def Info: figuras/figura13.png used on input line 1557.
+(pdftex.def)             Requested size: 97.11256pt x 76.03386pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [112]
+[113 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura13.png>
+] [114] <figuras/figura14.png, id=410, 103.88812pt x 67.0003pt>
+File: figuras/figura14.png Graphic file (type png)
+
+<use figuras/figura14.png>
+Package pdftex.def Info: figuras/figura14.png used on input line 1626.
+(pdftex.def)             Requested size: 103.88786pt x 67.00012pt.
+ [115] [116 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura
+14.png>] [117]
+<figuras/figura15.png, id=420, 109.1578pt x 49.68562pt>
+File: figuras/figura15.png Graphic file (type png)
+
+<use figuras/figura15.png>
+Package pdftex.def Info: figuras/figura15.png used on input line 1709.
+(pdftex.def)             Requested size: 109.15753pt x 49.6855pt.
+ [118 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura15.png
+>] [119] [120]
+Overfull \hbox (19.84978pt too wide) in paragraph at lines 1799--1800
+\OT1/cmr/m/n/10 operac~ao ``out"apenas adi-ci-ona uma nova tu-pla, com seu nom
+e e par^ametros,
+ []
+
+<figuras/figura16.png, id=431, 91.09032pt x 88.07906pt>
+File: figuras/figura16.png Graphic file (type png)
+
+<use figuras/figura16.png>
+Package pdftex.def Info: figuras/figura16.png used on input line 1803.
+(pdftex.def)             Requested size: 91.09007pt x 88.07883pt.
+ [121 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura16.png
+>] [122] [123] [124]
+Underfull \hbox (badness 10000) in paragraph at lines 1959--1961
+
+ []
+
+[125] [126] [127]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [128]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [129]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [130]
+[131]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [132]
+Underfull \hbox (badness 10000) in paragraph at lines 2215--2217
+
+ []
+
+<figuras/figura17.png, id=470, 130.23656pt x 207.77625pt>
+File: figuras/figura17.png Graphic file (type png)
+
+<use figuras/figura17.png>
+Package pdftex.def Info: figuras/figura17.png used on input line 2221.
+(pdftex.def)             Requested size: 130.23624pt x 207.77573pt.
+ [133 <C:/Users/jpbonson/Documents/Documents/TCC/TCC final/figuras/figura17.png
+>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [134]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [135]
+[136]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [137]
+[138] [139] [140] [141
+
+] [142
+
+]
+Apendice C.
+
+Underfull \hbox (badness 10000) in paragraph at lines 2555--2557
+
+ []
+
+[143] [144] [145] [146] [147] [148] [149] [150] [151
+
+] [152
+
+]
+Anexo A.
+[153
+
+] [154
+
+]
+Anexo B.
+
+Underfull \vbox (badness 3312) has occurred while \output is active []
+
+ [155]
+[156] [157] [158]
+Underfull \vbox (badness 3312) has occurred while \output is active []
+
+ [159]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [160]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [161]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [162]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [163]
+[164]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [165]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [166]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [167]
+[168]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [169]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [170]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [171]
+Overfull \hbox (28.91722pt too wide) in paragraph at lines 3612--3613
+[][][][] 
+ []
+
+[172]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [173]
+[174]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [175]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [176]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [177]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [178]
+[179]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [180]
+[181]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [182]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [183]
+[184]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [185]
+[186] [187] [188]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [189]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [190]
+Overfull \hbox (34.41779pt too wide) in paragraph at lines 4441--4442
+[][][][] 
+ []
+
+
+Overfull \hbox (39.5179pt too wide) in paragraph at lines 4450--4451
+[][][][][][] 
+ []
+
+
+Overfull \hbox (34.41779pt too wide) in paragraph at lines 4459--4460
+[][][][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [191]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [192]
+Overfull \hbox (23.81711pt too wide) in paragraph at lines 4502--4503
+[][][][] 
+ []
+
+
+Overfull \hbox (23.81711pt too wide) in paragraph at lines 4506--4508
+[][][][] 
+ []
+
+
+Overfull \hbox (28.91722pt too wide) in paragraph at lines 4508--4509
+[][][][] 
+ []
+
+
+Overfull \hbox (28.91722pt too wide) in paragraph at lines 4512--4514
+[][][][] 
+ []
+
+
+Overfull \hbox (23.81711pt too wide) in paragraph at lines 4518--4519
+[][][][] 
+ []
+
+
+Overfull \hbox (23.81711pt too wide) in paragraph at lines 4522--4524
+[][][][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [193]
+[194]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [195]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [196]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [197]
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 4699--4700
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 4701--4702
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [198]
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 4705--4706
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 4716--4717
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [199]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [200]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [201]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [202]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [203]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [204]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [205]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [206]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [207]
+[208]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [209]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [210]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [211]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [212]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [213]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [214]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [215]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [216]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [217]
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 5343--5344
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5345--5346
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 5348--5349
+[][] 
+ []
+
+
+Overfull \hbox (13.61688pt too wide) in paragraph at lines 5349--5350
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5350--5351
+[][] 
+ []
+
+
+Overfull \hbox (44.21756pt too wide) in paragraph at lines 5350--5351
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [218]
+Overfull \hbox (18.717pt too wide) in paragraph at lines 5351--5352
+[][] 
+ []
+
+
+Overfull \hbox (34.01733pt too wide) in paragraph at lines 5352--5353
+[][] 
+ []
+
+
+Overfull \hbox (13.61688pt too wide) in paragraph at lines 5352--5353
+[][] 
+ []
+
+
+Overfull \hbox (49.31767pt too wide) in paragraph at lines 5352--5353
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 5353--5354
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5354--5355
+[][] 
+ []
+
+
+Overfull \hbox (44.21756pt too wide) in paragraph at lines 5354--5355
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 5355--5356
+[][] 
+ []
+
+
+Overfull \hbox (34.01733pt too wide) in paragraph at lines 5356--5357
+[][] 
+ []
+
+
+Overfull \hbox (13.61688pt too wide) in paragraph at lines 5356--5357
+[][] 
+ []
+
+
+Overfull \hbox (49.31767pt too wide) in paragraph at lines 5356--5357
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 5357--5358
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5358--5359
+[][] 
+ []
+
+
+Overfull \hbox (44.21756pt too wide) in paragraph at lines 5358--5359
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 5359--5360
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [219]
+Overfull \hbox (34.01733pt too wide) in paragraph at lines 5360--5361
+[][] 
+ []
+
+
+Overfull \hbox (13.61688pt too wide) in paragraph at lines 5360--5361
+[][] 
+ []
+
+
+Overfull \hbox (49.31767pt too wide) in paragraph at lines 5360--5361
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 5361--5362
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5362--5363
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 5366--5367
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5368--5369
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 5370--5371
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [220]
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5372--5373
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 5374--5375
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5376--5377
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 5378--5379
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 5380--5381
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [221]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [222]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [223]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [224]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [225]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [226]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [227]
+[228]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [229]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [230]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [231]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [232]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [233]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [234]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [235]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [236]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [237]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [238]
+[239]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [240]
+[241]
+Underfull \vbox (badness 4569) has occurred while \output is active []
+
+ [242]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [243]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [244]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [245]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [246]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [247]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [248]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [249]
+[250]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [251]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [252]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [253]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [254]
+Overfull \hbox (8.91722pt too wide) in paragraph at lines 6467--6468
+[][][][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [255]
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 6496--6497
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 6498--6499
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 6500--6501
+[][] 
+ []
+
+
+Overfull \hbox (13.61688pt too wide) in paragraph at lines 6502--6503
+[][] 
+ []
+
+
+Overfull \hbox (44.21756pt too wide) in paragraph at lines 6504--6505
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 6505--6506
+[][] 
+ []
+
+
+Overfull \hbox (34.01733pt too wide) in paragraph at lines 6506--6507
+[][] 
+ []
+
+
+Overfull \hbox (13.61688pt too wide) in paragraph at lines 6506--6507
+[][] 
+ []
+
+
+Overfull \hbox (49.31767pt too wide) in paragraph at lines 6506--6507
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [256]
+Overfull \hbox (18.717pt too wide) in paragraph at lines 6507--6508
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 6509--6510
+[][] 
+ []
+
+
+Overfull \hbox (34.01733pt too wide) in paragraph at lines 6510--6511
+[][] 
+ []
+
+
+Overfull \hbox (13.61688pt too wide) in paragraph at lines 6510--6511
+[][] 
+ []
+
+
+Overfull \hbox (49.31767pt too wide) in paragraph at lines 6510--6511
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 6511--6512
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 6512--6513
+[][] 
+ []
+
+
+Overfull \hbox (23.81711pt too wide) in paragraph at lines 6515--6516
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [257]
+Overfull \hbox (23.81711pt too wide) in paragraph at lines 6516--6517
+[][] 
+ []
+
+
+Overfull \hbox (18.717pt too wide) in paragraph at lines 6526--6527
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [258]
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 6549--6550
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 6551--6552
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 6552--6553
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [259]
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 6553--6554
+[][] 
+ []
+
+
+Overfull \hbox (44.21756pt too wide) in paragraph at lines 6554--6555
+[][] 
+ []
+
+
+Overfull \hbox (3.41666pt too wide) in paragraph at lines 6556--6557
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 6558--6559
+[][] 
+ []
+
+
+Overfull \hbox (39.11745pt too wide) in paragraph at lines 6559--6560
+[][] 
+ []
+
+
+Overfull \hbox (8.51677pt too wide) in paragraph at lines 6560--6561
+[][] 
+ []
+
+
+Overfull \hbox (74.81824pt too wide) in paragraph at lines 6561--6562
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [260]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [261]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [262]
+Overfull \hbox (34.01733pt too wide) in paragraph at lines 6618--6619
+[][] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [263]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [264]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [265]
+[266]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [267]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [268]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [269]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [270]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [271]
+[272]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [273]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [274]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [275]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [276]
+[277]
++-------------------------------------------------------------------+
+| Comentario, sugestao ou critica sobre o abnTeX? Entre em contato: |
+|                  http://abntex.codigolivre.org.br                 |
++-------------------------------------------------------------------+
+[278] ("C:\Users\jpbonson\Documents\Documents\TCC\TCC final\TCC.aux")
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+ ) 
+Here is how much of TeX's memory you used:
+ 7649 strings out of 493921
+ 112857 string characters out of 3144867
+ 387391 words of memory out of 3000000
+ 10787 multiletter control sequences out of 15000+200000
+ 11115 words of font info for 39 fonts, out of 3000000 for 9000
+ 841 hyphenation exceptions out of 8191
+ 41i,9n,42p,1511b,1714s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmbsy8
+.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx10.p
+fb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/P
+rogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Progr
+am Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><C:/Program F
+iles (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr8.pfb><C:/Program Files (x8
+6)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Program Files (x86)/M
+iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files (x86)/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (x86)/MiKTeX 2
+.9/fonts/type1/public/amsfonts/cm/cmu10.pfb>
+Output written on TCC.pdf (280 pages, 1821005 bytes).
+PDF statistics:
+ 988 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
+
