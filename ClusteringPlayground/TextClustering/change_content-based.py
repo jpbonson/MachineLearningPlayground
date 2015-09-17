@@ -5,7 +5,7 @@
 # vim: set fileencoding=utf-8 :
 
 import json
-from engine.common.normalize import normalize_string, normalize_diacritics
+from test_project.normalize import normalize_string, normalize_diacritics
 
 # def download(s3_manager, data_name, s3file):
 #     print "Getting S3 path"

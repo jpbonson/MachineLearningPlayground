@@ -18,10 +18,10 @@ from gensim import corpora, models, similarities
 from gensim.models.tfidfmodel import TfidfModel
 from gensim.models import hdpmodel, ldamodel
 from itertools import izip
-from engine.tools.contentbased.stopwords import WORDS_STOPLIST, IGNORE_WORDS, PREPOSITIONS_LIST_SHORT, GENERIC_WORDS
-from engine.common.normalize import normalize_string
-from engine.tools.contentbased.create_model import get_terms
-from engine.common.filters import filter_and_classify_input
+from test_project.stopwords import WORDS_STOPLIST, IGNORE_WORDS, PREPOSITIONS_LIST_SHORT, GENERIC_WORDS
+from test_project.normalize import normalize_string
+from test_project.create_model import get_terms
+from test_project.filters import filter_and_classify_input
 from sklearn import metrics
 from gensim.models.tfidfmodel import TfidfModel
 from scipy.sparse import csr_matrix

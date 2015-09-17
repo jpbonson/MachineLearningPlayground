@@ -5,7 +5,7 @@
 # vim: set fileencoding=utf-8 :
 
 import json
-from engine.common.normalize import normalize_string, normalize_diacritics
+from test_project.normalize import normalize_string, normalize_diacritics
 
 j_content = []
 with open("data-clusterization/blah") as f:
