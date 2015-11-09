@@ -1,0 +1,413 @@
+
+R version 3.2.2 (2015-08-14) -- "Fire Safety"
+Copyright (C) 2015 The R Foundation for Statistical Computing
+Platform: x86_64-pc-linux-gnu (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+  Natural language support but running in an English locale
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(caret) # for train/test partition
+> library(rpart) # training a decision tree
+> 
+> # REMEMBER: The indices start at 1! (not zero!)
+> 
+> # (a) [1] Split the data randomly into a training set and a testing set (e.g. 65%‐35%).
+> # [2] Train a decision tree classifier using the train data.
+> # [3] Report the confusion matrix and accuracy for both train and test data.
+> # [4] Compare the train and test accuracy. Is there a big difference between train and test accuracy? Why?
+> # [5] Finally, visualize the tree.
+> 
+> # [1] read and partitionate data
+> data <- read.csv(file="winequality_simple.csv", header=TRUE, sep=",", colClasses=c(rep('numeric', 11), 'factor'))
+> set.seed(6000)
+> trainIndex <- createDataPartition(data$quality, p = .8, list = FALSE, times = 1)
+> train_data <- data[trainIndex,]
+> test_data <- data[-trainIndex,]
+> attach(train_data)
+> 
+> # [2] train tree 
+> control_obj <- rpart.control(minsplit = 30, minbucket = 7, cp = 0.0001, 
++               maxcompete = 4, maxsurrogate = 5, usesurrogate = 2, xval = 10,
++               surrogatestyle = 0, maxdepth = 30)
+> fit <- rpart(quality ~ fixed.acidity + volatile.acidity + citric.acid + residual.sugar + chlorides + free.sulfur.dioxide + total.sulfur.dioxide + density + pH + sulphates + alcohol, method="class", control=control_obj)
+> printcp(fit) # display cross-validation table
+
+Classification tree:
+rpart(formula = quality ~ fixed.acidity + volatile.acidity + 
+    citric.acid + residual.sugar + chlorides + free.sulfur.dioxide + 
+    total.sulfur.dioxide + density + pH + sulphates + alcohol, 
+    method = "class", control = control_obj)
+
+Variables actually used in tree construction:
+ [1] alcohol              chlorides            citric.acid         
+ [4] density              fixed.acidity        free.sulfur.dioxide 
+ [7] pH                   residual.sugar       sulphates           
+[10] total.sulfur.dioxide volatile.acidity    
+
+Root node error: 2141/3900 = 0.54897
+
+n= 3900 
+
+           CP nsplit rel error  xerror     xstd
+1  0.05721625      0   1.00000 1.00000 0.014514
+2  0.02288650      2   0.88557 0.90191 0.014584
+3  0.01961700      3   0.86268 0.88603 0.014579
+4  0.00747314      4   0.84306 0.87062 0.014570
+5  0.00607193      5   0.83559 0.86408 0.014565
+6  0.00451502      7   0.82345 0.86829 0.014568
+7  0.00420364     10   0.80990 0.86221 0.014564
+8  0.00389226     11   0.80570 0.85100 0.014553
+9  0.00373657     14   0.79402 0.85988 0.014561
+10 0.00326950     21   0.76787 0.85147 0.014553
+11 0.00303596     27   0.74825 0.85007 0.014552
+12 0.00280243     29   0.74218 0.84727 0.014549
+13 0.00249105     30   0.73937 0.84026 0.014541
+14 0.00233536     33   0.73190 0.84867 0.014550
+15 0.00217967     37   0.72256 0.84353 0.014544
+16 0.00210182     41   0.71228 0.84166 0.014542
+17 0.00198505     44   0.70574 0.83092 0.014528
+18 0.00186829     49   0.69547 0.82952 0.014526
+19 0.00163475     65   0.66231 0.82858 0.014525
+20 0.00155690     73   0.64923 0.83092 0.014528
+21 0.00140121     77   0.64269 0.82158 0.014514
+22 0.00116768     96   0.61513 0.82251 0.014516
+23 0.00093414     98   0.61280 0.82345 0.014517
+24 0.00077845    132   0.57543 0.83559 0.014535
+25 0.00074731    137   0.57123 0.84213 0.014543
+26 0.00070061    143   0.56656 0.84493 0.014546
+27 0.00046707    151   0.56095 0.84680 0.014548
+28 0.00023354    166   0.55395 0.85007 0.014552
+29 0.00011677    168   0.55348 0.85054 0.014552
+30 0.00010000    172   0.55301 0.85054 0.014552
+> summary(fit) # detailed results of splits including surrogate splits
+Call:
+rpart(formula = quality ~ fixed.acidity + volatile.acidity + 
+    citric.acid + residual.sugar + chlorides + free.sulfur.dioxide + 
+    total.sulfur.dioxide + density + pH + sulphates + alcohol, 
+    method = "class", control = control_obj)
+  n= 3900 
+
+             CP nsplit rel error    xerror       xstd
+1  0.0572162541      0 1.0000000 1.0000000 0.01451417
+2  0.0228865016      2 0.8855675 0.9019150 0.01458361
+3  0.0196170014      3 0.8626810 0.8860346 0.01457891
+4  0.0074731434      4 0.8430640 0.8706212 0.01457011
+5  0.0060719290      5 0.8355908 0.8640822 0.01456511
+6  0.0045150241      7 0.8234470 0.8682858 0.01456841
+7  0.0042036432     10 0.8099019 0.8622139 0.01456354
+8  0.0038922622     11 0.8056983 0.8510042 0.01455285
+9  0.0037365717     14 0.7940215 0.8598786 0.01456150
+10 0.0032695002     21 0.7678655 0.8514713 0.01455334
+11 0.0030359645     27 0.7482485 0.8500701 0.01455186
+12 0.0028024288     29 0.7421766 0.8472676 0.01454879
+13 0.0024910478     30 0.7393741 0.8402616 0.01454051
+14 0.0023353573     33 0.7319010 0.8486688 0.01455034
+15 0.0021796668     37 0.7225596 0.8435311 0.01454448
+16 0.0021018216     41 0.7122840 0.8416628 0.01454224
+17 0.0019850537     44 0.7057450 0.8309201 0.01452812
+18 0.0018682858     49 0.6954694 0.8295189 0.01452612
+19 0.0016347501     65 0.6623073 0.8285848 0.01452478
+20 0.0015569049     73 0.6492293 0.8309201 0.01452812
+21 0.0014012144     77 0.6426903 0.8215787 0.01451417
+22 0.0011676787     96 0.6151331 0.8225128 0.01451564
+23 0.0009341429     98 0.6127978 0.8234470 0.01451709
+24 0.0007784524    132 0.5754320 0.8355908 0.01453451
+25 0.0007473143    137 0.5712284 0.8421298 0.01454280
+26 0.0007006072    143 0.5665577 0.8449323 0.01454613
+27 0.0004670715    151 0.5609528 0.8468006 0.01454826
+28 0.0002335357    166 0.5539468 0.8500701 0.01455186
+29 0.0001167679    168 0.5534797 0.8505371 0.01455235
+30 0.0001000000    172 0.5530126 0.8505371 0.01455235
+
+Variable importance
+             alcohol              density            chlorides 
+                  16                   14                   10 
+    volatile.acidity total.sulfur.dioxide       residual.sugar 
+                   9                    9                    9 
+ free.sulfur.dioxide                   pH            sulphates 
+                   9                    8                    6 
+       fixed.acidity          citric.acid 
+                   5                    5 
+
+(...)
+
+> 
+> # [3] confusion matrix and accuracy (train and test)
+> 
+> # for testing:
+> # single_value<-data.frame(fixed.acidity=1,volatile.acidity=1,citric.acid=1,residual.sugar=1,chlorides=1,free.sulfur.dioxide=1,total.sulfur.dioxide=1,density=1,pH=1,sulphates=1,alcohol=1)
+> # single_value2<-test_data_no_labels[1,]
+> 
+> # train:
+> train_truth <- train_data[,12]
+> train_pred <- predict(fit, type="class")
+> confusionMatrix(train_pred, train_truth)
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    4    5    6    7    8
+         4   28    5    9    0    0
+         5   57  864  250   58   13
+         6   39  253 1340  183   42
+         7    7   38  141  443   44
+         8    0    6   19   20   41
+
+Overall Statistics
+                                          
+               Accuracy : 0.6964          
+                 95% CI : (0.6817, 0.7108)
+    No Information Rate : 0.451           
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.5384          
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: 4 Class: 5 Class: 6 Class: 7 Class: 8
+Sensitivity          0.213740   0.7410   0.7618   0.6293  0.29286
+Specificity          0.996285   0.8617   0.7585   0.9280  0.98803
+Pos Pred Value       0.666667   0.6957   0.7216   0.6582  0.47674
+Neg Pred Value       0.973302   0.8864   0.7949   0.9191  0.97404
+Prevalence           0.033590   0.2990   0.4510   0.1805  0.03590
+Detection Rate       0.007179   0.2215   0.3436   0.1136  0.01051
+Detection Prevalence 0.010769   0.3185   0.4762   0.1726  0.02205
+Balanced Accuracy    0.605013   0.8014   0.7602   0.7786  0.64044
+> 
+> # test:
+> test_data_no_labels <- test_data[,1:11]
+> test_truth <- test_data[,12]
+> test_pred <- predict(fit, test_data_no_labels, type="class")
+> confusionMatrix(test_pred, test_truth)
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   4   5   6   7   8
+         4   3   2   3   0   0
+         5  21 180 105  14   2
+         6   7  98 250  79  17
+         7   1  10  75  75  12
+         8   0   1   6   8   4
+
+Overall Statistics
+                                         
+               Accuracy : 0.5262         
+                 95% CI : (0.4943, 0.558)
+    No Information Rate : 0.4512         
+    P-Value [Acc > NIR] : 1.601e-06      
+                                         
+                  Kappa : 0.2808         
+ Mcnemar's Test P-Value : NA             
+
+Statistics by Class:
+
+                     Class: 4 Class: 5 Class: 6 Class: 7 Class: 8
+Sensitivity          0.093750   0.6186   0.5695  0.42614 0.114286
+Specificity          0.994687   0.7918   0.6236  0.87704 0.984009
+Pos Pred Value       0.375000   0.5590   0.5543  0.43353 0.210526
+Neg Pred Value       0.969948   0.8295   0.6379  0.87375 0.967505
+Prevalence           0.032888   0.2991   0.4512  0.18088 0.035971
+Detection Rate       0.003083   0.1850   0.2569  0.07708 0.004111
+Detection Prevalence 0.008222   0.3309   0.4635  0.17780 0.019527
+Balanced Accuracy    0.544218   0.7052   0.5965  0.65159 0.549147
+> 
+> # [4]
+> # [REPORT]
+> 
+> # [5] plot tree 
+> pdf("tree.pdf", width = 16, height = 10 )
+> plot(fit, uniform=TRUE, main="Classification Tree for Wine Quality") # plot decision tree
+> text(fit, use.n=TRUE, all=TRUE, cex=.8) # label the decision tree plot
+> # post(fit, file = "tree.ps", title = "Classification Tree for Wine Quality") # create postscript plot of decision tree
+> 
+> # (b) [1] Repeat (a) and after training the classifier, prune the decision tree.
+> # [2] Report the confusion matrix and accuracy for train and test data using the pruned tree and
+> #  compare it to those obtained from (a).
+> # [3] Visualize the tree and discuss the effect of pruning on generalization ability of the model.
+> # [4] How the train and test accuracy changes by pruning? Why?
+> 
+> # [1] prune the tree
+> # cp (complexity parameter): choose it so it minimizes the xerror
+> pfit <- prune(fit, cp = fit$cptable[which.min(fit$cptable[,"xerror"]),"CP"])
+> printcp(pfit) # display cross-validation table
+
+Classification tree:
+rpart(formula = quality ~ fixed.acidity + volatile.acidity + 
+    citric.acid + residual.sugar + chlorides + free.sulfur.dioxide + 
+    total.sulfur.dioxide + density + pH + sulphates + alcohol, 
+    method = "class", control = control_obj)
+
+Variables actually used in tree construction:
+ [1] alcohol              chlorides            citric.acid         
+ [4] density              fixed.acidity        free.sulfur.dioxide 
+ [7] pH                   residual.sugar       sulphates           
+[10] total.sulfur.dioxide volatile.acidity    
+
+Root node error: 2141/3900 = 0.54897
+
+n= 3900 
+
+          CP nsplit rel error  xerror     xstd
+1  0.0572163      0   1.00000 1.00000 0.014514
+2  0.0228865      2   0.88557 0.90191 0.014584
+3  0.0196170      3   0.86268 0.88603 0.014579
+4  0.0074731      4   0.84306 0.87062 0.014570
+5  0.0060719      5   0.83559 0.86408 0.014565
+6  0.0045150      7   0.82345 0.86829 0.014568
+7  0.0042036     10   0.80990 0.86221 0.014564
+8  0.0038923     11   0.80570 0.85100 0.014553
+9  0.0037366     14   0.79402 0.85988 0.014561
+10 0.0032695     21   0.76787 0.85147 0.014553
+11 0.0030360     27   0.74825 0.85007 0.014552
+12 0.0028024     29   0.74218 0.84727 0.014549
+13 0.0024910     30   0.73937 0.84026 0.014541
+14 0.0023354     33   0.73190 0.84867 0.014550
+15 0.0021797     37   0.72256 0.84353 0.014544
+16 0.0021018     41   0.71228 0.84166 0.014542
+17 0.0019851     44   0.70574 0.83092 0.014528
+18 0.0018683     49   0.69547 0.82952 0.014526
+19 0.0016348     65   0.66231 0.82858 0.014525
+20 0.0015569     73   0.64923 0.83092 0.014528
+21 0.0014012     77   0.64269 0.82158 0.014514
+> summary(pfit) # detailed results of splits including surrogate splits
+Call:
+rpart(formula = quality ~ fixed.acidity + volatile.acidity + 
+    citric.acid + residual.sugar + chlorides + free.sulfur.dioxide + 
+    total.sulfur.dioxide + density + pH + sulphates + alcohol, 
+    method = "class", control = control_obj)
+  n= 3900 
+
+            CP nsplit rel error    xerror       xstd
+1  0.057216254      0 1.0000000 1.0000000 0.01451417
+2  0.022886502      2 0.8855675 0.9019150 0.01458361
+3  0.019617001      3 0.8626810 0.8860346 0.01457891
+4  0.007473143      4 0.8430640 0.8706212 0.01457011
+5  0.006071929      5 0.8355908 0.8640822 0.01456511
+6  0.004515024      7 0.8234470 0.8682858 0.01456841
+7  0.004203643     10 0.8099019 0.8622139 0.01456354
+8  0.003892262     11 0.8056983 0.8510042 0.01455285
+9  0.003736572     14 0.7940215 0.8598786 0.01456150
+10 0.003269500     21 0.7678655 0.8514713 0.01455334
+11 0.003035965     27 0.7482485 0.8500701 0.01455186
+12 0.002802429     29 0.7421766 0.8472676 0.01454879
+13 0.002491048     30 0.7393741 0.8402616 0.01454051
+14 0.002335357     33 0.7319010 0.8486688 0.01455034
+15 0.002179667     37 0.7225596 0.8435311 0.01454448
+16 0.002101822     41 0.7122840 0.8416628 0.01454224
+17 0.001985054     44 0.7057450 0.8309201 0.01452812
+18 0.001868286     49 0.6954694 0.8295189 0.01452612
+19 0.001634750     65 0.6623073 0.8285848 0.01452478
+20 0.001556905     73 0.6492293 0.8309201 0.01452812
+21 0.001401214     77 0.6426903 0.8215787 0.01451417
+
+Variable importance
+             alcohol              density     volatile.acidity 
+                  21                   15                   12 
+           chlorides total.sulfur.dioxide       residual.sugar 
+                  10                    9                    8 
+ free.sulfur.dioxide                   pH            sulphates 
+                   7                    6                    6 
+       fixed.acidity          citric.acid 
+                   4                    3 
+
+(...)
+
+> 
+> # [2] confusion matrix and accuracy (train and test)
+> 
+> # train:
+> train_truth <- train_data[,12]
+> train_pred <- predict(pfit, type="class")
+> confusionMatrix(train_pred, train_truth)
+Confusion Matrix and Statistics
+
+          Reference
+Prediction    4    5    6    7    8
+         4   22    4    9    0    0
+         5   68  808  281   47    7
+         6   36  330 1334  309   55
+         7    5   18  131  345   63
+         8    0    6    4    3   15
+
+Overall Statistics
+                                          
+               Accuracy : 0.6472          
+                 95% CI : (0.6319, 0.6622)
+    No Information Rate : 0.451           
+    P-Value [Acc > NIR] : < 2.2e-16       
+                                          
+                  Kappa : 0.4503          
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: 4 Class: 5 Class: 6 Class: 7 Class: 8
+Sensitivity          0.167939   0.6930   0.7584  0.49006 0.107143
+Specificity          0.996551   0.8526   0.6590  0.93210 0.996543
+Pos Pred Value       0.628571   0.6672   0.6463  0.61388 0.535714
+Neg Pred Value       0.971798   0.8669   0.7685  0.89245 0.967717
+Prevalence           0.033590   0.2990   0.4510  0.18051 0.035897
+Detection Rate       0.005641   0.2072   0.3421  0.08846 0.003846
+Detection Prevalence 0.008974   0.3105   0.5292  0.14410 0.007179
+Balanced Accuracy    0.582245   0.7728   0.7087  0.71108 0.551843
+> 
+> # test:
+> test_data_no_labels <- test_data[,1:11]
+> test_truth <- test_data[,12]
+> test_pred <- predict(pfit, test_data_no_labels, type="class")
+> confusionMatrix(test_pred, test_truth)
+Confusion Matrix and Statistics
+
+          Reference
+Prediction   4   5   6   7   8
+         4   3   2   3   0   0
+         5  20 168  93   9   1
+         6   8 116 289 104  21
+         7   1   5  53  63  11
+         8   0   0   1   0   2
+
+Overall Statistics
+                                          
+               Accuracy : 0.5396          
+                 95% CI : (0.5077, 0.5712)
+    No Information Rate : 0.4512          
+    P-Value [Acc > NIR] : 1.993e-08       
+                                          
+                  Kappa : 0.276           
+ Mcnemar's Test P-Value : NA              
+
+Statistics by Class:
+
+                     Class: 4 Class: 5 Class: 6 Class: 7 Class: 8
+Sensitivity          0.093750   0.5773   0.6583  0.35795 0.057143
+Specificity          0.994687   0.8196   0.5337  0.91217 0.998934
+Pos Pred Value       0.375000   0.5773   0.5372  0.47368 0.666667
+Neg Pred Value       0.969948   0.8196   0.6552  0.86548 0.965979
+Prevalence           0.032888   0.2991   0.4512  0.18088 0.035971
+Detection Rate       0.003083   0.1727   0.2970  0.06475 0.002055
+Detection Prevalence 0.008222   0.2991   0.5529  0.13669 0.003083
+Balanced Accuracy    0.544218   0.6985   0.5960  0.63506 0.528038
+> 
+> # [REPORT]
+> 
+> # [3] plot tree
+> pdf("ptree.pdf", width = 16, height = 10 )
+> plot(pfit, uniform=TRUE, main="Classification Pruned Tree for Wine Quality") # plot decision tree
+> text(pfit, use.n=TRUE, all=TRUE, cex=.8) # label the decision tree plot
+> 
+> # [REPORT]
+> 
+> # [4] 
+> # [REPORT]
+> 
