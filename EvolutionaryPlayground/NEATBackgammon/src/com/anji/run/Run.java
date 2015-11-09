@@ -28,15 +28,8 @@ import org.jgap.event.GeneticEvent;
 import org.jgap.event.GeneticEventListener;
 
 import com.anji.integration.Generation;
-import com.anji.neat.Evolver;
-import com.anji.persistence.Persistence;
 import com.anji.util.Configurable;
-import com.anji.util.DummyConfiguration;
 import com.anji.util.Properties;
-import java.util.Iterator;
-import org.jgap.BulkFitnessFunction;
-import org.jgap.Chromosome;
-import org.jgap.Configuration;
 
 /**
  * Hibernate-able run object.
@@ -60,8 +53,6 @@ private List generations = new ArrayList();
 private Properties props;
 
 private Calendar startTime = Calendar.getInstance();
-
-public static double wins_against_pubeval = 0;
 
 // TODO population
 
@@ -99,46 +90,8 @@ public Run( String aName ) {
  * 
  * @param genotype
  */
-public void addGeneration( Genotype genotype ) { // AQUI
-        // genotype = geração que acabou de acabar
-        // code para testing curve aqui
-        if(currentGenerationNumber%50 == 0)
-        {
-            Chromosome champ = genotype.getFittestChromosome();
-            int fitness_temp = champ.getFitnessValue();
-            double wins_temp = champ.getWins();
-            evaluateAgainstPubeval(champ);
-            double wins_pubeval = champ.getWins();
-            champ.setFitnessValue(fitness_temp);
-            champ.setWins(wins_temp);
-            wins_against_pubeval = wins_pubeval;
-        }
-        
-        generations.add( new Generation( genotype, currentGenerationNumber++ ) );
-}
-
-public void evaluateAgainstPubeval(Chromosome champ) // AQUI
-{
-    // load fitness function from properties
-    Properties props_local = new Properties();
-    try{
-        props_local.loadFromResource( "backgammon_evaluation.properties" );
-    }catch(java.io.IOException e) {System.out.println("Problem on the custom code with the file backgammon_evaluation.properties");}
-    BulkFitnessFunction fitnessFunc = (BulkFitnessFunction) props_local
-                    .singletonObjectProperty( Evolver.FITNESS_FUNCTION_CLASS_KEY );
-
-    // load chromosomes
-    Persistence db = (Persistence) props_local.newObjectProperty( Persistence.PERSISTENCE_CLASS_KEY );
-    Configuration config = new DummyConfiguration();
-    ArrayList chroms = new ArrayList();
-    //Chromosome chrom = db.loadChromosome( champ.getId().toString(), config );
-    Chromosome chrom = champ;
-    if ( chrom == null )
-            throw new IllegalArgumentException( "no chromosome found: " + champ.getId().toString() );
-    chroms.add( chrom );
-
-    // evaluate
-    fitnessFunc.evaluate( chroms );
+public void addGeneration( Genotype genotype ) {
+	generations.add( new Generation( genotype, currentGenerationNumber++ ) );
 }
 
 /**

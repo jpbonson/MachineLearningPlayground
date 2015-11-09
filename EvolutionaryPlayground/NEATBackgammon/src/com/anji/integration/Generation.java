@@ -19,7 +19,6 @@
  */
 package com.anji.integration;
 
-import com.anji.run.Run;
 import java.util.Iterator;
 
 import org.jgap.Chromosome;
@@ -116,26 +115,19 @@ private void cacheXml() {
 		if ( thisChromComplexity < minComplexity )
 			minComplexity = thisChromComplexity;
 	}
-        result.append( "<evaluation>" ).append(Run.wins_against_pubeval*10000 );
-        result.append( "</evaluation>\n" );
 	result.append( "<fitness>\n" );
-	//result.append( "<max>" ).append( maxFitness );  //AQUI
-        result.append( "<max>" ).append( genotype.getFittestChromosome().getWins()*10000 );
-        // result.append( "<max>" ).append( 10000 );
+	result.append( "<max>" ).append( maxFitness );
 	result.append( "</max>\n" );
-	//result.append( "<min>" ).append( minFitness );  //AQUI
-        result.append( "<min>" ).append( 0 );
+	result.append( "<min>" ).append( minFitness );
 	result.append( "</min>\n" );
 	result.append( "<avg>" );
-	//result.append( runningFitnessTotal / popSize );  //AQUI
-	result.append( genotype.getFittestChromosome().getWins()*10000 );
-        result.append( "</avg>\n" );
+	result.append( runningFitnessTotal / popSize );
+	result.append( "</avg>\n" );
 	result.append( "</fitness>\n" );
+
 	result.append( "<complexity>\n" );
 	result.append( "<champ>" ).append( genotype.getFittestChromosome().size() );
 	result.append( "</champ>\n" );
-        result.append( "<champid>" ).append( genotype.getFittestChromosome().getId() );
-	result.append( "</champid>\n" );
 	result.append( "<max>" ).append( maxComplexity );
 	result.append( "</max>\n" );
 	result.append( "<min>" ).append( minComplexity );
@@ -144,29 +136,12 @@ private void cacheXml() {
 	result.append( (double) runningComplexityTotal / popSize );
 	result.append( "</avg>\n" );
 	result.append( "</complexity>\n" );
-                        
+
 	Iterator speciesIter = genotype.getSpecies().iterator();
 	while ( speciesIter.hasNext() ) {
 		Specie specie = (Specie) speciesIter.next();
 		result.append( specie.toXml() );
 	}
-        
-        result.append( "<species_extra_info>\n" ); // AQUI
-        result.append( "<total>" ).append(  genotype.getSpecies().size() );
-	result.append( "</total>\n" );
-        Iterator speciesIter2 = genotype.getSpecies().iterator();
-	while ( speciesIter2.hasNext() ) {
-		Specie specie = (Specie) speciesIter2.next();
-                result.append( "<" ).append( "specie" ).append( " " ).append( "id" ).append( "=\"" );
-            result.append( specie.getRepresentativeId() ).append( "\" " ).append( "count" ).append( "=\"" );
-            result.append( specie.getChromosomes().size() ).append( "\"" );
-            result.append( ">\n" );
-            result.append("<fittest id=\"").append(specie.getFittest().getId()).append("\" fitness=\"").append(specie.getFittest().getWins()).append( "\"/>\n");
-            result.append("<average_wins>").append(specie.getAverageWins()).append("</average_wins>");
-            result.append( "</specie>\n" );
-	}
-        result.append( "</species_extra_info>\n" );
-        
 	result.append( "</" ).append( GENERATION_TAG ).append( ">\n" );
 
 	cachedXml = result.toString();

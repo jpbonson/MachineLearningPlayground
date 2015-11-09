@@ -23,7 +23,6 @@ public class BackgammonGame implements Game, Configurable
     private final static String GAMECONFIG_KEY = "backgammon.game.gameConfig";
     private final static String GAMECONFIG_DEFAULT = "default";
     private final static String GAMECONFIG_RACING = "racing";
-    private final static String GAMECONFIG_RACING_QUAD2 = "racingQ2";
     private String gameconfig = GAMECONFIG_DEFAULT;
     
     public BackgammonGame()
@@ -41,10 +40,8 @@ public class BackgammonGame implements Game, Configurable
         
         if(gameconfig.equals(GAMECONFIG_DEFAULT))
             boardConfig = Board.BoardConfig.REGULAR;
-        else if(gameconfig.equals(GAMECONFIG_RACING))
-            boardConfig = Board.BoardConfig.RACING;
         else
-            boardConfig = Board.BoardConfig.RACING_QUAD2;
+            boardConfig = Board.BoardConfig.RACING;
         
         GameResults results = new GameResults();
 

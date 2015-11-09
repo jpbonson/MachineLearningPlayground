@@ -49,7 +49,7 @@ private final static String TOURNAMENT_CLASS_KEY = "tournament";
 
 private final static String TRANSCRIBER_CLASS_KEY = "tournament.transcriber";
 
-private final static String MAX_FITNESS_KEY = "tournament.fitness.max"; // nullied
+private final static String MAX_FITNESS_KEY = "tournament.fitness.max";
 
 private static final String NONCHROMOSOME_CONTESTANTS_KEY = "tournament.nonchromosome.contestants";
 
@@ -141,13 +141,7 @@ public void evaluate( List chroms ) {
 			// non-chromosome player
 			logger.info( tourneyPlayerResults );
 		else
-                {
-                    c.setFitnessValue( normalizedScore );
-                    c.setWins((double)tourneyPlayerResults.getResults().getWins()/((double)tourneyPlayerResults.getResults().getWins()+(double)tourneyPlayerResults.getResults().getLosses())); //AQUI
-                    //c.setFitnessValue( tourneyPlayerResults.getTournamentScore() );
-                    //c.setFitnessValue( tourneyPlayerResults.getResults().getWins() );
-                    //System.out.println(c.getId()+" - "+tourneyPlayerResults.getResults().getWins()+" : "+tourneyPlayerResults.getResults().getLosses()+" = "+c.getWins());
-                }
+			c.setFitnessValue( normalizedScore );
 	}
 }
 

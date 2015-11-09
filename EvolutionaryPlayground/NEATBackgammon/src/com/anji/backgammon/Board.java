@@ -10,7 +10,7 @@ public class Board {
     private BackgammonGame game;
     public static final int WHITE_BAR_POS = 100;
     public static final int BLACK_BAR_POS = 200;
-    public enum BoardConfig {REGULAR,RACING, RACING_QUAD2};
+    public enum BoardConfig {REGULAR,RACING};
     
     public Board(BackgammonGame game) {
         boardState = new BoardState();
@@ -24,8 +24,6 @@ public class Board {
             boardState.initializeRegularBoard();
         if(config == BoardConfig.RACING)
             boardState.initializeRacingBoard();
-        if(config == BoardConfig.RACING_QUAD2)
-            boardState.initializeRacingBoard_quad2();
     }
 
     public boolean isEndGame()
@@ -66,8 +64,8 @@ public class Board {
         Color currentPlayer = game.getCurrentPlayer();
         
         ArrayList<BoardState> nextBoardStates;
-        ArrayList<BoardState> nextBoardStates2 = new ArrayList<BoardState>();
-        ArrayList<BoardState> finalBoardStates = new ArrayList<BoardState>();
+        ArrayList<BoardState> nextBoardStates2 = new ArrayList<>();
+        ArrayList<BoardState> finalBoardStates = new ArrayList<>();
         
         BoardState currentBoardState = boardState;
         BoardState possibleWin;
@@ -109,7 +107,7 @@ public class Board {
                 return finalBoardStates;
             }
             
-            nextBoardStates = new ArrayList<BoardState>();
+            nextBoardStates = new ArrayList<>();
             for(int i = 0; i < nextBoardStates2.size(); i++)
                 nextBoardStates.addAll(getAllValidMoves_Iteration(currentPlayer, nextBoardStates2.get(i), dice_values));
             if(checkIfMoveWins(nextBoardStates))
@@ -118,7 +116,7 @@ public class Board {
                 return finalBoardStates;
             }
             
-            nextBoardStates2 = new ArrayList<BoardState>();
+            nextBoardStates2 = new ArrayList<>();
             for(int i = 0; i < nextBoardStates.size(); i++)
                 nextBoardStates2.addAll(getAllValidMoves_Iteration(currentPlayer, nextBoardStates.get(i), dice_values));
             if(checkIfMoveWins(nextBoardStates2))
@@ -155,13 +153,13 @@ public class Board {
     
     private ArrayList<BoardState> getAllValidMoves_Iteration(Color currentPlayer, BoardState currentBoardState, int dice_values[])
     {
-        ArrayList<BoardState> nextBoardStates = new ArrayList<BoardState>();
+        ArrayList<BoardState> nextBoardStates = new ArrayList<>();
         
         // which column apply the dice (for the current BoardState)
         ArrayList<Integer> validColumns = validColumns(currentPlayer, currentBoardState);
         // dice ordering
         // for each Integer in the ArrayList, create a DiceAtPosition for each valid dice in that position
-        ArrayList<DiceAtPosition> diceAtPosition = new ArrayList<DiceAtPosition>();
+        ArrayList<DiceAtPosition> diceAtPosition = new ArrayList<>();
         DiceAtPosition diceAtPositionTemp;
         for(int i = 0; i < validColumns.size(); i++)
             for(int j = 0; j < dice_values.length; j++)
@@ -288,7 +286,7 @@ public class Board {
     // add valid column positions
     private ArrayList<Integer> validColumns(Color currentPlayer, BoardState currentBoardState)
     {
-        ArrayList<Integer> validColumns = new ArrayList<Integer>();
+        ArrayList<Integer> validColumns = new ArrayList<>();
         
         // check if it's at bar
         if(currentPlayer == Color.WHITE && currentBoardState.getWhiteBar().getQuantityCheckers() > 0)

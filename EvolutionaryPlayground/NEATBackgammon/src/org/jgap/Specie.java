@@ -247,17 +247,6 @@ public String toXml() {
 	return result.toString();
 }
 
-public double getAverageWins() // AQUI
-{
-    Iterator chromIter = getChromosomes().iterator();
-    double total = 0;
-    while ( chromIter.hasNext() ) {
-            Chromosome chromToStore = (Chromosome) chromIter.next();
-            total += chromToStore.getWins();
-    }
-    return total/getChromosomes().size();
-}
-
 /**
  * for hibernate
  * @return unique id

@@ -154,8 +154,8 @@ public void init( Properties props ) throws Exception {
 
 	// load population, either from previous run or random
 	genotype = db.loadGenotype( config );
-	if ( genotype != null ){
-		logger.info( "genotype from previous run" );}
+	if ( genotype != null )
+		logger.info( "genotype from previous run" );
 	else {
 		genotype = Genotype.randomInitialGenotype( config );
 		logger.info( "random genotype" );

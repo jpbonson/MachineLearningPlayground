@@ -10,7 +10,7 @@ public class BoardState
     private Position white_beared;
     private Position black_beared;
     private final int quantPositions = 24;
-    private ArrayList<DiceAtPosition> usedDiceValues = new ArrayList<DiceAtPosition>();
+    private ArrayList<DiceAtPosition> usedDiceValues = new ArrayList<>();
     
     public BoardState()
     {
@@ -198,22 +198,6 @@ public class BoardState
         }
     }
     
-    public void initializeRacingBoard_quad2()
-    {
-        initializeEmptyBoard();
-        int pos;
-        for(int i = 0; i < 15; i++)
-        {
-            pos = RobustRandomNumber.random(12, 12);
-            board_positions[pos].addChecker(Color.WHITE);
-        }
-        for(int i = 0; i < 15; i++)
-        {
-            pos = RobustRandomNumber.random(0, 12);
-            board_positions[pos].addChecker(Color.BLACK);
-        }
-    }
-    
     public String toString_TreeDebugVersion()
     {
         String str = "";
@@ -249,8 +233,30 @@ public class BoardState
         return str;
     }
     
-    public double[] codifyToNEAT() // divide by 15 to normalize, [0,1] to sigmoid function is ideal
+    public double[] codifyToNEAT()
     {
+        /*double[] array = new double[4+quantPositions+quantPositions+1];
+        
+        array[0] = white_beared.getQuantityCheckers();
+        array[1] = black_beared.getQuantityCheckers();
+        array[2] = white_bar.getQuantityCheckers();
+        array[3] = black_bar.getQuantityCheckers();
+        // board positions with WHITE checkers
+        for(int i = 0; i < board_positions.length; i++)
+            if(board_positions[i].getColor() == Color.WHITE)
+                array[i+4] = board_positions[i].getQuantityCheckers();
+            else
+                array[i+4] = 0.0;
+        // board positions with BLACK checkers
+        for(int i = 0; i < board_positions.length; i++)
+            if(board_positions[i].getColor() == Color.WHITE)
+                array[i+4+board_positions.length] = board_positions[i].getQuantityCheckers();
+            else
+                array[i+4+board_positions.length] = 0.0;
+        array[4+quantPositions+quantPositions] = 1.0; // bias
+        
+        return array;*/
+        
         if(BackgammonGame.currentPlayer == Color.WHITE) // So I'm white (opposite direction)
         {
             double[] array = new double[4+quantPositions+1];//29
@@ -300,60 +306,6 @@ public class BoardState
             return array;
         }
     }
-    
-    /*
-public double[] codifyToNEAT()
-    {
-        if(BackgammonGame.currentPlayer == Color.WHITE) // So I'm white (opposite direction)
-        {
-            double[] array = new double[4+quantPositions+1];//29
-
-            array[0] = -black_bar.getQuantityCheckers();
-            
-            // board positions
-            for(int i = 0; i < board_positions.length; i++)
-            {
-                if(board_positions[i].getColor() == Color.WHITE)
-                    array[24-i] = board_positions[i].getQuantityCheckers();
-                else if(board_positions[i].getColor() == Color.BLACK)
-                    array[24-i] = -board_positions[i].getQuantityCheckers();
-                else
-                    array[24-i] = 0.0;
-            }
-            
-            array[1+quantPositions] = white_bar.getQuantityCheckers();
-            array[2+quantPositions] = white_beared.getQuantityCheckers();
-            array[3+quantPositions] = -black_beared.getQuantityCheckers();
-            array[4+quantPositions] = 1.0; // bias
-
-            return array;
-        }
-        else // I'm black (direction = ok)
-        {
-            double[] array = new double[4+quantPositions+1];//29
-
-            array[0] = -white_bar.getQuantityCheckers();
-            
-            // board positions
-            for(int i = 0; i < board_positions.length; i++)
-            {
-                if(board_positions[i].getColor() == Color.WHITE)
-                    array[i+1] = -board_positions[i].getQuantityCheckers();
-                else if(board_positions[i].getColor() == Color.BLACK)
-                    array[i+1] = board_positions[i].getQuantityCheckers();
-                else
-                    array[i+1] = 0.0;
-            }
-            
-            array[1+quantPositions] = black_bar.getQuantityCheckers();
-            array[2+quantPositions] = black_beared.getQuantityCheckers();
-            array[3+quantPositions] = -white_beared.getQuantityCheckers();
-            array[4+quantPositions] = 1.0; // bias
-
-            return array;
-        }
-    }
-     */
     
     public int[] codifyToNEAT_pubeval()
     {

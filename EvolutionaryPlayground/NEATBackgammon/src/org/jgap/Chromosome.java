@@ -42,8 +42,6 @@ private Long m_id = DEFAULT_ID;
 
 private String m_idString;
 
-private double wins;
-
 /**
  * Genetic material contained in this chromosome.
  */
@@ -90,17 +88,6 @@ public Chromosome( ChromosomeMaterial a_material, Long an_id ) {
 	m_alleles = Collections.unmodifiableSortedSet( m_material.getAlleles() );
 	associateAllelesWithChromosome();
 }
-
-public double getWins() // AQUI
-{
-    return wins;
-}
-
-public void setWins(double w) // AQUI
-{
-    wins = w;
-}
-
 
 private void associateAllelesWithChromosome() {
 	Iterator it = m_alleles.iterator();
