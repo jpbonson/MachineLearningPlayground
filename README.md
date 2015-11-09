@@ -4,6 +4,7 @@ I use this github project to store ML projects that I have worked on, but that h
 
 ### ClassificationPlayground:
   - **BioinformaticsProject**: Use SVM and decision tree algorithms to classify data extracted from biophysical simulations. Includes preprocessing and feature selection (Python).
+  - **R**: Some trials with R for classification, using decision tress, random forest, and Naive Bayes (R).
   - **VisualizationToolForMLData**: A tool for visualization of classification datasets. (Javascript+Python) (it has its own project under VisualizationToolForMLData)
 
 ### ClusteringPlayground:
