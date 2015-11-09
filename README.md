@@ -12,7 +12,7 @@ I use this github project to store ML projects that I have worked on, but that h
 ### EvolutionaryPlayground:
   - **PaperSummarizer**: Use NLP, graphs and genetic algorithms to summarize scientific papers (Java).
   - **NEATBackgammon**: A system that uses NeuroEvolution of Augmenting Topologies (NEAT) and reinforcement learning to developed intelligent backgammon players. NEAT is a genetic algorithm that evolves artificial neural networks. (Java)
-  - **pSBB**: A multipurpose framework that uses Symbiotic Bid-based (SBB) Genetic Programming to evolve programs. It can be used for classification and reinforcement learning tasks. The main environment evolves programs that learn how to play poker. (Python) (it has its own project under pSBB)
+  - **SBB**: A multipurpose framework that uses Symbiotic Bid-based (SBB) Genetic Programming to evolve programs. It can be used for classification and reinforcement learning tasks. The main environment evolves programs that learn how to play poker. (Python) (it has its own project under SBBClassifier and SBBReinforcementLearner)
   
 ### KnowledgePlayground:
 - **OntologyRecommentationSystem**: Intelligent agents use the DBPedia ontology to provide recommendations for Learning Object metadata. (Java)
